@@ -8,6 +8,7 @@
 :root{
   --d:#060D18; --n:#0A1628; --nm:#0F2140; --nl:#162D50; --ns:#1A3158;
   --c:#00D4FF; --cd:#0098B8; --ck:#006A82;
+  --ax:#00C8FF;
   --st:#8A9BB5; --sv:#C4CDD9; --w:#F0F4F8;
   --g:rgba(0,212,255,.04);
   --font-display:'Space Grotesk',sans-serif;
@@ -29,6 +30,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-thumb{background:var(--ck);border-radius:3px}
 ::selection{background:rgba(0,212,255,.25);color:#fff}
+.brand-wordmark-inline{display:inline-block;white-space:nowrap}
+.brand-ax{color:var(--ax)}
 
 /* ── LANG TOGGLE ── */
 [data-lang="en"] .es{display:none!important}
@@ -61,8 +64,8 @@ nav.scrolled{background:rgba(6,13,24,.97);border-bottom-color:rgba(0,212,255,.14
 .lang-btn{font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:.14em;padding:7px 14px;background:transparent;border:none;color:var(--st);cursor:pointer;transition:all .2s;text-transform:uppercase}
 .lang-btn.active{background:var(--c);color:var(--d)}
 .lang-btn:not(.active):hover{color:var(--c)}
-.nav-cta{font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--d);background:var(--c);border:none;padding:10px 20px;text-decoration:none;transition:all .2s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
-.nav-cta:hover{background:var(--w)}
+.nav-cta{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ax);background:transparent;border:1px solid rgba(0,200,255,.82);padding:11px 26px;text-decoration:none;transition:all .2s;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(0,200,255,.06)}
+.nav-cta:hover{color:var(--w);border-color:var(--ax);background:rgba(0,200,255,.08);box-shadow:0 0 24px rgba(0,200,255,.16)}
 
 /* ══════ HERO ═════════════════════════════════════════ */
 #hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:72px 24px 140px}
@@ -96,7 +99,7 @@ nav.scrolled{background:rgba(6,13,24,.97);border-bottom-color:rgba(0,212,255,.14
 .ticker{background:var(--d);border-top:1px solid rgba(0,212,255,.08);border-bottom:1px solid rgba(0,212,255,.08);padding:12px 0;overflow:hidden;position:relative;z-index:1}
 .ticker-inner{display:inline-flex;animation:tick 38s linear infinite;white-space:nowrap}
 .ti{display:inline-flex;align-items:center;gap:12px;padding:0 28px;font-family:var(--font-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(138,155,181,.45)}
-.ti em{font-style:normal;color:var(--cd)}
+.ti em{font-style:normal;color:var(--sv)}
 .ti-dot{width:3px;height:3px;border-radius:50%;background:rgba(138,155,181,.25)}
 
 /* ══════ SECTION COMMONS ══════════════════════════════ */
@@ -314,6 +317,7 @@ footer{background:var(--d);border-top:1px solid rgba(0,212,255,.08);padding:22px
   .nav-logo-wordmark{font-size:18px;letter-spacing:.22em}
   .nav-logo-descriptor{font-size:6px;letter-spacing:.24em}
   .nav-right{gap:10px}
+  .nav-cta{padding:10px 16px;font-size:10px;letter-spacing:.18em}
   .container{padding:0 20px}
   section{padding:80px 0}
   .div-grid{grid-template-columns:1fr}

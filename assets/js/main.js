@@ -4,6 +4,34 @@ function setLang(l){
   document.getElementById('btnES').classList.toggle('active',l==='es');
   document.documentElement.lang=l;
 }
+function decorateBrandWordmarks(){
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+    acceptNode(node){
+      if(!node.nodeValue.includes('BARAX')) return NodeFilter.FILTER_REJECT;
+      const parent=node.parentElement;
+      if(!parent||parent.closest('script,style,noscript,.brand-wordmark-inline')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const targets=[];
+  while(walker.nextNode())targets.push(walker.currentNode);
+  targets.forEach(node=>{
+    const parent=node.parentNode;
+    if(!parent) return;
+    const frag=document.createDocumentFragment();
+    node.nodeValue.split('BARAX').forEach((chunk,index,parts)=>{
+      if(chunk) frag.appendChild(document.createTextNode(chunk));
+      if(index<parts.length-1){
+        const mark=document.createElement('span');
+        mark.className='brand-wordmark-inline';
+        mark.innerHTML='BAR<span class="brand-ax">AX</span>';
+        frag.appendChild(mark);
+      }
+    });
+    parent.replaceChild(frag,node);
+  });
+}
+decorateBrandWordmarks();
 const nav=document.getElementById('mainNav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
