@@ -83,7 +83,18 @@ function decorateBrandWordmarks(){
 initIntroHero();
 decorateBrandWordmarks();
 const nav=document.getElementById('mainNav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+let navActivated=window.scrollY>12;
+function updateNav(){
+  const y=window.scrollY;
+  if(!navActivated&&y>12){
+    navActivated=true;
+    nav.classList.add('nav-visible');
+  }
+  if(navActivated) nav.classList.add('nav-visible');
+  nav.classList.toggle('scrolled',navActivated&&y>60);
+}
+updateNav();
+window.addEventListener('scroll',updateNav,{passive:true});
 const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 if(window.matchMedia('(pointer:fine)').matches){

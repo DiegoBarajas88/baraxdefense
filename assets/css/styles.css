@@ -45,8 +45,10 @@ nav{
   background:rgba(6,13,24,.88);
   backdrop-filter:blur(24px) saturate(1.6);
   border-bottom:1px solid rgba(0,212,255,.08);
-  transition:background .3s;
+  opacity:0;transform:translateY(-100%);pointer-events:none;
+  transition:transform .45s ease,opacity .35s ease,background .3s,border-color .3s;
 }
+nav.nav-visible{opacity:1;transform:translateY(0);pointer-events:auto}
 nav.scrolled{background:rgba(6,13,24,.97);border-bottom-color:rgba(0,212,255,.14)}
 .nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;min-width:0}
 .nav-logo-symbol{width:34px;aspect-ratio:1/1;height:auto;display:block;flex:0 0 auto}
