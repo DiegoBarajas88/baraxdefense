@@ -71,24 +71,35 @@ nav.scrolled{background:rgba(6,13,24,.97);border-bottom-color:rgba(0,212,255,.14
   position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
   padding:96px 24px 48px;overflow:hidden;background:#040A13;border-bottom:1px solid rgba(0,212,255,.08)
 }
-.intro-media,.intro-scrim,.intro-grid{position:absolute;inset:0}
+.intro-media,.intro-scrim,.intro-camo,.intro-grid{position:absolute;inset:0}
 .intro-media{background:#040A13}
 .intro-scene{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
   transform:scale(1.05);transition:opacity 1.15s ease,transform 6.5s ease;
-  filter:saturate(.88) contrast(1.02) brightness(.62)
+  filter:saturate(.68) contrast(1.05) brightness(.5) hue-rotate(-8deg)
 }
 .intro-scene.active{opacity:1;transform:scale(1)}
 .intro-scrim{
   background:
-    radial-gradient(ellipse 58% 48% at 50% 46%,rgba(0,200,255,.08) 0%,transparent 72%),
-    linear-gradient(to bottom,rgba(4,10,19,.48) 0%,rgba(4,10,19,.42) 20%,rgba(4,10,19,.62) 72%,rgba(4,10,19,.92) 100%)
+    radial-gradient(ellipse 56% 44% at 50% 44%,rgba(0,212,255,.16) 0%,rgba(0,212,255,.08) 24%,transparent 72%),
+    radial-gradient(ellipse 80% 72% at 50% 50%,rgba(21,87,212,.18) 0%,transparent 68%),
+    linear-gradient(180deg,rgba(4,10,19,.62) 0%,rgba(7,16,31,.52) 18%,rgba(7,18,34,.66) 58%,rgba(4,10,19,.94) 100%)
+}
+.intro-camo{
+  pointer-events:none;opacity:.7;
+  background:
+    radial-gradient(ellipse 18% 16% at 18% 34%,rgba(7,30,56,.34) 0%,rgba(7,30,56,.18) 48%,transparent 72%),
+    radial-gradient(ellipse 24% 14% at 73% 28%,rgba(0,72,104,.22) 0%,rgba(0,72,104,.08) 50%,transparent 72%),
+    radial-gradient(ellipse 20% 15% at 68% 66%,rgba(10,42,68,.28) 0%,rgba(10,42,68,.1) 52%,transparent 74%),
+    radial-gradient(ellipse 16% 12% at 34% 72%,rgba(2,80,120,.18) 0%,rgba(2,80,120,.08) 45%,transparent 70%),
+    linear-gradient(124deg,transparent 0%,transparent 28%,rgba(13,39,66,.16) 28%,rgba(13,39,66,.16) 39%,transparent 39%,transparent 100%),
+    linear-gradient(304deg,transparent 0%,transparent 54%,rgba(6,46,72,.14) 54%,rgba(6,46,72,.14) 64%,transparent 64%,transparent 100%)
 }
 .intro-grid{
   pointer-events:none;
   background-image:
-    linear-gradient(rgba(26,45,80,.18) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(26,45,80,.18) 1px,transparent 1px);
+    linear-gradient(rgba(26,45,80,.24) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,45,80,.24) 1px,transparent 1px);
   background-size:54px 54px;
   mask-image:radial-gradient(ellipse 88% 74% at 50% 42%,#000 38%,transparent 88%);
   -webkit-mask-image:radial-gradient(ellipse 88% 74% at 50% 42%,#000 38%,transparent 88%);
@@ -97,14 +108,25 @@ nav.scrolled{background:rgba(6,13,24,.97);border-bottom-color:rgba(0,212,255,.14
   position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:16px;text-align:center
 }
-.intro-symbol{width:clamp(62px,7vw,90px);aspect-ratio:1/1;height:auto;display:block;filter:drop-shadow(0 0 22px rgba(0,200,255,.12))}
+.intro-content::before{
+  content:'';position:absolute;left:50%;top:50%;width:min(56vw,720px);height:min(46vw,560px);
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(circle at 50% 50%,rgba(5,18,35,.18) 0%,rgba(5,18,35,.3) 34%,rgba(5,18,35,.52) 58%,transparent 86%),
+    radial-gradient(circle at 50% 46%,rgba(0,212,255,.1) 0%,transparent 52%);
+  filter:blur(10px);
+  z-index:-1
+}
+.intro-symbol{width:clamp(62px,7vw,90px);aspect-ratio:1/1;height:auto;display:block;filter:drop-shadow(0 0 26px rgba(0,200,255,.18))}
 .intro-wordmark{
   font-family:var(--font-brand);font-size:clamp(36px,7vw,78px);font-weight:700;letter-spacing:.34em;
-  line-height:.92;color:var(--w);text-transform:uppercase;text-indent:.34em
+  line-height:.92;color:var(--w);text-transform:uppercase;text-indent:.34em;
+  text-shadow:0 0 24px rgba(4,10,19,.42),0 0 48px rgba(4,10,19,.68)
 }
 .intro-descriptor{
   font-family:var(--font-brand-support);font-size:clamp(8px,1vw,11px);font-weight:500;
-  letter-spacing:.42em;line-height:1.2;color:rgba(240,244,248,.72);text-transform:uppercase
+  letter-spacing:.42em;line-height:1.2;color:rgba(240,244,248,.8);text-transform:uppercase;
+  text-shadow:0 0 18px rgba(4,10,19,.55)
 }
 
 /* ══════ HERO ═════════════════════════════════════════ */
