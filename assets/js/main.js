@@ -4,6 +4,45 @@ function setLang(l){
   document.getElementById('btnES').classList.toggle('active',l==='es');
   document.documentElement.lang=l;
 }
+function initIntroHero(){
+  const videos=[...document.querySelectorAll('.intro-scene')];
+  if(!videos.length)return;
+  videos.forEach(video=>{
+    const source=video.querySelector('source[data-src]');
+    if(source){
+      source.src=source.dataset.src;
+      video.load();
+    }
+    video.muted=true;
+    video.playsInline=true;
+  });
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let activeIndex=0;
+  const safePlay=video=>video.play().catch(()=>{});
+  const activate=index=>{
+    if(index===activeIndex)return;
+    const previous=videos[activeIndex];
+    const next=videos[index];
+    try{next.currentTime=0;}catch{}
+    next.classList.add('active');
+    safePlay(next);
+    window.setTimeout(()=>{
+      previous.classList.remove('active');
+      previous.pause();
+    },900);
+    activeIndex=index;
+  };
+  safePlay(videos[0]);
+  if(reducedMotion)return;
+  window.setInterval(()=>activate((activeIndex+1)%videos.length),5000);
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){
+      videos.forEach(video=>video.pause());
+      return;
+    }
+    safePlay(videos[activeIndex]);
+  });
+}
 function decorateBrandWordmarks(){
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
     acceptNode(node){
@@ -31,6 +70,7 @@ function decorateBrandWordmarks(){
     parent.replaceChild(frag,node);
   });
 }
+initIntroHero();
 decorateBrandWordmarks();
 const nav=document.getElementById('mainNav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});

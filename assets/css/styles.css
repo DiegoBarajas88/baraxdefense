@@ -66,6 +66,47 @@ nav.scrolled{background:rgba(6,13,24,.97);border-bottom-color:rgba(0,212,255,.14
 .nav-cta{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ax);background:transparent;border:1px solid rgba(0,200,255,.82);padding:11px 26px;text-decoration:none;transition:all .2s;white-space:nowrap;box-shadow:inset 0 0 0 1px rgba(0,200,255,.06)}
 .nav-cta:hover{color:var(--w);border-color:var(--ax);background:rgba(0,200,255,.08);box-shadow:0 0 24px rgba(0,200,255,.16)}
 
+/* ══════ INTRO HERO ═══════════════════════════════════ */
+#introHero{
+  position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:96px 24px 48px;overflow:hidden;background:#040A13;border-bottom:1px solid rgba(0,212,255,.08)
+}
+.intro-media,.intro-scrim,.intro-grid{position:absolute;inset:0}
+.intro-media{background:#040A13}
+.intro-scene{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+  transform:scale(1.05);transition:opacity 1.15s ease,transform 6.5s ease;
+  filter:saturate(.88) contrast(1.02) brightness(.62)
+}
+.intro-scene.active{opacity:1;transform:scale(1)}
+.intro-scrim{
+  background:
+    radial-gradient(ellipse 58% 48% at 50% 46%,rgba(0,200,255,.08) 0%,transparent 72%),
+    linear-gradient(to bottom,rgba(4,10,19,.48) 0%,rgba(4,10,19,.42) 20%,rgba(4,10,19,.62) 72%,rgba(4,10,19,.92) 100%)
+}
+.intro-grid{
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(26,45,80,.18) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,45,80,.18) 1px,transparent 1px);
+  background-size:54px 54px;
+  mask-image:radial-gradient(ellipse 88% 74% at 50% 42%,#000 38%,transparent 88%);
+  -webkit-mask-image:radial-gradient(ellipse 88% 74% at 50% 42%,#000 38%,transparent 88%);
+}
+.intro-content{
+  position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;text-align:center
+}
+.intro-symbol{width:clamp(62px,7vw,90px);aspect-ratio:1/1;height:auto;display:block;filter:drop-shadow(0 0 22px rgba(0,200,255,.12))}
+.intro-wordmark{
+  font-family:var(--font-brand);font-size:clamp(36px,7vw,78px);font-weight:700;letter-spacing:.34em;
+  line-height:.92;color:var(--w);text-transform:uppercase;text-indent:.34em
+}
+.intro-descriptor{
+  font-family:var(--font-brand-support);font-size:clamp(8px,1vw,11px);font-weight:500;
+  letter-spacing:.42em;line-height:1.2;color:rgba(240,244,248,.72);text-transform:uppercase
+}
+
 /* ══════ HERO ═════════════════════════════════════════ */
 #hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:72px 24px 140px}
 .hero-bg{position:absolute;inset:0;background:var(--d)}
@@ -292,6 +333,9 @@ footer{background:var(--d);border-top:1px solid rgba(0,212,255,.08);padding:22px
   .nav-logo-descriptor{font-size:6px;letter-spacing:.24em}
   .nav-right{gap:10px}
   .nav-cta{padding:10px 16px;font-size:10px;letter-spacing:.18em}
+  #introHero{padding:88px 20px 44px}
+  .intro-wordmark{font-size:clamp(32px,12vw,58px);letter-spacing:.28em;text-indent:.28em}
+  .intro-descriptor{font-size:8px;letter-spacing:.3em}
   .container{padding:0 20px}
   section{padding:80px 0}
   .div-grid{grid-template-columns:1fr}
