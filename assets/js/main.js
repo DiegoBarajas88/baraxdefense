@@ -7,22 +7,27 @@ function setLang(l){
 function initIntroHero(){
   const videos=[...document.querySelectorAll('.intro-scene')];
   if(!videos.length)return;
-  videos.forEach(video=>{
+  const attachSource=video=>{
     const source=video.querySelector('source[data-src]');
-    if(source){
+    if(source&&!source.src){
       source.src=source.dataset.src;
       video.load();
     }
+  };
+  videos.forEach((video,index)=>{
+    if(index===0) attachSource(video);
     video.muted=true;
     video.playsInline=true;
   });
   const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let activeIndex=0;
   const safePlay=video=>video.play().catch(()=>{});
+  const prepare=index=>attachSource(videos[index]);
   const activate=index=>{
     if(index===activeIndex)return;
     const previous=videos[activeIndex];
     const next=videos[index];
+    prepare(index);
     try{next.currentTime=0;}catch{}
     next.classList.add('active');
     safePlay(next);
@@ -34,7 +39,12 @@ function initIntroHero(){
   };
   safePlay(videos[0]);
   if(reducedMotion)return;
-  window.setInterval(()=>activate((activeIndex+1)%videos.length),5000);
+  prepare(1);
+  window.setInterval(()=>{
+    const nextIndex=(activeIndex+1)%videos.length;
+    prepare((nextIndex+1)%videos.length);
+    activate(nextIndex);
+  },5000);
   document.addEventListener('visibilitychange',()=>{
     if(document.hidden){
       videos.forEach(video=>video.pause());
