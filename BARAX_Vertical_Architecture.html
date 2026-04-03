@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BARAX — Vertical Architecture & Capability Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-deep:#060D18; --navy:#0A1628; --navy-mid:#0F2140;
+  --navy-light:#162D50; --navy-surface:#1A3158;
+  --cyan:#00D4FF; --cyan-dim:#0098B8; --cyan-dark:#006A82;
+  --steel:#8A9BB5; --silver:#C4CDD9; --white:#F0F4F8;
+  --grid:rgba(0,212,255,0.04);
+
+  /* VERTICAL COLORS — in stack order (bottom → top) */
+  --c-supply:     #78BE8A;   /* Military operational green — foundation */
+  --c-surv:       #00D4FF;   /* Cyan — ISR/Surveillance */
+  --c-comms:      #00FF88;   /* Electric green — Communications */
+  --c-cyber:      #FFB800;   /* Amber — Cyber/Electronic Warfare */
+  --c-plat:       #FF6B35;   /* Orange — Platforms/UAS */
+  --c-sys:        #A855F7;   /* Purple — Systems/C4ISR Apex */
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{
+  background:var(--navy-deep);color:var(--white);
+  font-family:'Inter',sans-serif;line-height:1.75;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--cyan-dark);border-radius:3px}
+::selection{background:rgba(0,212,255,0.2);color:var(--white)}
+
+/* ── LAYOUT ── */
+.page{max-width:960px;margin:0 auto;padding:80px 48px 120px;position:relative;z-index:1}
+
+/* ── COVER ── */
+.cover{
+  min-height:280px;display:flex;flex-direction:column;justify-content:center;
+  margin-bottom:80px;padding-bottom:64px;
+  border-bottom:1px solid rgba(0,212,255,0.08);
+}
+.doc-class{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--cyan-dark);margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.doc-class::before{content:'';width:24px;height:1px;background:var(--cyan-dark)}
+.cover-title{
+  font-family:'Rajdhani',sans-serif;font-size:62px;font-weight:700;
+  letter-spacing:-.03em;line-height:1.0;color:var(--white);margin-bottom:16px;
+}
+.cover-title em{font-style:normal;color:var(--cyan)}
+.cover-sub{font-size:16px;color:var(--steel);max-width:600px;margin-bottom:36px;line-height:1.7}
+.meta-row{display:flex;gap:0;border:1px solid rgba(0,212,255,0.08);width:fit-content;overflow:hidden}
+.meta-cell{padding:10px 24px;border-right:1px solid rgba(0,212,255,0.08)}
+.meta-cell:last-child{border-right:none}
+.meta-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-dark);display:block;margin-bottom:3px}
+.meta-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--silver)}
+
+/* ── SECTION ── */
+.section{margin-bottom:72px;padding-bottom:72px;border-bottom:1px solid rgba(0,212,255,0.06)}
+.section:last-of-type{border-bottom:none}
+.s-num{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--cyan-dim);margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.s-num::before{content:'';width:20px;height:1px;background:var(--cyan-dim)}
+.s-title{
+  font-family:'Rajdhani',sans-serif;font-size:38px;font-weight:700;
+  letter-spacing:-.02em;line-height:1.05;color:var(--white);margin-bottom:24px;
+}
+.s-title em{font-style:normal;color:var(--cyan)}
+.rule{display:block;width:48px;height:2px;background:var(--cyan);margin:0 0 28px}
+p{font-size:14.5px;line-height:1.8;color:var(--steel);margin-bottom:16px;max-width:820px}
+p strong{color:var(--white);font-weight:600}
+
+/* ── CALLOUT ── */
+.callout{padding:22px 28px;border-left:2px solid var(--cyan);background:rgba(0,212,255,0.03);margin:28px 0}
+.callout-text{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:600;line-height:1.5;color:var(--silver)}
+.callout-attr{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-dark);margin-top:12px}
+
+/* ══════════════════════════════════════════════════════
+   CAPABILITY STACK VISUALIZATION
+══════════════════════════════════════════════════════ */
+.stack-wrap{margin:40px 0}
+.stack-label-top{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--c-sys);margin-bottom:8px;
+  display:flex;align-items:center;gap:12px;
+}
+.stack-label-top::before,.stack-label-top::after{content:'';flex:1;height:1px;background:rgba(168,85,247,0.25)}
+.stack-label-bot{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--c-supply);margin-top:8px;
+  display:flex;align-items:center;gap:12px;
+}
+.stack-label-bot::before,.stack-label-bot::after{content:'';flex:1;height:1px;background:rgba(120,190,138,0.25)}
+
+.stack{display:flex;flex-direction:column;gap:2px}
+
+.stack-row{
+  display:grid;
+  grid-template-columns:120px 1fr 240px;
+  gap:0;
+  border:1px solid rgba(0,212,255,0.06);
+  overflow:hidden;
+  transition:border-color .2s;
+  position:relative;
+}
+.stack-row:hover{border-color:rgba(255,255,255,0.1)}
+.stack-row::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--row-color, var(--cyan));
+}
+
+.stack-layer{
+  padding:20px 16px;
+  background:rgba(6,13,24,0.8);
+  border-right:1px solid rgba(0,212,255,0.06);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:4px;
+}
+.stack-layer-num{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;color:var(--steel);text-transform:uppercase}
+.stack-layer-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--row-color,var(--cyan))}
+
+.stack-body{padding:20px 24px;display:flex;flex-direction:column;justify-content:center}
+.stack-name{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:.03em;color:var(--white);margin-bottom:6px}
+.stack-name em{font-style:normal;color:var(--row-color,var(--cyan))}
+.stack-desc{font-size:13px;line-height:1.6;color:var(--steel)}
+
+.stack-tags{
+  padding:20px;
+  background:rgba(6,13,24,0.6);
+  border-left:1px solid rgba(0,212,255,0.06);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+}
+.s-tag{
+  font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--row-color,var(--cyan));
+  border:1px solid currentColor;opacity:.55;padding:3px 8px;
+  width:fit-content;transition:opacity .2s;
+}
+.stack-row:hover .s-tag{opacity:.9}
+
+/* Arrow between layers */
+.stack-connector{
+  display:flex;justify-content:center;align-items:center;
+  height:20px;color:rgba(138,155,181,0.25);
+  font-size:14px;letter-spacing:2px;
+  font-family:'JetBrains Mono',monospace;
+}
+
+/* ══════════════════════════════════════════════════════
+   SUPPLY DEEP-DIVE SECTION
+══════════════════════════════════════════════════════ */
+.supply-hero{
+  background:linear-gradient(135deg, rgba(120,190,138,0.06) 0%, rgba(6,13,24,0) 60%);
+  border:1px solid rgba(120,190,138,0.15);
+  padding:40px 40px 36px;
+  margin:32px 0;
+  position:relative;
+  overflow:hidden;
+}
+.supply-hero::before{
+  content:'SUPPLY';
+  position:absolute;right:-10px;top:50%;transform:translateY(-50%);
+  font-family:'Rajdhani',sans-serif;font-size:120px;font-weight:700;
+  color:rgba(120,190,138,0.03);letter-spacing:-.05em;line-height:1;
+  pointer-events:none;
+}
+.supply-label{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--c-supply);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.supply-label::before{content:'';width:20px;height:1px;background:var(--c-supply)}
+.supply-title{
+  font-family:'Rajdhani',sans-serif;font-size:34px;font-weight:700;
+  letter-spacing:-.01em;color:var(--white);margin-bottom:12px;
+}
+.supply-def{font-size:16px;line-height:1.7;color:var(--silver);max-width:680px}
+
+/* Supply categories */
+.supply-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:28px 0}
+.supply-cat{
+  background:rgba(15,33,64,0.5);border:1px solid rgba(120,190,138,0.1);
+  padding:20px;transition:all .2s;
+}
+.supply-cat:hover{border-color:rgba(120,190,138,0.3);background:rgba(15,33,64,0.7)}
+.supply-cat-icon{font-size:22px;margin-bottom:12px;display:block}
+.supply-cat-title{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px}
+.supply-cat-items{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--c-supply);line-height:1.8;opacity:.7}
+
+/* ══════════════════════════════════════════════════════
+   VERTICAL DEEP DIVES
+══════════════════════════════════════════════════════ */
+.verticals{display:flex;flex-direction:column;gap:2px;margin:32px 0}
+.v-row{
+  display:grid;grid-template-columns:3fr 2fr;gap:0;
+  border:1px solid rgba(0,212,255,0.06);overflow:hidden;
+  transition:border-color .2s;position:relative;
+}
+.v-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--vc,var(--cyan))}
+.v-row:hover{border-color:rgba(0,212,255,0.15)}
+.v-main{padding:24px 28px}
+.v-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--vc,var(--cyan));margin-bottom:10px;opacity:.7}
+.v-name{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px}
+.v-mission{font-size:13.5px;line-height:1.65;color:var(--steel)}
+.v-side{
+  padding:24px;background:rgba(6,13,24,0.5);border-left:1px solid rgba(0,212,255,0.06);
+  display:flex;flex-direction:column;justify-content:center;gap:8px;
+}
+.v-kw{
+  font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--vc,var(--cyan));
+  border:1px solid currentColor;opacity:.5;padding:4px 10px;width:fit-content;
+}
+
+/* ══════════════════════════════════════════════════════
+   CONNECTION MODEL
+══════════════════════════════════════════════════════ */
+.conn-model{
+  display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;
+  gap:0;align-items:center;margin:32px 0;
+}
+.conn-box{
+  background:rgba(15,33,64,0.5);border:1px solid rgba(0,212,255,0.08);
+  padding:24px 20px;text-align:center;
+}
+.conn-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel);margin-bottom:8px}
+.conn-title{font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:8px}
+.conn-desc{font-size:12px;line-height:1.6;color:var(--steel)}
+.conn-arrow{text-align:center;color:var(--cyan-dark);font-size:20px}
+
+/* ══════════════════════════════════════════════════════
+   ENGAGEMENT LEVELS
+══════════════════════════════════════════════════════ */
+.engagement{display:flex;flex-direction:column;gap:2px;margin:28px 0}
+.eng-row{
+  display:grid;grid-template-columns:200px 1fr 180px;gap:0;
+  border:1px solid rgba(0,212,255,0.06);overflow:hidden;
+}
+.eng-level{
+  padding:16px 20px;background:rgba(6,13,24,0.7);
+  border-right:1px solid rgba(0,212,255,0.06);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.eng-level-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--steel);margin-bottom:4px}
+.eng-level-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:var(--white)}
+.eng-body{padding:16px 20px;display:flex;align-items:center;font-size:13px;line-height:1.6;color:var(--steel)}
+.eng-tag{
+  padding:16px 20px;background:rgba(6,13,24,0.4);
+  border-left:1px solid rgba(0,212,255,0.06);
+  display:flex;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* ── LIST ── */
+.doc-list{list-style:none;margin:20px 0;display:flex;flex-direction:column;gap:12px}
+.doc-list li{display:flex;align-items:flex-start;gap:16px;font-size:14px;line-height:1.65;color:var(--steel)}
+.doc-list li::before{content:'';width:20px;height:1px;background:var(--cyan);flex-shrink:0;margin-top:12px}
+.doc-list li strong{color:var(--white)}
+
+/* ── PRINCIPLE BOXES ── */
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin:28px 0}
+.principle{background:rgba(15,33,64,0.45);border:1px solid rgba(0,212,255,0.08);padding:24px}
+.principle-rule{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan-dark);margin-bottom:10px}
+.principle-stmt{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;color:var(--white);margin-bottom:8px}
+.principle-body{font-size:13px;line-height:1.65;color:var(--steel)}
+
+/* ── POSITIONING STATEMENT ── */
+.pos-block{
+  background:rgba(0,212,255,0.02);border:1px solid rgba(0,212,255,0.1);
+  padding:40px;margin:32px 0;text-align:center;
+}
+.pos-main{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;line-height:1.4;color:var(--white);margin-bottom:16px}
+.pos-sub{font-size:14px;line-height:1.7;color:var(--steel);max-width:600px;margin:0 auto}
+.pos-attr{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan-dark);margin-top:20px}
+
+/* ── DOC FOOTER ── */
+.doc-footer{
+  margin-top:80px;padding-top:32px;border-top:1px solid rgba(0,212,255,0.08);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.df-logo{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:3px;color:var(--steel)}
+.df-tagline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan-dark)}
+.df-class{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(138,155,181,.35)}
+
+@media(max-width:768px){
+  .page{padding:48px 20px 80px}
+  .cover-title{font-size:40px}
+  .stack-row{grid-template-columns:1fr}
+  .stack-tags{border-left:none;border-top:1px solid rgba(0,212,255,.06)}
+  .supply-cats{grid-template-columns:1fr}
+  .v-row{grid-template-columns:1fr}
+  .v-side{border-left:none;border-top:1px solid rgba(0,212,255,.06)}
+  .conn-model{grid-template-columns:1fr}
+  .conn-arrow{transform:rotate(90deg)}
+  .eng-row{grid-template-columns:1fr}
+  .eng-level{border-right:none;border-bottom:1px solid rgba(0,212,255,.06)}
+  .eng-tag{border-left:none;border-top:1px solid rgba(0,212,255,.06)}
+  .principles{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══ COVER ══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="doc-class">Strategic Architecture Document — BARAX Defense &amp; Technology</div>
+  <h1 class="cover-title">Vertical<br><em>Architecture</em><br>&amp; Capability Stack</h1>
+  <p class="cover-sub">Structural definition of the BARAX capability stack — from mission-ready equipment provisioning through full multi-domain systems integration. This document defines each vertical, its operational mandate, and how the six layers connect into a unified delivery model.</p>
+  <div class="meta-row">
+    <div class="meta-cell"><span class="meta-lbl">Company</span><span class="meta-val">BARAX Defense &amp; Technology</span></div>
+    <div class="meta-cell"><span class="meta-lbl">Document</span><span class="meta-val">Vertical Architecture v1.0</span></div>
+    <div class="meta-cell"><span class="meta-lbl">Classification</span><span class="meta-val">Internal Strategic</span></div>
+    <div class="meta-cell"><span class="meta-lbl">Status</span><span class="meta-val">Active — 2025</span></div>
+  </div>
+</div>
+
+
+<!-- ══ 01 — THE FUNDAMENTAL INSIGHT ══════════════════ -->
+<div class="section">
+  <div class="s-num">01 — Strategic Foundation</div>
+  <h2 class="s-title">The <em>Capability Stack</em> Model</h2>
+  <span class="rule"></span>
+
+  <p>
+    <strong>BARAX organizes its delivery capability into six verticals structured as a progressive stack.</strong> This is not a flat product catalog. It is a deliberate architecture — each layer enabling the next, and all layers connectable into a single integrated program.
+  </p>
+  <p>
+    The stack model communicates a critical competitive truth: <strong>BARAX can engage at any level of operational complexity</strong> — from immediate equipment provisioning to full multi-domain C4ISR integration — and it can do both simultaneously within the same institutional relationship.
+  </p>
+  <p>
+    An institution that enters through BARAX Supply does not need a new vendor when it is ready to integrate. The integration capability is already embedded in the same organization. This creates a continuous relationship and a natural growth path across the full vertical stack.
+  </p>
+
+  <div class="callout">
+    <div class="callout-text">From equipment to integrated systems — BARAX delivers operational capability at every level of institutional complexity.</div>
+    <div class="callout-attr">— BARAX Capability Stack Principle</div>
+  </div>
+
+  <!-- STACK VISUALIZATION -->
+  <div class="stack-wrap">
+    <div class="stack-label-top">APEX — Full Systems Integration</div>
+
+    <div class="stack">
+
+      <!-- Layer 6: SYSTEMS -->
+      <div class="stack-row" style="--row-color: var(--c-sys)">
+        <div class="stack-layer">
+          <span class="stack-layer-num">Layer 06</span>
+          <span class="stack-layer-label">Apex</span>
+        </div>
+        <div class="stack-body">
+          <div class="stack-name">BARAX <em>Systems</em></div>
+          <div class="stack-desc">Multi-domain C4ISR architecture. Full systems integration across all verticals. Unified command, interoperable platforms, and real-time operational intelligence at strategic and operational command levels.</div>
+        </div>
+        <div class="stack-tags">
+          <span class="s-tag" style="--row-color:var(--c-sys)">C4ISR</span>
+          <span class="s-tag" style="--row-color:var(--c-sys)">Multi-Domain COP</span>
+          <span class="s-tag" style="--row-color:var(--c-sys)">Data Fusion</span>
+          <span class="s-tag" style="--row-color:var(--c-sys)">System Architecture</span>
+        </div>
+      </div>
+
+      <div class="stack-connector">↑ &nbsp; integration &nbsp; ↑</div>
+
+      <!-- Layer 5: PLATFORMS -->
+      <div class="stack-row" style="--row-color: var(--c-plat)">
+        <div class="stack-layer">
+          <span class="stack-layer-num">Layer 05</span>
+          <span class="stack-layer-label">Platforms</span>
+        </div>
+        <div class="stack-body">
+          <div class="stack-name">BARAX <em>Platforms</em></div>
+          <div class="stack-desc">Unmanned aerial, ground, and maritime platforms with configured payloads and operator infrastructure. Fixed-wing ISR, tactical VTOL, counter-UAS, and maritime USV systems deployed and sustained.</div>
+        </div>
+        <div class="stack-tags">
+          <span class="s-tag" style="--row-color:var(--c-plat)">UAS / UAV</span>
+          <span class="s-tag" style="--row-color:var(--c-plat)">Counter-UAS</span>
+          <span class="s-tag" style="--row-color:var(--c-plat)">Maritime USV</span>
+          <span class="s-tag" style="--row-color:var(--c-plat)">GCS / Payloads</span>
+        </div>
+      </div>
+
+      <div class="stack-connector">↑ &nbsp; integration &nbsp; ↑</div>
+
+      <!-- Layer 4: CYBER -->
+      <div class="stack-row" style="--row-color: var(--c-cyber)">
+        <div class="stack-layer">
+          <span class="stack-layer-num">Layer 04</span>
+          <span class="stack-layer-label">Cyber</span>
+        </div>
+        <div class="stack-body">
+          <div class="stack-name">BARAX <em>Cyber</em></div>
+          <div class="stack-desc">Cybersecurity operations and Electronic Warfare systems. Signal jamming, spectrum management, cyber-physical protection, SOC capabilities, and threat intelligence for critical networks and tactical units.</div>
+        </div>
+        <div class="stack-tags">
+          <span class="s-tag" style="--row-color:var(--c-cyber)">Electronic Warfare</span>
+          <span class="s-tag" style="--row-color:var(--c-cyber)">SOC Operations</span>
+          <span class="s-tag" style="--row-color:var(--c-cyber)">Cyber Defense</span>
+          <span class="s-tag" style="--row-color:var(--c-cyber)">Threat Intel</span>
+        </div>
+      </div>
+
+      <div class="stack-connector">↑ &nbsp; integration &nbsp; ↑</div>
+
+      <!-- Layer 3: COMMS -->
+      <div class="stack-row" style="--row-color: var(--c-comms)">
+        <div class="stack-layer">
+          <span class="stack-layer-num">Layer 03</span>
+          <span class="stack-layer-label">Comms</span>
+        </div>
+        <div class="stack-body">
+          <div class="stack-name">BARAX <em>Comms</em></div>
+          <div class="stack-desc">Secure tactical communications infrastructure — encrypted radio networks, SATCOM links, C4I backbone, and data relay systems — enabling command at all echelons in contested environments.</div>
+        </div>
+        <div class="stack-tags">
+          <span class="s-tag" style="--row-color:var(--c-comms)">SATCOM</span>
+          <span class="s-tag" style="--row-color:var(--c-comms)">Encrypted Radio</span>
+          <span class="s-tag" style="--row-color:var(--c-comms)">C4I Backbone</span>
+          <span class="s-tag" style="--row-color:var(--c-comms)">Tactical Mesh</span>
+        </div>
+      </div>
+
+      <div class="stack-connector">↑ &nbsp; integration &nbsp; ↑</div>
+
+      <!-- Layer 2: SURVEILLANCE -->
+      <div class="stack-row" style="--row-color: var(--c-surv)">
+        <div class="stack-layer">
+          <span class="stack-layer-num">Layer 02</span>
+          <span class="stack-layer-label">Surveillance</span>
+        </div>
+        <div class="stack-body">
+          <div class="stack-name">BARAX <em>Surveillance</em></div>
+          <div class="stack-desc">Wide-area ISR architectures integrating ground radar, EO/IR sensors, SIGINT collection, and aerial assets into persistent, layered situational awareness — deployed at tactical, operational, and strategic scale.</div>
+        </div>
+        <div class="stack-tags">
+          <span class="s-tag" style="--row-color:var(--c-surv)">Ground Radar</span>
+          <span class="s-tag" style="--row-color:var(--c-surv)">EO/IR Systems</span>
+          <span class="s-tag" style="--row-color:var(--c-surv)">SIGINT</span>
+          <span class="s-tag" style="--row-color:var(--c-surv)">Wide-Area ISR</span>
+        </div>
+      </div>
+
+      <div class="stack-connector">↑ &nbsp; built on &nbsp; ↑</div>
+
+      <!-- Layer 1: SUPPLY — FOUNDATION -->
+      <div class="stack-row" style="--row-color: var(--c-supply); background: rgba(120,190,138,0.03);">
+        <div class="stack-layer" style="background:rgba(120,190,138,0.06)">
+          <span class="stack-layer-num">Layer 01</span>
+          <span class="stack-layer-label" style="color:var(--c-supply)">Foundation</span>
+        </div>
+        <div class="stack-body">
+          <div class="stack-name">BARAX <em style="color:var(--c-supply)">Supply</em></div>
+          <div class="stack-desc"><strong style="color:var(--silver)">Mission-ready equipment provisioning for defense and security operations.</strong> Tactical ground equipment, naval systems, aerial and drone systems, counter-drone, night vision, and military-grade operational gear — delivered deployment-ready to institutional clients.</div>
+        </div>
+        <div class="stack-tags" style="background:rgba(120,190,138,0.04)">
+          <span class="s-tag" style="--row-color:var(--c-supply);color:var(--c-supply)">Tactical Equipment</span>
+          <span class="s-tag" style="--row-color:var(--c-supply);color:var(--c-supply)">Naval Systems</span>
+          <span class="s-tag" style="--row-color:var(--c-supply);color:var(--c-supply)">Counter-Drone</span>
+          <span class="s-tag" style="--row-color:var(--c-supply);color:var(--c-supply)">Night Vision</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="stack-label-bot">FOUNDATION — Mission-Ready Equipment Provisioning</div>
+  </div>
+</div>
+
+
+<!-- ══ 02 — BARAX SUPPLY — FULL DEFINITION ══════════ -->
+<div class="section">
+  <div class="s-num">02 — Foundational Vertical</div>
+  <h2 class="s-title">BARAX <em>Supply</em></h2>
+  <span class="rule" style="background:var(--c-supply)"></span>
+
+  <div class="supply-hero">
+    <div class="supply-label">DIV-01 · Foundation Layer · Entry Point</div>
+    <div class="supply-title">Mission-Ready Equipment Provisioning</div>
+    <div class="supply-def">
+      BARAX Supply is the operational entry point of the BARAX capability stack. It is not a procurement catalog. It is not a distribution function. It is a specialized equipment provisioning capability — sourcing, configuring, and delivering military-grade systems and gear to institutional clients who require immediate operational readiness.
+    </div>
+  </div>
+
+  <p>
+    <strong>BARAX Supply serves three distinct functions within the company's operating model:</strong>
+  </p>
+
+  <ul class="doc-list">
+    <li><strong>Operational Entry Point:</strong> Many institutions require immediate equipment capability before committing to a full integration program. BARAX Supply provides that entry — building the relationship, demonstrating delivery credibility, and creating the institutional trust that enables larger programs.</li>
+    <li><strong>Integration Foundation:</strong> The equipment provisioned through BARAX Supply is the physical layer upon which higher-vertical integration is built. The sensors supplied become the inputs to BARAX Surveillance architectures. The platforms supplied become the nodes in BARAX Systems C4ISR networks.</li>
+    <li><strong>Recurring Institutional Revenue:</strong> Equipment requires replacement, upgrade, and replenishment. BARAX Supply creates continuous institutional demand — spare parts, updated systems, next-generation gear — that sustains the relationship between major integration programs.</li>
+  </ul>
+
+  <div class="supply-cats">
+    <div class="supply-cat">
+      <span class="supply-cat-icon">🚛</span>
+      <div class="supply-cat-title">Tactical Ground Equipment</div>
+      <div class="supply-cat-items">Armored Vehicles · Tactical Mobility<br>Protected Platforms · Field Systems<br>Ground Support Equipment</div>
+    </div>
+    <div class="supply-cat">
+      <span class="supply-cat-icon">⚓</span>
+      <div class="supply-cat-title">Naval Systems &amp; Components</div>
+      <div class="supply-cat-items">Patrol Vessels · Maritime Sensors<br>Fleet Support Systems · Navigation<br>Maritime Surveillance Equipment</div>
+    </div>
+    <div class="supply-cat">
+      <span class="supply-cat-icon">✈</span>
+      <div class="supply-cat-title">Aerial &amp; Drone Systems</div>
+      <div class="supply-cat-items">Tactical UAS · Fixed-Wing ISR<br>Multi-Rotor Platforms · Payloads<br>Ground Control Stations</div>
+    </div>
+    <div class="supply-cat">
+      <span class="supply-cat-icon">🛡</span>
+      <div class="supply-cat-title">Counter-Drone Systems</div>
+      <div class="supply-cat-items">RF Jamming Systems · Detection Radar<br>Kinetic Intercept · Drone Nets<br>C-UAS Command Software</div>
+    </div>
+    <div class="supply-cat">
+      <span class="supply-cat-icon">👁</span>
+      <div class="supply-cat-title">Night Vision &amp; Sensing</div>
+      <div class="supply-cat-items">Thermal Imaging · Image Intensifiers<br>Multi-Spectral Sensors · Laser Range<br>Target Acquisition Systems</div>
+    </div>
+    <div class="supply-cat">
+      <span class="supply-cat-icon">⚙</span>
+      <div class="supply-cat-title">Military-Grade Operational Gear</div>
+      <div class="supply-cat-items">Body Armor &amp; PPE · Field Communications<br>Navigation Systems · Optics<br>Operational Support Equipment</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-text">BARAX Supply does not sell equipment. It provisions operational capability — delivering systems that are assessed, configured, and validated for the specific institutional environment before transfer.</div>
+    <div class="callout-attr">— BARAX Supply Operating Principle</div>
+  </div>
+</div>
+
+
+<!-- ══ 03 — ALL SIX VERTICALS ════════════════════════ -->
+<div class="section">
+  <div class="s-num">03 — Complete Vertical Structure</div>
+  <h2 class="s-title">Six <em>Operational</em> Verticals</h2>
+  <span class="rule"></span>
+
+  <p>Each vertical is a defined capability domain — staffed, structured, and positioned as a specialized business line within the BARAX master brand. All six share the same institutional client base, the same delivery philosophy, and the same accountability model.</p>
+
+  <div class="verticals">
+
+    <div class="v-row" style="--vc:var(--c-supply)">
+      <div class="v-main">
+        <div class="v-label">DIV-01 · Entry Point · Foundation</div>
+        <div class="v-name">BARAX Supply — <span style="color:var(--c-supply)">Mission-Ready Equipment</span></div>
+        <div class="v-mission">We provision mission-ready equipment — tactical ground systems, naval components, aerial and drone platforms, counter-drone systems, night vision, and military-grade operational gear — delivering deployment-ready capability to institutional clients who require immediate operational readiness without the lead time of a full integration program.</div>
+      </div>
+      <div class="v-side">
+        <span class="v-kw" style="--vc:var(--c-supply);color:var(--c-supply)">Tactical Equipment</span>
+        <span class="v-kw" style="--vc:var(--c-supply);color:var(--c-supply)">Naval Systems</span>
+        <span class="v-kw" style="--vc:var(--c-supply);color:var(--c-supply)">UAS / Drones</span>
+        <span class="v-kw" style="--vc:var(--c-supply);color:var(--c-supply)">Counter-UAS</span>
+        <span class="v-kw" style="--vc:var(--c-supply);color:var(--c-supply)">Night Vision</span>
+        <span class="v-kw" style="--vc:var(--c-supply);color:var(--c-supply)">Mil-Grade Gear</span>
+      </div>
+    </div>
+
+    <div class="v-row" style="--vc:var(--c-surv)">
+      <div class="v-main">
+        <div class="v-label">DIV-02 · ISR Layer · Persistent Awareness</div>
+        <div class="v-name">BARAX Surveillance — <span style="color:var(--c-surv)">Wide-Area ISR Architecture</span></div>
+        <div class="v-mission">We deploy layered surveillance architectures — integrating ground radar, electro-optical/infrared sensors, SIGINT collection platforms, and aerial assets — into persistent, multi-layer situational awareness systems. We deliver not sensors, but architectures: integrated networks that generate the real-time intelligence picture required for operational decision-making at tactical, operational, and strategic command levels.</div>
+      </div>
+      <div class="v-side">
+        <span class="v-kw" style="--vc:var(--c-surv);color:var(--c-surv)">Ground Radar</span>
+        <span class="v-kw" style="--vc:var(--c-surv);color:var(--c-surv)">EO/IR Systems</span>
+        <span class="v-kw" style="--vc:var(--c-surv);color:var(--c-surv)">SIGINT</span>
+        <span class="v-kw" style="--vc:var(--c-surv);color:var(--c-surv)">Sensor Networks</span>
+        <span class="v-kw" style="--vc:var(--c-surv);color:var(--c-surv)">Wide-Area ISR</span>
+      </div>
+    </div>
+
+    <div class="v-row" style="--vc:var(--c-comms)">
+      <div class="v-main">
+        <div class="v-label">DIV-03 · Communications Layer · Command Backbone</div>
+        <div class="v-name">BARAX Comms — <span style="color:var(--c-comms)">Secure Tactical Communications</span></div>
+        <div class="v-mission">We integrate secure, resilient tactical communications infrastructure — encrypted radio networks, SATCOM uplinks, C4I data backbone, and tactical mesh networks — that enable command and coordination at all operational echelons, including in communications-denied and electronically contested environments. Without communications, no other capability layer functions. This vertical is the connective tissue of the full stack.</div>
+      </div>
+      <div class="v-side">
+        <span class="v-kw" style="--vc:var(--c-comms);color:var(--c-comms)">SATCOM</span>
+        <span class="v-kw" style="--vc:var(--c-comms);color:var(--c-comms)">Encrypted Radio</span>
+        <span class="v-kw" style="--vc:var(--c-comms);color:var(--c-comms)">C4I Backbone</span>
+        <span class="v-kw" style="--vc:var(--c-comms);color:var(--c-comms)">Tactical Mesh</span>
+        <span class="v-kw" style="--vc:var(--c-comms);color:var(--c-comms)">Contested Comms</span>
+      </div>
+    </div>
+
+    <div class="v-row" style="--vc:var(--c-cyber)">
+      <div class="v-main">
+        <div class="v-label">DIV-04 · EW &amp; Cyber Layer · Spectrum &amp; Digital Domain</div>
+        <div class="v-name">BARAX Cyber — <span style="color:var(--c-cyber)">Electronic Warfare &amp; Cyber Defense</span></div>
+        <div class="v-mission">We deploy offensive and defensive Electronic Warfare systems and cybersecurity operations capabilities — signal jamming, spectrum management, directed energy, SOC operations, and cyber-physical protection — for armed forces, intelligence agencies, and critical infrastructure operators. In modern operations, the electromagnetic and digital domains are as contested as physical terrain. BARAX Cyber provides the capability to dominate both.</div>
+      </div>
+      <div class="v-side">
+        <span class="v-kw" style="--vc:var(--c-cyber);color:var(--c-cyber)">Electronic Warfare</span>
+        <span class="v-kw" style="--vc:var(--c-cyber);color:var(--c-cyber)">Signal Jamming</span>
+        <span class="v-kw" style="--vc:var(--c-cyber);color:var(--c-cyber)">SOC Operations</span>
+        <span class="v-kw" style="--vc:var(--c-cyber);color:var(--c-cyber)">Threat Intel</span>
+        <span class="v-kw" style="--vc:var(--c-cyber);color:var(--c-cyber)">Cyber Defense</span>
+      </div>
+    </div>
+
+    <div class="v-row" style="--vc:var(--c-plat)">
+      <div class="v-main">
+        <div class="v-label">DIV-05 · Platforms Layer · Autonomous &amp; Manned Systems</div>
+        <div class="v-name">BARAX Platforms — <span style="color:var(--c-plat)">Unmanned &amp; Autonomous Systems</span></div>
+        <div class="v-mission">We integrate multi-domain unmanned systems — fixed-wing ISR, tactical VTOL, maritime USV, and ground UGV platforms — with sensor payload configuration, ground control station deployment, and operator training. We also deploy counter-UAS defensive architectures. BARAX Platforms provides the physical assets that generate sensor data, extend operational reach, and reduce risk to personnel in contested environments.</div>
+      </div>
+      <div class="v-side">
+        <span class="v-kw" style="--vc:var(--c-plat);color:var(--c-plat)">Fixed-Wing ISR</span>
+        <span class="v-kw" style="--vc:var(--c-plat);color:var(--c-plat)">Tactical VTOL</span>
+        <span class="v-kw" style="--vc:var(--c-plat);color:var(--c-plat)">Maritime USV</span>
+        <span class="v-kw" style="--vc:var(--c-plat);color:var(--c-plat)">Counter-UAS</span>
+        <span class="v-kw" style="--vc:var(--c-plat);color:var(--c-plat)">GCS / Payloads</span>
+      </div>
+    </div>
+
+    <div class="v-row" style="--vc:var(--c-sys);background:rgba(168,85,247,0.03)">
+      <div class="v-main">
+        <div class="v-label">DIV-06 · Apex Layer · Full Integration</div>
+        <div class="v-name">BARAX Systems — <span style="color:var(--c-sys)">Multi-Domain C4ISR Integration</span></div>
+        <div class="v-mission">We architect and deploy multi-vendor C4ISR environments — the apex integration layer that connects all capability verticals into a unified operational picture. We fuse data from every sensor, platform, and communications node across the stack into a single, real-time situational awareness architecture accessible at every command echelon. BARAX Systems is where equipment becomes capability, and capability becomes operational dominance.</div>
+      </div>
+      <div class="v-side">
+        <span class="v-kw" style="--vc:var(--c-sys);color:var(--c-sys)">C4ISR Architecture</span>
+        <span class="v-kw" style="--vc:var(--c-sys);color:var(--c-sys)">Multi-Domain COP</span>
+        <span class="v-kw" style="--vc:var(--c-sys);color:var(--c-sys)">Data Fusion</span>
+        <span class="v-kw" style="--vc:var(--c-sys);color:var(--c-sys)">Interoperability</span>
+        <span class="v-kw" style="--vc:var(--c-sys);color:var(--c-sys)">System-of-Systems</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══ 04 — HOW THEY CONNECT ═════════════════════════ -->
+<div class="section">
+  <div class="s-num">04 — Connection Model</div>
+  <h2 class="s-title">How the <em>Stack Connects</em></h2>
+  <span class="rule"></span>
+
+  <p>
+    <strong>The six verticals are not independent business lines. They are interconnected capability layers designed to compound value as institutional relationships deepen.</strong> Each layer feeds the next, and BARAX's competitive advantage grows with every vertical engaged.
+  </p>
+
+  <div class="conn-model">
+    <div class="conn-box">
+      <div class="conn-label" style="color:var(--c-supply)">Layer 01</div>
+      <div class="conn-title" style="color:var(--c-supply)">BARAX Supply</div>
+      <div class="conn-desc">Provisions the physical equipment — sensors, platforms, gear — that becomes the hardware layer of integrated systems</div>
+    </div>
+    <div class="conn-arrow">→</div>
+    <div class="conn-box">
+      <div class="conn-label" style="color:var(--c-surv)">Layers 02–05</div>
+      <div class="conn-title" style="color:var(--c-surv)">Capability Verticals</div>
+      <div class="conn-desc">Surveillance · Comms · Cyber · Platforms. Activate the equipment as structured operational capabilities with architecture, training, and support</div>
+    </div>
+    <div class="conn-arrow">→</div>
+    <div class="conn-box">
+      <div class="conn-label" style="color:var(--c-sys)">Layer 06</div>
+      <div class="conn-title" style="color:var(--c-sys)">BARAX Systems</div>
+      <div class="conn-desc">Integrates all capability layers into a unified C4ISR architecture — the apex where individual systems become operational dominance</div>
+    </div>
+  </div>
+
+  <h2 class="s-title" style="font-size:26px;margin-top:40px;margin-bottom:20px">Institutional <em>Engagement Levels</em></h2>
+  <p>BARAX can be engaged at any level of the stack — and the relationship is designed to grow naturally from entry-level equipment provisioning to full multi-domain integration:</p>
+
+  <div class="engagement">
+    <div class="eng-row">
+      <div class="eng-level">
+        <span class="eng-level-label">Level 01 — Entry</span>
+        <span class="eng-level-name" style="color:var(--c-supply)">Equipment Supply</span>
+      </div>
+      <div class="eng-body">Immediate provisioning of tactical equipment, drone systems, night vision, naval components, or counter-UAS gear — no integration program required. Single procurement event or framework supply agreement.</div>
+      <div class="eng-tag" style="color:var(--c-supply)">Weeks → Months</div>
+    </div>
+    <div class="eng-row">
+      <div class="eng-level">
+        <span class="eng-level-label">Level 02 — Capability</span>
+        <span class="eng-level-name" style="color:var(--c-surv)">Vertical Deployment</span>
+      </div>
+      <div class="eng-body">Deployment of a single capability vertical — a surveillance architecture, tactical communications network, electronic warfare system, or UAS fleet — as a structured, validated program with operator training and sustainment.</div>
+      <div class="eng-tag" style="color:var(--c-surv)">Months → 1 Year</div>
+    </div>
+    <div class="eng-row">
+      <div class="eng-level">
+        <span class="eng-level-label">Level 03 — Integration</span>
+        <span class="eng-level-name" style="color:var(--c-sys)">Full C4ISR Program</span>
+      </div>
+      <div class="eng-body">Multi-vertical integration program — combining surveillance, communications, platforms, and cyber capabilities into a unified C4ISR architecture under BARAX Systems. Full lifecycle accountability from assessment to sustainment.</div>
+      <div class="eng-tag" style="color:var(--c-sys)">1 Year → Multi-Year</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ 05 — COMMUNICATION PRINCIPLES ════════════════ -->
+<div class="section">
+  <div class="s-num">05 — Communication Architecture</div>
+  <h2 class="s-title">How <em>BARAX</em> Speaks</h2>
+  <span class="rule"></span>
+
+  <p>All six verticals communicate through the same framework: execution-first language that demonstrates capability without describing it. Specific rules for the Supply vertical require particular attention, as it carries the highest risk of sounding commercial rather than operational.</p>
+
+  <div class="principles">
+    <div class="principle">
+      <div class="principle-rule">Supply — Correct Frame</div>
+      <div class="principle-stmt" style="color:var(--c-supply)">Operational Provisioning</div>
+      <div class="principle-body">
+        <strong>Say:</strong> "We provision mission-ready equipment for immediate deployment." "We supply tactical systems configured for the operational environment."<br><br>
+        <strong>Never say:</strong> "We sell defense equipment." "We offer a catalog of security products." "We distribute military gear."
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-rule">Systems — Correct Frame</div>
+      <div class="principle-stmt" style="color:var(--c-sys)">Integration Authority</div>
+      <div class="principle-body">
+        <strong>Say:</strong> "We architect multi-domain C4ISR systems." "We integrate disparate platforms into a unified operational picture."<br><br>
+        <strong>Never say:</strong> "We provide systems integration services." "We help connect your platforms." "We offer consulting."
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-rule">Universal Rule — All Verticals</div>
+      <div class="principle-stmt">Execute, Don't Describe</div>
+      <div class="principle-body">
+        BARAX never describes itself. BARAX demonstrates through execution language. Every sentence should communicate something that BARAX delivers, deploys, integrates, or sustains — not something BARAX "is" or "offers."
+      </div>
+    </div>
+    <div class="principle">
+      <div class="principle-rule">Stack Narrative — Connecting Verticals</div>
+      <div class="principle-stmt">From Equipment to Dominance</div>
+      <div class="principle-body">
+        When communicating the full BARAX model: "We provision the equipment. We deploy the systems. We integrate the architecture. From the first piece of tactical gear to the final C4ISR node — BARAX delivers operational capability at every level."
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ 06 — MASTER POSITIONING STATEMENT ══════════ -->
+<div class="section">
+  <div class="s-num">06 — Positioning</div>
+  <h2 class="s-title">BARAX <em>Defined</em></h2>
+  <span class="rule"></span>
+
+  <div class="pos-block">
+    <div class="pos-main">
+      From mission-ready equipment to full multi-domain integration —<br>
+      BARAX delivers operational capability at every level of institutional complexity.
+    </div>
+    <div class="pos-sub">
+      We provision what institutions need immediately. We integrate what they need strategically. We sustain what they need permanently. One company. Six verticals. A single capability stack — built to scale with the mission.
+    </div>
+    <div class="pos-attr">— BARAX Vertical Architecture · Master Positioning Statement</div>
+  </div>
+
+  <p>
+    The company's competitive strength is not that it is the best equipment supplier, or the best surveillance system integrator, or the best C4ISR architect — individually, world-class specialists exist in each category. <strong>BARAX's competitive strength is that it is the only entity in the region that can do all of it, within a single institutional relationship, under a single accountable program structure, from the first equipment delivery to the final systems integration.</strong>
+  </p>
+  <p>
+    That is the capability stack. That is BARAX.
+  </p>
+</div>
+
+
+<!-- ══ DOC FOOTER ══════════════════════════════════ -->
+<div class="doc-footer">
+  <div class="df-logo">BARAX</div>
+  <div class="df-tagline">Strategic Edge. Global Reach.</div>
+  <div class="df-class">Vertical Architecture v1.0 · Strategic Internal · 2025</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is BARAX — Strategic Positioning Document</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-deep:#060D18; --navy:#0A1628; --navy-mid:#0F2140;
+  --navy-light:#162D50; --navy-surface:#1A3158;
+  --cyan:#00D4FF; --cyan-dim:#0098B8; --cyan-dark:#006A82;
+  --steel:#8A9BB5; --silver:#C4CDD9; --white:#F0F4F8;
+  --grid:rgba(0,212,255,0.04);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{
+  background:var(--navy-deep);color:var(--white);
+  font-family:'Inter',sans-serif;line-height:1.75;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0;
+}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--cyan-dark);border-radius:3px}
+
+/* ── LAYOUT ── */
+.page { max-width: 900px; margin: 0 auto; padding: 80px 48px 120px; position: relative; z-index: 1; }
+
+/* ── COVER ── */
+.cover {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 80px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(0,212,255,0.08);
+}
+.cover-class {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan-dark);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cover-class::before { content: ''; width: 24px; height: 1px; background: var(--cyan-dark); }
+.cover-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.cover-title em { font-style: normal; color: var(--cyan); }
+.cover-sub {
+  font-size: 16px;
+  color: var(--steel);
+  max-width: 560px;
+  margin-bottom: 32px;
+}
+.cover-meta {
+  display: flex;
+  gap: 0;
+  border: 1px solid rgba(0,212,255,0.08);
+  overflow: hidden;
+  width: fit-content;
+}
+.meta-item {
+  padding: 10px 24px;
+  border-right: 1px solid rgba(0,212,255,0.08);
+}
+.meta-item:last-child { border-right: none; }
+.meta-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan-dark);
+  display: block;
+  margin-bottom: 3px;
+}
+.meta-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--silver);
+}
+
+/* ── SECTION ── */
+.section {
+  margin-bottom: 72px;
+  padding-bottom: 72px;
+  border-bottom: 1px solid rgba(0,212,255,0.06);
+}
+.section:last-child { border-bottom: none; }
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan-dim);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-num::before { content: ''; width: 20px; height: 1px; background: var(--cyan-dim); }
+.section-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 28px;
+}
+.section-title em { font-style: normal; color: var(--cyan); }
+
+/* ── BODY TEXT ── */
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--steel);
+  margin-bottom: 16px;
+  max-width: 760px;
+}
+p strong { color: var(--white); font-weight: 600; }
+
+/* ── CALL OUT ── */
+.callout {
+  padding: 24px 28px;
+  border-left: 2px solid var(--cyan);
+  background: rgba(0,212,255,0.03);
+  margin: 28px 0;
+}
+.callout-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--silver);
+}
+.callout-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan-dark);
+  margin-top: 12px;
+}
+
+/* ── GRID CARDS ── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  margin: 28px 0;
+}
+.card {
+  background: rgba(15,33,64,0.5);
+  border: 1px solid rgba(0,212,255,0.08);
+  padding: 24px 24px;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: rgba(0,212,255,0.18); }
+.card-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cyan-dim);
+  margin-bottom: 10px;
+}
+.card-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.card-body {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--steel);
+}
+.card-body p { font-size: 13px; margin-bottom: 8px; max-width: 100%; }
+
+/* ── 3-col ── */
+.cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 28px 0;
+}
+
+/* ── LIST ── */
+.doc-list {
+  list-style: none;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.doc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--steel);
+}
+.doc-list li::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--cyan);
+  flex-shrink: 0;
+  margin-top: 12px;
+}
+.doc-list li strong { color: var(--white); }
+
+/* ── STATEMENT ── */
+.positioning-block {
+  background: rgba(0,212,255,0.03);
+  border: 1px solid rgba(0,212,255,0.1);
+  padding: 36px 40px;
+  margin: 32px 0;
+  text-align: center;
+}
+.positioning-block .en {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.positioning-block .es {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--steel);
+  font-style: italic;
+}
+.positioning-block .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cyan-dark);
+  margin-top: 16px;
+}
+
+/* ── DOMAINS TABLE ── */
+.domains {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  margin: 24px 0;
+}
+.domain-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 180px;
+  gap: 0;
+  border: 1px solid rgba(0,212,255,0.08);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.domain-row:hover { border-color: rgba(0,212,255,0.2); }
+.domain-name {
+  padding: 16px 20px;
+  background: rgba(15,33,64,0.5);
+  border-right: 1px solid rgba(0,212,255,0.08);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+}
+.domain-desc {
+  padding: 16px 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--steel);
+  display: flex;
+  align-items: center;
+}
+.domain-tag {
+  padding: 16px 20px;
+  background: rgba(6,13,24,0.5);
+  border-left: 1px solid rgba(0,212,255,0.08);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+/* ── PROCESS ── */
+.process {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 28px 0;
+}
+.process-step {
+  background: rgba(15,33,64,0.45);
+  border: 1px solid rgba(0,212,255,0.08);
+  padding: 24px 20px;
+  position: relative;
+}
+.process-step-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--cyan-dark);
+  margin-bottom: 12px;
+}
+.process-step-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.process-step-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--steel);
+}
+
+/* ── VERTICALS SUMMARY ── */
+.verticals-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 24px 0;
+}
+.v-item {
+  padding: 18px 20px;
+  background: rgba(15,33,64,0.4);
+  border: 1px solid rgba(0,212,255,0.08);
+}
+.v-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--cyan-dark);
+  margin-bottom: 8px;
+}
+.v-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.v-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+/* ── RULE LINE ── */
+.rule { display: block; width: 48px; height: 2px; background: var(--cyan); margin: 12px 0 28px; }
+
+/* ── FOOTER ── */
+.doc-footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(0,212,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.doc-footer-logo {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--steel);
+}
+.doc-footer-class {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan-dark);
+}
+.doc-footer-tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(138,155,181,0.4);
+}
+
+@media(max-width:768px){
+  .page{padding:48px 20px 80px}
+  .cards,.cards-3,.process,.verticals-summary{grid-template-columns:1fr}
+  .domain-row{grid-template-columns:1fr}
+  .domain-tag{border-left:none;border-top:1px solid rgba(0,212,255,0.08)}
+  .cover-title{font-size:42px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══ COVER ══ -->
+  <div class="cover">
+    <div class="cover-class">Strategic Positioning Document — Internal Reference</div>
+    <h1 class="cover-title">What is<br><em>BARAX</em></h1>
+    <p class="cover-sub">A structured reference document defining BARAX's identity, business model, value proposition, market opportunity, problems solved, and strategic operating model.</p>
+    <div class="cover-meta">
+      <div class="meta-item">
+        <span class="meta-label">Company</span>
+        <span class="meta-val">BARAX Defense &amp; Technology</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Document Type</span>
+        <span class="meta-val">Strategic Positioning</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Classification</span>
+        <span class="meta-val">Internal / Commercial</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Version</span>
+        <span class="meta-val">1.0 — 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 01 — WHAT THE COMPANY IS ══ -->
+  <div class="section">
+    <div class="section-num">01 — Identity</div>
+    <h2 class="section-title">What <em>BARAX</em> Is</h2>
+    <span class="rule"></span>
+
+    <p>
+      <strong>BARAX is a strategic defense technology integrator.</strong> We translate advanced technology into deployable operational capability for armed forces, government security agencies, and critical infrastructure operators across the Americas.
+    </p>
+    <p>
+      We do not manufacture. We do not distribute from a catalog. We architect, configure, integrate, deploy, and sustain multi-domain defense and security systems — treating each institutional engagement as a full program, not a transaction.
+    </p>
+    <p>
+      BARAX operates at the intersection of two realities: the world's most advanced defense technology exists predominantly in Europe, Israel, North America, and Asia-Pacific; and the institutions that need it most — in Latin America and the Caribbean — lack direct access, technical evaluation capacity, and in-country support structures to deploy it effectively.
+    </p>
+    <p>
+      We close that gap.
+    </p>
+
+    <div class="callout">
+      <div class="callout-text">"BARAX converts operational complexity into deployable capabilities, integrating world-class technology for armed forces, security agencies, and critical infrastructure of the Americas."</div>
+      <div class="callout-attr">— Official Positioning Statement</div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">Full Name</div>
+        <div class="card-title">BARAX Defense &amp; Technology</div>
+        <div class="card-body"><p>Used in formal institutional communications, contracts, proposals, and regulatory engagements. The complete identity that signals sector and capability in a single phrase.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Short Form</div>
+        <div class="card-title">BARAX</div>
+        <div class="card-body"><p>Used in logos, web headers, operational communications, and any context where the sector is already established. Two syllables. Direct. Unambiguous.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Tagline</div>
+        <div class="card-title">Strategic Edge. Global Reach.</div>
+        <div class="card-body"><p>Communicates both core advantages: local strategic understanding (edge = advantage + operational border) and access to world-class technology through international manufacturer relationships.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Engagement Type</div>
+        <div class="card-title">Institutional / B2G Only</div>
+        <div class="card-body"><p>BARAX engages exclusively with accredited institutional clients: armed forces, government security agencies, and authorized prime contractors. No commercial or consumer engagements.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 02 — BUSINESS MODEL ══ -->
+  <div class="section">
+    <div class="section-num">02 — Business Model</div>
+    <h2 class="section-title">How <em>BARAX</em> Operates</h2>
+    <span class="rule"></span>
+
+    <p>
+      <strong>BARAX operates as a defense technology integrator with a capability-driven commercial model.</strong> This means our revenue is generated through full-program engagements — from initial assessment and system configuration through deployment, training, and long-term sustainment — not through equipment sales.
+    </p>
+    <p>
+      The model rests on three interlocking capabilities:
+    </p>
+
+    <ul class="doc-list">
+      <li><strong>Technology Access:</strong> We establish and maintain formal commercial representation and distribution agreements with tier-1 defense manufacturers in key technology countries. This gives institutional clients access to world-class systems through a trusted regional intermediary who understands both the technology and the operational context.</li>
+      <li><strong>Integration Expertise:</strong> We design multi-vendor system architectures that solve actual operational problems — not single-product installations. We configure, test, and validate before delivery. We build for interoperability and future scalability.</li>
+      <li><strong>Program Accountability:</strong> We remain engaged through the full lifecycle. Operator training, technical support, spare parts management, and system upgrades are part of every program — not optional add-ons.</li>
+    </ul>
+
+    <div class="process">
+      <div class="process-step">
+        <div class="process-step-num">PHASE 01</div>
+        <div class="process-step-title">Operational Assessment</div>
+        <div class="process-step-desc">We analyze the institution's actual operational requirements, existing infrastructure, threat environment, and budget parameters — before recommending any system.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">PHASE 02</div>
+        <div class="process-step-title">System Architecture</div>
+        <div class="process-step-desc">We design the integrated solution — selecting and configuring best-fit technology from our partner network — with interoperability and scalability built in.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">PHASE 03</div>
+        <div class="process-step-title">Deployment &amp; Validation</div>
+        <div class="process-step-desc">We manage the full delivery process — logistics, installation, integration testing, and operational acceptance — ensuring the system performs against stated requirements.</div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">PHASE 04</div>
+        <div class="process-step-title">Sustainment</div>
+        <div class="process-step-desc">We deliver training, ILS, MRO, and system upgrades — maintaining operational readiness through the full program lifecycle, not just at initial delivery.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 — VALUE PROPOSITION ══ -->
+  <div class="section">
+    <div class="section-num">03 — Value Proposition</div>
+    <h2 class="section-title">Why <em>BARAX</em></h2>
+    <span class="rule"></span>
+
+    <p>
+      <strong>We deliver what neither pure manufacturers nor generic distributors can:</strong> a combination of world-class technology access, deep technical integration expertise, regional institutional understanding, and full lifecycle accountability.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">For Armed Forces</div>
+        <div class="card-title">Operational Capability, Not Hardware</div>
+        <div class="card-body">
+          <p>We deliver integrated systems validated against actual mission requirements — not catalog equipment. Every engagement is designed around operational outcomes, not product specifications.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">For Security Agencies</div>
+        <div class="card-title">Multi-Domain Solutions</div>
+        <div class="card-body">
+          <p>We integrate surveillance, C2, communications, and cyber-physical systems into coherent architectures — delivering unified situational awareness across institutional mandates.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">For Program Managers</div>
+        <div class="card-title">Single Point of Accountability</div>
+        <div class="card-body">
+          <p>Multi-vendor programs have complex accountability structures. BARAX assumes program-level responsibility — one counterpart, one contract, full lifecycle visibility.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">For Institutions</div>
+        <div class="card-title">Technology Without Risk</div>
+        <div class="card-body">
+          <p>Deploying unfamiliar technology in institutional environments carries significant risk. We evaluate, configure, validate, and support every system we deliver — reducing institutional exposure at every stage.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="positioning-block">
+      <div class="en">We deliver integrated defense and technology capabilities.<br>We do not describe ourselves. We demonstrate through execution.</div>
+      <div class="es">"We deliver integrated surveillance systems." "We deploy multi-domain ISR capabilities." "We integrate radar, UAS, and command systems." "We sustain operational readiness beyond initial delivery."</div>
+      <div class="label">Communication Principle — BARAX Brand System</div>
+    </div>
+  </div>
+
+  <!-- ══ 04 — MARKET OPPORTUNITY ══ -->
+  <div class="section">
+    <div class="section-num">04 — Market Opportunity</div>
+    <h2 class="section-title">Where <em>BARAX</em> Operates</h2>
+    <span class="rule"></span>
+
+    <p>
+      <strong>Defense modernization across Latin America and the Caribbean is accelerating.</strong> Governments are increasing security budgets, upgrading aging equipment, and expanding operational mandates across counter-narcotics, border control, maritime security, and critical infrastructure protection.
+    </p>
+    <p>
+      The structural opportunity is clear: <strong>institutional demand for advanced defense technology is growing</strong>, while direct access to tier-1 manufacturers remains limited by language barriers, procurement complexity, export licensing, and the absence of local technical support infrastructure.
+    </p>
+
+    <div class="cards-3">
+      <div class="card">
+        <div class="card-label">Primary Market</div>
+        <div class="card-title">Latin America</div>
+        <div class="card-body"><p>Armed forces, national police, intelligence agencies, and border protection institutions across the region. Growing budgets. Urgent modernization requirements. Underdeveloped local integration capability.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Secondary Market</div>
+        <div class="card-title">Caribbean Basin</div>
+        <div class="card-body"><p>Small-state defense forces with concentrated maritime and air domain requirements. Limited procurement capacity creates demand for turnkey, integrated solutions with in-country support.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Tertiary Market</div>
+        <div class="card-title">North America</div>
+        <div class="card-body"><p>Subcontracting and teaming with prime contractors on programs requiring regional access, local expertise, or established in-country relationships with institutional clients.</p></div>
+      </div>
+    </div>
+
+    <p>
+      The defense technology domains with highest demand in the region include <strong>ISR systems, border surveillance, counter-UAS, C4ISR, electronic warfare, maritime domain awareness, and critical infrastructure protection</strong> — all within BARAX's six technology verticals.
+    </p>
+  </div>
+
+  <!-- ══ 05 — PROBLEMS WE SOLVE ══ -->
+  <div class="section">
+    <div class="section-num">05 — Problems We Solve</div>
+    <h2 class="section-title">The Gaps <em>BARAX</em> Closes</h2>
+    <span class="rule"></span>
+
+    <p>
+      The defense technology market in the Americas faces a set of structural problems that BARAX is specifically positioned to address:
+    </p>
+
+    <div class="domains">
+      <div class="domain-row">
+        <div class="domain-name">Access Gap</div>
+        <div class="domain-desc">Institutional clients in the region cannot directly access tier-1 manufacturers due to language, geography, export regulations, procurement complexity, and the absence of local support structures.</div>
+        <div class="domain-tag" style="color:var(--cyan)">BARAX closes direct access</div>
+      </div>
+      <div class="domain-row">
+        <div class="domain-name">Integration Gap</div>
+        <div class="domain-desc">Institutions purchase individual products from multiple vendors, resulting in siloed systems that cannot exchange data, share situational awareness, or operate under unified command.</div>
+        <div class="domain-tag" style="color:var(--cyan)">BARAX delivers unified systems</div>
+      </div>
+      <div class="domain-row">
+        <div class="domain-name">Expertise Gap</div>
+        <div class="domain-desc">Institutional procurement teams lack the technical depth to evaluate advanced defense systems against operational requirements — leading to mismatched purchases and underutilized capability.</div>
+        <div class="domain-tag" style="color:var(--cyan)">BARAX provides technical authority</div>
+      </div>
+      <div class="domain-row">
+        <div class="domain-name">Sustainment Gap</div>
+        <div class="domain-desc">Technology delivered without support infrastructure degrades rapidly. Most vendors do not provide in-country training, spare parts logistics, or technical maintenance post-delivery.</div>
+        <div class="domain-tag" style="color:var(--cyan)">BARAX delivers full lifecycle</div>
+      </div>
+      <div class="domain-row">
+        <div class="domain-name">Accountability Gap</div>
+        <div class="domain-desc">Multi-vendor programs in the region lack a single accountable party who understands both the technology and the institutional requirements — creating delivery and performance risk.</div>
+        <div class="domain-tag" style="color:var(--cyan)">BARAX is single counterpart</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 06 — STRATEGIC OPERATING MODEL ══ -->
+  <div class="section">
+    <div class="section-num">06 — Strategic Operating Model</div>
+    <h2 class="section-title">How <em>BARAX</em> Wins</h2>
+    <span class="rule"></span>
+
+    <p>
+      <strong>BARAX competes on depth, not breadth.</strong> We are not a general-purpose technology distributor. We are a specialized defense integrator with defined technology verticals, a specific institutional client base, and a program-oriented engagement model that creates long-term relationships rather than transactional revenue.
+    </p>
+
+    <p>The strategic model rests on three pillars:</p>
+
+    <div class="cards-3">
+      <div class="card">
+        <div class="card-label">Pillar 01</div>
+        <div class="card-title">Technology Partnerships</div>
+        <div class="card-body"><p>We maintain formal representation relationships with tier-1 manufacturers across key technology countries — providing institutional clients with access to world-class systems through a trusted regional integrator who assumes in-country accountability.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Pillar 02</div>
+        <div class="card-title">Institutional Relationships</div>
+        <div class="card-body"><p>We build long-term relationships with defense and security institutions — earning trust through delivery, technical credibility, and demonstrated operational understanding — rather than through commercial outreach.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Pillar 03</div>
+        <div class="card-title">Program Lifecycle Value</div>
+        <div class="card-body"><p>Every program generates long-term value: sustainment contracts, system upgrades, training renewals, and expansion to additional capabilities — creating recurring institutional revenue that compounds over time.</p></div>
+      </div>
+    </div>
+
+    <h2 class="section-title" style="font-size:26px; margin-top:40px; margin-bottom:20px">Six <em>Technology Verticals</em></h2>
+    <p>BARAX organizes its capabilities across six defined technology verticals — each a distinct business line within the BARAX master brand:</p>
+
+    <div class="verticals-summary">
+      <div class="v-item">
+        <div class="v-num">DIV-01</div>
+        <div class="v-name" style="color:#00D4FF">BARAX Surveillance</div>
+        <div class="v-sub">ISR · Radar · EO/IR · SIGINT</div>
+      </div>
+      <div class="v-item">
+        <div class="v-num">DIV-02</div>
+        <div class="v-name" style="color:#00FF88">BARAX Comms</div>
+        <div class="v-sub">SATCOM · Radio · C4I · Networks</div>
+      </div>
+      <div class="v-item">
+        <div class="v-num">DIV-03</div>
+        <div class="v-name" style="color:#FFB800">BARAX Cyber</div>
+        <div class="v-sub">Electronic Warfare · SOC · Threat Intel</div>
+      </div>
+      <div class="v-item">
+        <div class="v-num">DIV-04</div>
+        <div class="v-name" style="color:#FF6B35">BARAX Platforms</div>
+        <div class="v-sub">UAV · Vehicles · Naval · Tactical</div>
+      </div>
+      <div class="v-item">
+        <div class="v-num">DIV-05</div>
+        <div class="v-name" style="color:#A855F7">BARAX Systems</div>
+        <div class="v-sub">C4ISR · Integration · Command</div>
+      </div>
+      <div class="v-item">
+        <div class="v-num">DIV-06</div>
+        <div class="v-name" style="color:#EC4899">BARAX Services</div>
+        <div class="v-sub">ILS · Training · Support · MRO</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 28px;">
+      <strong>Mental model for all external communications:</strong> BARAX is not a distributor. BARAX is not a reseller. BARAX is not a consultant. BARAX is a strategic defense integrator — a capability builder that operates at program level, deploying integrated technology that transforms operational complexity into deployable capability.
+    </p>
+
+    <div class="callout">
+      <div class="callout-text">Think like a defense contractor preparing material for a Ministry of Defense. Every communication should demonstrate capability through execution — not describe capability through adjectives.</div>
+      <div class="callout-attr">— Communication Principle · BARAX Brand System</div>
+    </div>
+
+    <ul class="doc-list" style="margin-top: 28px;">
+      <li><strong>We deliver integrated surveillance systems</strong> — not "we offer surveillance solutions"</li>
+      <li><strong>We deploy multi-domain ISR capabilities</strong> — not "we are a leader in intelligence"</li>
+      <li><strong>We integrate radar, UAS, and command systems</strong> — not "we work with the best technology"</li>
+      <li><strong>We sustain operational readiness beyond initial delivery</strong> — not "we offer aftermarket support"</li>
+    </ul>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <div class="doc-footer">
+    <div class="doc-footer-logo">BARAX</div>
+    <div class="doc-footer-tagline">Strategic Edge. Global Reach.</div>
+    <div class="doc-footer-class">Internal Reference · Strategic Positioning · 2025</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BARAX Defense & Technology — Strategic Edge. Global Reach.</title>
+<meta name="description" content="From mission-ready equipment to full multi-domain integration — BARAX delivers operational capability at every level of institutional complexity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   BARAX DEFENSE & TECHNOLOGY — Website v3
+   NEW: BARAX Supply as foundational first vertical
+   Vertical Stack: Supply → Surveillance → Comms → Cyber → Platforms → Systems
+   Brand-system aligned · Bilingual EN/ES
+================================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --d:#060D18; --n:#0A1628; --nm:#0F2140; --nl:#162D50; --ns:#1A3158;
+  --c:#00D4FF; --cd:#0098B8; --ck:#006A82;
+  --st:#8A9BB5; --sv:#C4CDD9; --w:#F0F4F8;
+  --g:rgba(0,212,255,.04);
+  /* Vertical accent colors */
+  --v1:#78BE8A; /* Supply — Military operational green */
+  --v2:#00D4FF; /* Surveillance — Cyan */
+  --v3:#00FF88; /* Comms — Electric green */
+  --v4:#FFB800; /* Cyber — Amber */
+  --v5:#FF6B35; /* Platforms — Orange */
+  --v6:#A855F7; /* Systems — Purple */
+}
+html{scroll-behavior:smooth}
+body{background:var(--d);color:var(--w);font-family:'Inter',sans-serif;line-height:1.75;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--g) 1px,transparent 1px),linear-gradient(90deg,var(--g) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:var(--ck);border-radius:3px}
+::selection{background:rgba(0,212,255,.25);color:#fff}
+
+/* ── LANG TOGGLE ── */
+[data-lang="en"] .es{display:none!important}
+[data-lang="es"] .en{display:none!important}
+[data-lang="es"] .es{display:revert}
+
+/* ══════ NAV ══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:72px;
+  background:rgba(6,13,24,.88);
+  backdrop-filter:blur(24px) saturate(1.6);
+  border-bottom:1px solid rgba(0,212,255,.08);
+  transition:background .3s;
+}
+nav.scrolled{background:rgba(6,13,24,.97);border-bottom-color:rgba(0,212,255,.14)}
+.nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--st);text-decoration:none;transition:color .2s;position:relative;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav-links a:hover{color:var(--w)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.lang-toggle{display:flex;align-items:center;border:1px solid rgba(0,212,255,.2);overflow:hidden}
+.lang-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;padding:7px 14px;background:transparent;border:none;color:var(--st);cursor:pointer;transition:all .2s;text-transform:uppercase}
+.lang-btn.active{background:var(--c);color:var(--d)}
+.lang-btn:not(.active):hover{color:var(--c)}
+.nav-cta{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--d);background:var(--c);border:none;padding:10px 20px;text-decoration:none;transition:all .2s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+.nav-cta:hover{background:var(--w)}
+
+/* ══════ HERO ═════════════════════════════════════════ */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:72px 24px 140px}
+.hero-bg{position:absolute;inset:0;background:var(--d)}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-ov{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 42%,rgba(0,212,255,.06) 0%,transparent 65%),linear-gradient(to bottom,rgba(6,13,24,.1) 0%,rgba(6,13,24,.5) 70%,rgba(6,13,24,.98) 100%)}
+.hero-content{position:relative;z-index:2;max-width:940px}
+.hero-eye{display:inline-flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--cd);margin-bottom:32px;opacity:0;animation:fu .8s ease forwards .3s}
+.hero-eye-line{width:28px;height:1px;background:var(--cd)}
+.hero-h{font-family:'Rajdhani',sans-serif;font-size:clamp(44px,7.5vw,96px);font-weight:700;letter-spacing:-.03em;line-height:1.0;color:var(--w);margin-bottom:20px;opacity:0;animation:fu .9s ease forwards .5s}
+.hero-h em{font-style:normal;color:var(--c)}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:clamp(10px,1.4vw,13px);letter-spacing:.3em;text-transform:uppercase;color:var(--cd);margin-bottom:20px;opacity:0;animation:fu .8s ease forwards .65s}
+.hero-sub{font-size:clamp(14px,1.6vw,17px);line-height:1.75;color:var(--st);max-width:600px;margin:0 auto 48px;opacity:0;animation:fu .8s ease forwards .75s}
+.hero-acts{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;opacity:0;animation:fu .8s ease forwards .9s}
+
+/* Buttons */
+.btn-p{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--d);background:var(--c);border:none;padding:15px 32px;cursor:pointer;text-decoration:none;transition:all .2s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-p:hover{background:var(--w);box-shadow:0 0 40px rgba(0,212,255,.3)}
+.btn-g{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--st);background:transparent;border:1px solid rgba(0,212,255,.2);padding:15px 32px;cursor:pointer;text-decoration:none;transition:all .2s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-g:hover{color:var(--c);border-color:var(--c);background:rgba(0,212,255,.04)}
+
+/* Hero stats */
+.hero-stats{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;gap:0;z-index:2;border:1px solid rgba(0,212,255,.1);opacity:0;animation:fu .8s ease forwards 1.1s;white-space:nowrap}
+.hs{padding:14px 26px;border-right:1px solid rgba(0,212,255,.1);text-align:center}
+.hs:last-child{border-right:none}
+.hs-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;color:var(--w);display:block;line-height:1}
+.hs-val em{font-style:normal;color:var(--c)}
+.hs-label{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--st);margin-top:5px;display:block}
+
+/* ══════ TICKER ════════════════════════════════════════ */
+.ticker{background:var(--d);border-top:1px solid rgba(0,212,255,.08);border-bottom:1px solid rgba(0,212,255,.08);padding:12px 0;overflow:hidden;position:relative;z-index:1}
+.ticker-inner{display:inline-flex;animation:tick 38s linear infinite;white-space:nowrap}
+.ti{display:inline-flex;align-items:center;gap:12px;padding:0 28px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(138,155,181,.45)}
+.ti em{font-style:normal;color:var(--cd)}
+.ti-dot{width:3px;height:3px;border-radius:50%;background:rgba(138,155,181,.25)}
+
+/* ══════ SECTION COMMONS ══════════════════════════════ */
+section{position:relative;z-index:1;padding:120px 0}
+.container{max-width:1200px;margin:0 auto;padding:0 48px}
+.s-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--cd);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.s-tag::before{content:'';width:20px;height:1px;background:var(--cd)}
+.s-title{font-family:'Rajdhani',sans-serif;font-size:clamp(30px,4.5vw,54px);font-weight:700;letter-spacing:-.02em;line-height:1.05;color:var(--w);margin-bottom:16px}
+.s-title em{font-style:normal;color:var(--c)}
+.s-desc{font-size:15px;line-height:1.75;color:var(--st);max-width:560px}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.06s}.rd2{transition-delay:.12s}.rd3{transition-delay:.18s}
+.rd4{transition-delay:.24s}.rd5{transition-delay:.30s}.rd6{transition-delay:.36s}
+
+/* ══════ CAPABILITY STACK (NEW SECTION) ═══════════════ */
+#stack{background:var(--n);border-top:1px solid rgba(0,212,255,.06)}
+
+.stack-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:64px}
+
+/* The visual stack */
+.stack-vis{display:flex;flex-direction:column;gap:2px;margin-top:60px}
+.stack-row{
+  display:grid;grid-template-columns:100px 1fr 200px;
+  border:1px solid rgba(0,212,255,.06);overflow:hidden;
+  transition:border-color .25s;position:relative;cursor:default;
+}
+.stack-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--vc,var(--c))}
+.stack-row:hover{border-color:rgba(255,255,255,.09)}
+.stack-row:hover .sr-tags .st{opacity:.9}
+
+.sr-layer{
+  padding:18px 14px;background:rgba(6,13,24,.75);border-right:1px solid rgba(0,212,255,.06);
+  display:flex;flex-direction:column;justify-content:center;gap:4px;
+}
+.sr-n{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.15em;color:var(--st);text-transform:uppercase}
+.sr-l{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--vc,var(--c))}
+
+.sr-body{padding:18px 22px;display:flex;flex-direction:column;justify-content:center}
+.sr-name{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;letter-spacing:.03em;color:var(--w);margin-bottom:5px}
+.sr-name em{font-style:normal;color:var(--vc,var(--c))}
+.sr-desc{font-size:12px;line-height:1.6;color:var(--st)}
+
+.sr-tags{
+  padding:18px;background:rgba(6,13,24,.5);border-left:1px solid rgba(0,212,255,.06);
+  display:flex;flex-direction:column;justify-content:center;gap:5px;
+}
+.st{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;opacity:.45;padding:3px 8px;width:fit-content;transition:opacity .2s}
+
+.stack-arrow{display:flex;justify-content:center;align-items:center;height:16px;color:rgba(138,155,181,.2);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px}
+
+.stack-labels{display:flex;justify-content:space-between;margin-top:16px}
+.sl{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(138,155,181,.4)}
+.sl-top{color:rgba(168,85,247,.4)}
+.sl-bot{color:rgba(120,190,138,.4)}
+
+/* ══════ VERTICALS FULL SECTION ══════════════════════ */
+#verticals{background:var(--d);border-top:1px solid rgba(0,212,255,.06)}
+
+.v-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:64px}
+
+.div-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+
+.div-card{
+  background:rgba(15,33,64,.5);border:1px solid rgba(0,212,255,.08);
+  padding:36px 28px;position:relative;overflow:hidden;cursor:default;
+  transition:all .3s;
+}
+.div-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--va,var(--c));opacity:.55;transition:opacity .3s}
+.div-card:hover{background:rgba(15,33,64,.8);border-color:rgba(0,212,255,.14)}
+.div-card:hover::before{opacity:1}
+.div-card:hover .dg{opacity:1}
+.div-card:hover .dt{opacity:.9}
+
+/* Supply card — special treatment as foundation */
+.div-card.supply{
+  background:rgba(120,190,138,.04);
+  border-color:rgba(120,190,138,.12);
+}
+.div-card.supply:hover{background:rgba(120,190,138,.07);border-color:rgba(120,190,138,.22)}
+
+.dg{position:absolute;top:0;right:0;width:120px;height:120px;border-radius:50%;filter:blur(40px);opacity:0;transition:opacity .4s;background:var(--va,var(--c));transform:translate(40%,-40%)}
+.d-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--st);margin-bottom:18px}
+.d-icon{width:40px;height:40px;margin-bottom:18px}
+.d-name{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;letter-spacing:.05em;color:var(--w);margin-bottom:4px}
+.d-name em{font-style:normal;color:var(--va,var(--c))}
+.d-sub{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.15em;text-transform:uppercase;color:var(--st);margin-bottom:14px}
+.d-desc{font-size:13px;line-height:1.65;color:var(--st);margin-bottom:14px}
+.d-tags{display:flex;flex-wrap:wrap;gap:5px}
+.dt{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--va,var(--c));border:1px solid currentColor;opacity:.45;padding:3px 8px;transition:opacity .2s}
+
+/* Supply entry badge */
+.supply-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--v1);border:1px solid rgba(120,190,138,.3);padding:4px 10px;margin-bottom:14px;
+}
+.supply-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--v1)}
+
+/* ══════ WHAT WE DELIVER ══════════════════════════════ */
+#deliver{background:var(--n);border-top:1px solid rgba(0,212,255,.06)}
+.del-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+#deliverCanvas{width:100%;height:480px;border:1px solid rgba(0,212,255,.08);display:block}
+.del-list{display:flex;flex-direction:column;gap:0}
+.del-item{display:flex;gap:22px;padding:22px 0;border-bottom:1px solid rgba(0,212,255,.06);transition:all .2s}
+.del-item:first-child{border-top:1px solid rgba(0,212,255,.06)}
+.del-item:hover .del-num{color:var(--c)}
+.del-item:hover .del-title{color:var(--c)}
+.del-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ck);min-width:22px;margin-top:4px;transition:color .2s}
+.del-body{flex:1}
+.del-title{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:var(--sv);margin-bottom:5px;transition:color .2s}
+.del-desc{font-size:13px;line-height:1.65;color:var(--st)}
+
+/* ══════ TECHNOLOGY ═══════════════════════════════════ */
+#technology{background:var(--d);border-top:1px solid rgba(0,212,255,.06)}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px}
+.pillar{background:rgba(15,33,64,.45);border:1px solid rgba(0,212,255,.08);padding:34px 26px;position:relative;overflow:hidden;transition:all .3s}
+.pillar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c),var(--cd));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.pillar:hover{background:rgba(15,33,64,.7)}
+.pillar:hover::after{transform:scaleX(1)}
+.p-num{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--ck);margin-bottom:22px}
+.p-icon{width:38px;height:38px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.12);display:flex;align-items:center;justify-content:center;margin-bottom:22px;font-size:17px}
+.p-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--w);margin-bottom:11px}
+.p-desc{font-size:13px;line-height:1.7;color:var(--st)}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(0,212,255,.08);margin-top:52px;overflow:hidden}
+.metric{padding:30px 26px;border-right:1px solid rgba(0,212,255,.08);transition:background .2s}
+.metric:last-child{border-right:none}
+.metric:hover{background:rgba(0,212,255,.02)}
+.m-val{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;color:var(--w);line-height:1;margin-bottom:8px}
+.m-val em{font-style:normal;color:var(--c)}
+.m-label{font-size:11px;font-weight:600;letter-spacing:.05em;color:var(--sv);text-transform:uppercase;margin-bottom:3px}
+.m-sub{font-size:11px;color:var(--st)}
+
+/* ══════ USE CASES ════════════════════════════════════ */
+#usecases{background:var(--n);border-top:1px solid rgba(0,212,255,.06)}
+.cases{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:60px}
+.case{position:relative;height:300px;background:rgba(15,33,64,.4);border:1px solid rgba(0,212,255,.08);overflow:hidden;transition:border-color .3s}
+.case:hover{border-color:rgba(0,212,255,.2)}
+.case-cv{position:absolute;inset:0;width:100%;height:100%;opacity:.5;transition:opacity .4s}
+.case:hover .case-cv{opacity:.85}
+.case-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,13,24,.88) 0%,rgba(6,13,24,.55) 100%)}
+.case-body{position:absolute;inset:0;padding:26px;display:flex;flex-direction:column;justify-content:flex-end}
+.case-sys{position:absolute;top:18px;right:18px;display:flex;flex-direction:column;gap:5px;align-items:flex-end}
+.cs{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--cd);background:rgba(6,13,24,.9);border:1px solid rgba(0,212,255,.14);padding:3px 8px}
+.case-env{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--cd);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.case-env::before{content:'';width:12px;height:1px;background:var(--cd)}
+.case-title{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--w);letter-spacing:.02em;margin-bottom:7px}
+.case-desc{font-size:12.5px;line-height:1.6;color:var(--st);max-width:360px}
+
+/* ══════ ABOUT ════════════════════════════════════════ */
+#about{background:var(--d);border-top:1px solid rgba(0,212,255,.06)}
+.about-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-title{font-family:'Rajdhani',sans-serif;font-size:clamp(28px,4vw,46px);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--w);margin-bottom:22px}
+.about-title em{font-style:normal;color:var(--c)}
+.about-p{font-size:14.5px;line-height:1.8;color:var(--st);margin-bottom:16px;max-width:520px}
+.about-pos{margin-top:30px;padding:20px 24px;border-left:2px solid var(--c);background:rgba(0,212,255,.03)}
+.about-pos-text{font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:600;line-height:1.5;color:var(--sv)}
+.about-pos-attr{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ck);margin-top:10px}
+.about-cards{display:grid;grid-template-columns:1fr;gap:2px}
+.a-card{background:rgba(15,33,64,.45);border:1px solid rgba(0,212,255,.08);padding:22px 26px;transition:all .2s}
+.a-card:hover{background:rgba(15,33,64,.7);border-color:rgba(0,212,255,.14)}
+.ac-label{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--cd);margin-bottom:8px}
+.ac-title{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:var(--w);margin-bottom:7px}
+.ac-body{font-size:13px;line-height:1.65;color:var(--st)}
+
+/* ══════ CONTACT ══════════════════════════════════════ */
+#contact{background:var(--d);border-top:1px solid rgba(0,212,255,.06);padding:160px 0;position:relative;overflow:hidden}
+.contact-glow{position:absolute;bottom:-80px;left:50%;transform:translateX(-50%);width:700px;height:380px;background:radial-gradient(ellipse,rgba(0,212,255,.06) 0%,transparent 70%);pointer-events:none}
+.contact-content{position:relative;z-index:2;text-align:center;max-width:680px;margin:0 auto}
+.contact-title{font-family:'Rajdhani',sans-serif;font-size:clamp(36px,5.5vw,62px);font-weight:700;letter-spacing:-.02em;line-height:1.0;color:var(--w);margin-bottom:20px}
+.contact-title em{font-style:normal;color:var(--c)}
+.contact-desc{font-size:15px;line-height:1.75;color:var(--st);margin-bottom:44px;max-width:520px;margin-left:auto;margin-right:auto}
+.contact-acts{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:60px}
+.contact-info{display:flex;align-items:center;justify-content:center;border:1px solid rgba(0,212,255,.08);overflow:hidden;flex-wrap:wrap}
+.ci{padding:16px 26px;border-right:1px solid rgba(0,212,255,.08);text-align:center}
+.ci:last-child{border-right:none}
+.ci-l{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--ck);margin-bottom:4px}
+.ci-v{font-size:13px;font-weight:500;color:var(--sv)}
+
+/* ══════ FOOTER ═══════════════════════════════════════ */
+footer{background:var(--d);border-top:1px solid rgba(0,212,255,.08);padding:22px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
+.f-tagline{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ck)}
+.f-copy{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--st);opacity:.35}
+.f-status{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--st);opacity:.45}
+.f-dot{width:5px;height:5px;border-radius:50%;background:var(--c);animation:pd 2.5s ease infinite}
+
+/* ══════ KEYFRAMES ════════════════════════════════════ */
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.5)}}
+
+/* ══════ RESPONSIVE ═══════════════════════════════════ */
+@media(max-width:1024px){
+  .div-grid{grid-template-columns:repeat(2,1fr)}
+  .del-layout{grid-template-columns:1fr}
+  .about-layout{grid-template-columns:1fr}
+  .pillars{grid-template-columns:repeat(2,1fr)}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .stack-intro,.v-intro{grid-template-columns:1fr;gap:32px}
+  .stack-row{grid-template-columns:80px 1fr}
+  .sr-tags{display:none}
+}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .container{padding:0 20px}
+  section{padding:80px 0}
+  .div-grid{grid-template-columns:1fr}
+  .cases{grid-template-columns:1fr}
+  .pillars{grid-template-columns:1fr}
+  .metrics{grid-template-columns:1fr 1fr}
+  .hero-stats{display:none}
+  footer{padding:20px;flex-direction:column;text-align:center}
+  .contact-info{flex-direction:column}
+  .ci{border-right:none;border-bottom:1px solid rgba(0,212,255,.08);width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════ -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">
+    <svg width="160" height="38" viewBox="0 0 160 38" fill="none">
+      <polygon points="14,1.5 24,1.5 29,8.5 29,23 24,30 14,30 9,23 9,8.5" stroke="#00D4FF" stroke-width="1.4" fill="none"/>
+      <polygon points="16,5.5 22,5.5 26,11 26,21 22,26 16,26 12,21 12,11" stroke="#00D4FF" stroke-width=".7" fill="rgba(0,212,255,.04)"/>
+      <line x1="19" y1="11" x2="19" y2="21" stroke="#00D4FF" stroke-width=".9" opacity=".5"/>
+      <line x1="14" y1="16" x2="24" y2="16" stroke="#00D4FF" stroke-width=".9" opacity=".5"/>
+      <circle cx="19" cy="16" r="2" fill="#00D4FF"/>
+      <circle cx="19" cy="16" r="4" stroke="#00D4FF" stroke-width=".5" fill="none" opacity=".3"/>
+      <line x1="15.5" y1="11" x2="17.5" y2="11" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <line x1="15.5" y1="11" x2="15.5" y2="13" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <line x1="22.5" y1="11" x2="20.5" y2="11" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <line x1="22.5" y1="11" x2="22.5" y2="13" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <line x1="15.5" y1="21" x2="17.5" y2="21" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <line x1="15.5" y1="21" x2="15.5" y2="19" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <line x1="22.5" y1="21" x2="20.5" y2="21" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <line x1="22.5" y1="21" x2="22.5" y2="19" stroke="#00D4FF" stroke-width=".7" opacity=".4"/>
+      <text x="36" y="22" font-family="Rajdhani,sans-serif" font-size="20" font-weight="700" fill="#F0F4F8" letter-spacing="3">BARAX</text>
+      <line x1="36" y1="25" x2="152" y2="25" stroke="#00D4FF" stroke-width=".3" opacity=".2"/>
+      <text x="36" y="33" font-family="Inter,sans-serif" font-size="7" font-weight="500" fill="#0098B8" letter-spacing="3">DEFENSE &amp; TECHNOLOGY</text>
+    </svg>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#stack" class="en">Capability Stack</a><a href="#stack" class="es">Stack de Capacidades</a></li>
+    <li><a href="#verticals" class="en">Verticals</a><a href="#verticals" class="es">Verticales</a></li>
+    <li><a href="#technology" class="en">Technology</a><a href="#technology" class="es">Tecnología</a></li>
+    <li><a href="#usecases" class="en">Operations</a><a href="#usecases" class="es">Operaciones</a></li>
+    <li><a href="#about" class="en">About</a><a href="#about" class="es">Nosotros</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnES" onclick="setLang('es')">ES</button>
+    </div>
+    <a href="mailto:contact@baraxdefense.com" class="nav-cta en">Contact</a>
+    <a href="mailto:contact@baraxdefense.com" class="nav-cta es">Contacto</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"><canvas id="heroCanvas"></canvas></div>
+  <div class="hero-ov"></div>
+  <div class="hero-content">
+    <div class="hero-eye">
+      <span class="hero-eye-line"></span>
+      <span class="en">Defense · Intelligence · Technology Integration</span>
+      <span class="es">Defensa · Inteligencia · Integración Tecnológica</span>
+      <span class="hero-eye-line"></span>
+    </div>
+    <h1 class="hero-h en">From <em>Equipment</em><br>to Integrated<br>Systems</h1>
+    <h1 class="hero-h es">Del <em>Equipamiento</em><br>a Sistemas<br>Integrados</h1>
+    <div class="hero-tag">Strategic Edge. Global Reach.</div>
+    <p class="hero-sub en">We provision mission-ready equipment. We deploy surveillance architectures. We integrate multi-domain C4ISR systems. One company — six verticals — a single capability stack built to scale with the mission.</p>
+    <p class="hero-sub es">Proveemos equipamiento listo para operaciones. Desplegamos arquitecturas de vigilancia. Integramos sistemas C4ISR multi-dominio. Una empresa — seis verticales — un stack de capacidad construido para escalar con la misión.</p>
+    <div class="hero-acts">
+      <a href="mailto:contact@baraxdefense.com" class="btn-p en">Get in Touch</a>
+      <a href="mailto:contact@baraxdefense.com" class="btn-p es">Contactar</a>
+      <a href="#stack" class="btn-g en">Explore Stack</a>
+      <a href="#stack" class="btn-g es">Ver Stack</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><span class="hs-val">6</span><span class="hs-label en">Capability Verticals</span><span class="hs-label es">Verticales</span></div>
+    <div class="hs"><span class="hs-val">5</span><span class="hs-label en">Operational Domains</span><span class="hs-label es">Dominios Operativos</span></div>
+    <div class="hs"><span class="hs-val">3</span><span class="hs-label en">Active Regions</span><span class="hs-label es">Regiones Activas</span></div>
+    <div class="hs"><span class="hs-val"><em>⬤</em></span><span class="hs-label en">Systems Operational</span><span class="hs-label es">Sistemas Operativos</span></div>
+  </div>
+</section>
+
+<!-- ══ TICKER ══════════════════════════════════════════ -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ti"><em>BARAX</em><span class="ti-dot"></span>Defense &amp; Technology</span>
+    <span class="ti"><em>SUPPLY</em><span class="ti-dot"></span>Mission-Ready Equipment Provisioning</span>
+    <span class="ti"><em>SYSTEMS</em><span class="ti-dot"></span>UAS · Radar · C4ISR · Electronic Warfare</span>
+    <span class="ti"><em>DOMAINS</em><span class="ti-dot"></span>Land · Maritime · Air · Cyber · EW</span>
+    <span class="ti"><em>STACK</em><span class="ti-dot"></span>Supply → Surveillance → Comms → Cyber → Platforms → Systems</span>
+    <span class="ti"><em>TAGLINE</em><span class="ti-dot"></span>Strategic Edge. Global Reach.</span>
+    <span class="ti"><em>BARAX</em><span class="ti-dot"></span>Defense &amp; Technology</span>
+    <span class="ti"><em>SUPPLY</em><span class="ti-dot"></span>Mission-Ready Equipment Provisioning</span>
+    <span class="ti"><em>SYSTEMS</em><span class="ti-dot"></span>UAS · Radar · C4ISR · Electronic Warfare</span>
+    <span class="ti"><em>DOMAINS</em><span class="ti-dot"></span>Land · Maritime · Air · Cyber · EW</span>
+    <span class="ti"><em>STACK</em><span class="ti-dot"></span>Supply → Surveillance → Comms → Cyber → Platforms → Systems</span>
+    <span class="ti"><em>TAGLINE</em><span class="ti-dot"></span>Strategic Edge. Global Reach.</span>
+  </div>
+</div>
+
+<!-- ══ CAPABILITY STACK ════════════════════════════════ -->
+<section id="stack">
+  <div class="container">
+    <div class="stack-intro">
+      <div>
+        <div class="s-tag reveal en">02 — Capability Stack</div>
+        <div class="s-tag reveal es">02 — Stack de Capacidades</div>
+        <h2 class="s-title reveal en">Six Layers.<br><em>One</em> Company.</h2>
+        <h2 class="s-title reveal es">Seis Capas.<br><em>Una</em> Empresa.</h2>
+      </div>
+      <div class="reveal rd2">
+        <p class="s-desc en">We deliver operational capability at every level — from immediate equipment provisioning to full multi-domain C4ISR integration. Every vertical is interconnected. Every engagement can scale.</p>
+        <p class="s-desc es">Entregamos capacidad operativa en cada nivel — desde el suministro inmediato de equipamiento hasta la integración C4ISR multi-dominio completa. Cada vertical está interconectado. Cada compromiso puede escalar.</p>
+      </div>
+    </div>
+
+    <div class="stack-vis reveal">
+
+      <!-- Layer 6 SYSTEMS — APEX -->
+      <div class="stack-row reveal rd1" style="--vc:var(--v6)">
+        <div class="sr-layer"><span class="sr-n">Layer 06</span><span class="sr-l" style="color:var(--v6)">Apex</span></div>
+        <div class="sr-body">
+          <div class="sr-name">BARAX <em style="color:var(--v6)">Systems</em></div>
+          <div class="sr-desc en">Multi-domain C4ISR architecture — the apex layer. We fuse data from every sensor, platform, and communications node into a unified operational picture at all command echelons.</div>
+          <div class="sr-desc es">Arquitectura C4ISR multi-dominio — la capa ápex. Fusionamos datos de cada sensor, plataforma y nodo de comunicaciones en una imagen operativa unificada en todos los escalones de mando.</div>
+        </div>
+        <div class="sr-tags">
+          <span class="st" style="color:var(--v6)">C4ISR</span>
+          <span class="st" style="color:var(--v6)">Data Fusion</span>
+          <span class="st" style="color:var(--v6)">Multi-Domain COP</span>
+        </div>
+      </div>
+      <div class="stack-arrow">↑ integration ↑</div>
+
+      <!-- Layer 5 PLATFORMS -->
+      <div class="stack-row reveal rd2" style="--vc:var(--v5)">
+        <div class="sr-layer"><span class="sr-n">Layer 05</span><span class="sr-l" style="color:var(--v5)">Platforms</span></div>
+        <div class="sr-body">
+          <div class="sr-name">BARAX <em style="color:var(--v5)">Platforms</em></div>
+          <div class="sr-desc en">We integrate unmanned aerial, ground, and maritime platforms with configured payloads, ground control stations, and counter-UAS defensive architectures.</div>
+          <div class="sr-desc es">Integramos plataformas no tripuladas aéreas, terrestres y marítimas con cargas configuradas, estaciones de control terrestre y arquitecturas defensivas anti-UAS.</div>
+        </div>
+        <div class="sr-tags">
+          <span class="st" style="color:var(--v5)">UAS / UAV</span>
+          <span class="st" style="color:var(--v5)">Counter-UAS</span>
+          <span class="st" style="color:var(--v5)">Maritime USV</span>
+        </div>
+      </div>
+      <div class="stack-arrow">↑ integration ↑</div>
+
+      <!-- Layer 4 CYBER -->
+      <div class="stack-row reveal rd3" style="--vc:var(--v4)">
+        <div class="sr-layer"><span class="sr-n">Layer 04</span><span class="sr-l" style="color:var(--v4)">Cyber</span></div>
+        <div class="sr-body">
+          <div class="sr-name">BARAX <em style="color:var(--v4)">Cyber</em></div>
+          <div class="sr-desc en">We deploy Electronic Warfare systems and cybersecurity operations — signal jamming, spectrum management, SOC capabilities, and cyber-physical protection for tactical and strategic environments.</div>
+          <div class="sr-desc es">Desplegamos sistemas de Guerra Electrónica y operaciones de ciberseguridad — inhibición de señal, gestión del espectro, capacidades SOC y protección ciber-física para entornos tácticos y estratégicos.</div>
+        </div>
+        <div class="sr-tags">
+          <span class="st" style="color:var(--v4)">Electronic Warfare</span>
+          <span class="st" style="color:var(--v4)">SOC</span>
+          <span class="st" style="color:var(--v4)">Threat Intel</span>
+        </div>
+      </div>
+      <div class="stack-arrow">↑ integration ↑</div>
+
+      <!-- Layer 3 COMMS -->
+      <div class="stack-row reveal rd4" style="--vc:var(--v3)">
+        <div class="sr-layer"><span class="sr-n">Layer 03</span><span class="sr-l" style="color:var(--v3)">Comms</span></div>
+        <div class="sr-body">
+          <div class="sr-name">BARAX <em style="color:var(--v3)">Comms</em></div>
+          <div class="sr-desc en">We integrate secure tactical communications — encrypted radio networks, SATCOM links, and C4I backbone — enabling command at all echelons in contested environments.</div>
+          <div class="sr-desc es">Integramos comunicaciones tácticas seguras — redes de radio encriptadas, enlaces SATCOM y columna vertebral C4I — habilitando el mando en todos los escalones en entornos en disputa.</div>
+        </div>
+        <div class="sr-tags">
+          <span class="st" style="color:var(--v3)">SATCOM</span>
+          <span class="st" style="color:var(--v3)">Encrypted Radio</span>
+          <span class="st" style="color:var(--v3)">C4I Backbone</span>
+        </div>
+      </div>
+      <div class="stack-arrow">↑ integration ↑</div>
+
+      <!-- Layer 2 SURVEILLANCE -->
+      <div class="stack-row reveal rd5" style="--vc:var(--v2)">
+        <div class="sr-layer"><span class="sr-n">Layer 02</span><span class="sr-l" style="color:var(--v2)">Surveillance</span></div>
+        <div class="sr-body">
+          <div class="sr-name">BARAX <em style="color:var(--v2)">Surveillance</em></div>
+          <div class="sr-desc en">We deploy wide-area ISR architectures integrating ground radar, EO/IR sensors, and SIGINT platforms — delivering persistent situational awareness at tactical and strategic scale.</div>
+          <div class="sr-desc es">Desplegamos arquitecturas ISR de área amplia que integran radar terrestre, sensores EO/IR y plataformas SIGINT — entregando conciencia situacional persistente a escala táctica y estratégica.</div>
+        </div>
+        <div class="sr-tags">
+          <span class="st" style="color:var(--v2)">Ground Radar</span>
+          <span class="st" style="color:var(--v2)">EO/IR</span>
+          <span class="st" style="color:var(--v2)">SIGINT</span>
+        </div>
+      </div>
+      <div class="stack-arrow">↑ built on ↑</div>
+
+      <!-- Layer 1 SUPPLY — FOUNDATION -->
+      <div class="stack-row reveal rd6" style="--vc:var(--v1);background:rgba(120,190,138,.04)">
+        <div class="sr-layer" style="background:rgba(120,190,138,.07)">
+          <span class="sr-n">Layer 01</span>
+          <span class="sr-l" style="color:var(--v1)">Foundation</span>
+        </div>
+        <div class="sr-body">
+          <div class="sr-name">BARAX <em style="color:var(--v1)">Supply</em></div>
+          <div class="sr-desc en"><strong style="color:var(--sv)">Mission-ready equipment provisioning.</strong> Tactical ground equipment, naval systems, aerial and drone platforms, counter-drone, night vision, and military-grade operational gear — deployment-ready for institutions that require immediate operational capability.</div>
+          <div class="sr-desc es"><strong style="color:var(--sv)">Suministro de equipamiento listo para operaciones.</strong> Equipo táctico terrestre, sistemas navales, plataformas aéreas y drones, anti-drones, visión nocturna y equipo operativo militar — listo para despliegue para instituciones que requieren capacidad operativa inmediata.</div>
+        </div>
+        <div class="sr-tags" style="background:rgba(120,190,138,.04)">
+          <span class="st" style="color:var(--v1)">Tactical Equipment</span>
+          <span class="st" style="color:var(--v1)">Naval Systems</span>
+          <span class="st" style="color:var(--v1)">Counter-Drone</span>
+          <span class="st" style="color:var(--v1)">Night Vision</span>
+        </div>
+      </div>
+
+      <div class="stack-labels">
+        <span class="sl sl-bot en">Foundation — Entry Point</span>
+        <span class="sl sl-bot es">Fundación — Punto de Entrada</span>
+        <span class="sl sl-top en">Apex — Full C4ISR Integration</span>
+        <span class="sl sl-top es">Ápex — Integración C4ISR Completa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VERTICALS DETAIL ════════════════════════════════ -->
+<section id="verticals">
+  <div class="container">
+    <div class="v-intro">
+      <div>
+        <div class="s-tag reveal en">03 — Technology Verticals</div>
+        <div class="s-tag reveal es">03 — Verticales Tecnológicas</div>
+        <h2 class="s-title reveal en">Six <em>Specialized</em><br>Domains</h2>
+        <h2 class="s-title reveal es">Seis <em>Dominios</em><br>Especializados</h2>
+      </div>
+      <p class="s-desc reveal rd2 en">Each vertical is a distinct operational capability — structured, staffed, and positioned as a specialized business line within the BARAX master brand. All six are interconnected and designed to compound value.</p>
+      <p class="s-desc reveal rd2 es">Cada vertical es una capacidad operativa distinta — estructurada, dotada de personal y posicionada como una línea de negocio especializada dentro de la marca principal BARAX. Las seis están interconectadas y diseñadas para multiplicar valor.</p>
+    </div>
+
+    <div class="div-grid">
+
+      <!-- SUPPLY — Foundation -->
+      <div class="div-card supply reveal rd1" style="--va:var(--v1)">
+        <div class="dg" style="background:var(--v1)"></div>
+        <div class="d-num">DIV-01</div>
+        <div class="supply-badge en">Entry Point · Foundation Layer</div>
+        <div class="supply-badge es">Punto de Entrada · Capa Fundacional</div>
+        <div class="d-icon">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <rect x="4" y="12" width="32" height="22" rx="2" stroke="#78BE8A" stroke-width="1.2"/>
+            <path d="M4 18 L36 18" stroke="#78BE8A" stroke-width=".7" opacity=".4"/>
+            <rect x="9" y="22" width="6" height="6" rx="1" fill="rgba(120,190,138,.2)" stroke="#78BE8A" stroke-width="1"/>
+            <rect x="18" y="22" width="6" height="6" rx="1" fill="rgba(120,190,138,.2)" stroke="#78BE8A" stroke-width="1"/>
+            <path d="M12 12 L12 8 M20 12 L20 8 M28 12 L28 8" stroke="#78BE8A" stroke-width="1.2"/>
+            <line x1="8" y1="8" x2="32" y2="8" stroke="#78BE8A" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="d-name">BARAX <em>Supply</em></div>
+        <div class="d-sub en">Tactical · Naval · Aerial · Counter-Drone · NVG · Mil-Gear</div>
+        <div class="d-sub es">Táctico · Naval · Aéreo · Anti-Drone · NVG · Equipo Militar</div>
+        <div class="d-desc en">We provision mission-ready equipment for immediate operational deployment — tactical ground systems, naval components, UAS platforms, counter-drone systems, night vision, and military-grade operational gear. No catalog browsing. No generic distribution. Equipment assessed, configured, and delivered deployment-ready.</div>
+        <div class="d-desc es">Suministramos equipamiento listo para despliegue operativo inmediato — sistemas tácticos terrestres, componentes navales, plataformas UAS, sistemas anti-drones, visión nocturna y equipo operativo militar. Sin catálogos genéricos. Equipamiento evaluado, configurado y entregado listo para operar.</div>
+        <div class="d-tags">
+          <span class="dt" style="color:var(--v1)">Tactical Vehicles</span>
+          <span class="dt" style="color:var(--v1)">Naval Systems</span>
+          <span class="dt" style="color:var(--v1)">UAS / Drones</span>
+          <span class="dt" style="color:var(--v1)">Counter-UAS</span>
+          <span class="dt" style="color:var(--v1)">Night Vision</span>
+        </div>
+      </div>
+
+      <!-- SURVEILLANCE -->
+      <div class="div-card reveal rd2" style="--va:var(--v2)">
+        <div class="dg" style="background:var(--v2)"></div>
+        <div class="d-num">DIV-02</div>
+        <div class="d-icon">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <circle cx="20" cy="20" r="14" stroke="#00D4FF" stroke-width="1"/>
+            <circle cx="20" cy="20" r="8" stroke="#00D4FF" stroke-width=".8" stroke-dasharray="3 3"/>
+            <circle cx="20" cy="20" r="2" fill="#00D4FF"/>
+            <line x1="20" y1="6" x2="20" y2="12" stroke="#00D4FF" stroke-width="1"/>
+            <line x1="20" y1="28" x2="20" y2="34" stroke="#00D4FF" stroke-width="1"/>
+            <line x1="6" y1="20" x2="12" y2="20" stroke="#00D4FF" stroke-width="1"/>
+            <line x1="28" y1="20" x2="34" y2="20" stroke="#00D4FF" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="d-name">BARAX <em>Surveillance</em></div>
+        <div class="d-sub">ISR · Radar · EO/IR · SIGINT</div>
+        <div class="d-desc en">We deploy wide-area ISR architectures — integrating ground radar, EO/IR sensors, and SIGINT platforms into persistent, layered situational awareness systems that generate the real-time intelligence picture required for operational command.</div>
+        <div class="d-desc es">Desplegamos arquitecturas ISR de área amplia — integrando radar terrestre, sensores EO/IR y plataformas SIGINT en sistemas de conciencia situacional persistentes y en capas que generan la imagen de inteligencia en tiempo real.</div>
+        <div class="d-tags">
+          <span class="dt" style="color:var(--v2)">Ground Radar</span>
+          <span class="dt" style="color:var(--v2)">Thermal EO/IR</span>
+          <span class="dt" style="color:var(--v2)">SIGINT</span>
+          <span class="dt" style="color:var(--v2)">Wide-Area ISR</span>
+        </div>
+      </div>
+
+      <!-- COMMS -->
+      <div class="div-card reveal rd3" style="--va:var(--v3)">
+        <div class="dg" style="background:var(--v3)"></div>
+        <div class="d-num">DIV-03</div>
+        <div class="d-icon">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <path d="M8 20 Q20 6 32 20" stroke="#00FF88" stroke-width="1" fill="none"/>
+            <path d="M4 24 Q20 2 36 24" stroke="#00FF88" stroke-width=".7" fill="none" opacity=".4"/>
+            <rect x="16" y="26" width="8" height="7" rx="1" stroke="#00FF88" stroke-width="1"/>
+            <line x1="20" y1="20" x2="20" y2="26" stroke="#00FF88" stroke-width="1"/>
+            <line x1="14" y1="33" x2="26" y2="33" stroke="#00FF88" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="d-name">BARAX <em>Comms</em></div>
+        <div class="d-sub">SATCOM · Encrypted Radio · C4I · Tactical Mesh</div>
+        <div class="d-desc en">We integrate secure, resilient tactical communications — encrypted radio networks, SATCOM uplinks, and C4I backbone — enabling command and coordination at all echelons, including in communications-denied and electronically contested environments.</div>
+        <div class="d-desc es">Integramos comunicaciones tácticas seguras y resilientes — redes de radio encriptadas, enlaces SATCOM ascendentes y columna C4I — habilitando mando y coordinación en todos los escalones, incluso en entornos con comunicaciones denegadas.</div>
+        <div class="d-tags">
+          <span class="dt" style="color:var(--v3)">SATCOM</span>
+          <span class="dt" style="color:var(--v3)">Encrypted Radio</span>
+          <span class="dt" style="color:var(--v3)">C4I</span>
+          <span class="dt" style="color:var(--v3)">Tactical Mesh</span>
+        </div>
+      </div>
+
+      <!-- CYBER -->
+      <div class="div-card reveal rd4" style="--va:var(--v4)">
+        <div class="dg" style="background:var(--v4)"></div>
+        <div class="d-num">DIV-04</div>
+        <div class="d-icon">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <rect x="6" y="12" width="28" height="18" rx="2" stroke="#FFB800" stroke-width="1"/>
+            <path d="M14 21 L18 25 L26 17" stroke="#FFB800" stroke-width="1.2" fill="none"/>
+            <line x1="6" y1="25" x2="34" y2="25" stroke="#FFB800" stroke-width=".6" opacity=".3"/>
+            <line x1="12" y1="8" x2="12" y2="12" stroke="#FFB800" stroke-width="1"/>
+            <line x1="20" y1="6" x2="20" y2="12" stroke="#FFB800" stroke-width="1"/>
+            <line x1="28" y1="8" x2="28" y2="12" stroke="#FFB800" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="d-name">BARAX <em>Cyber</em></div>
+        <div class="d-sub">Electronic Warfare · SOC · Cyber Defense · Threat Intel</div>
+        <div class="d-desc en">We deploy Electronic Warfare and cybersecurity operations — signal jamming, spectrum management, SOC operations, and cyber-physical protection. In modern operations, the electromagnetic and digital domains are as contested as physical terrain. We provide the capability to dominate both.</div>
+        <div class="d-desc es">Desplegamos Guerra Electrónica y operaciones de ciberseguridad — inhibición de señal, gestión del espectro, operaciones SOC y protección ciber-física. En operaciones modernas, los dominios electromagnético y digital son tan disputados como el terreno físico.</div>
+        <div class="d-tags">
+          <span class="dt" style="color:var(--v4)">Electronic Warfare</span>
+          <span class="dt" style="color:var(--v4)">SOC Operations</span>
+          <span class="dt" style="color:var(--v4)">Cyber Defense</span>
+          <span class="dt" style="color:var(--v4)">Threat Intel</span>
+        </div>
+      </div>
+
+      <!-- PLATFORMS -->
+      <div class="div-card reveal rd5" style="--va:var(--v5)">
+        <div class="dg" style="background:var(--v5)"></div>
+        <div class="d-num">DIV-05</div>
+        <div class="d-icon">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <path d="M20 5 L30 16 L20 14 L10 16 Z" fill="rgba(255,107,53,.15)" stroke="#FF6B35" stroke-width="1"/>
+            <path d="M12 16 L16 23 L24 23 L28 16" stroke="#FF6B35" stroke-width=".8" fill="none"/>
+            <line x1="16" y1="23" x2="16" y2="30" stroke="#FF6B35" stroke-width="1"/>
+            <line x1="24" y1="23" x2="24" y2="30" stroke="#FF6B35" stroke-width="1"/>
+            <line x1="12" y1="30" x2="28" y2="30" stroke="#FF6B35" stroke-width="1.2"/>
+            <circle cx="20" cy="10" r="1.5" fill="#FF6B35"/>
+          </svg>
+        </div>
+        <div class="d-name">BARAX <em>Platforms</em></div>
+        <div class="d-sub">Fixed-Wing UAS · VTOL · Maritime USV · Counter-UAS</div>
+        <div class="d-desc en">We integrate multi-domain unmanned systems — fixed-wing ISR, tactical VTOL, maritime USV — with sensor payload configuration, ground control deployment, and operator training. We also deploy counter-UAS defensive architectures for force and infrastructure protection.</div>
+        <div class="d-desc es">Integramos sistemas no tripulados multi-dominio — ISR de ala fija, VTOL táctico, USV marítimo — con configuración de carga de sensores, despliegue de control terrestre y entrenamiento de operadores. También desplegamos arquitecturas anti-UAS defensivas.</div>
+        <div class="d-tags">
+          <span class="dt" style="color:var(--v5)">Fixed-Wing ISR</span>
+          <span class="dt" style="color:var(--v5)">Tactical VTOL</span>
+          <span class="dt" style="color:var(--v5)">Maritime USV</span>
+          <span class="dt" style="color:var(--v5)">Counter-UAS</span>
+        </div>
+      </div>
+
+      <!-- SYSTEMS — Apex -->
+      <div class="div-card reveal rd6" style="--va:var(--v6);background:rgba(168,85,247,.03)">
+        <div class="dg" style="background:var(--v6)"></div>
+        <div class="d-num">DIV-06</div>
+        <div class="d-icon">
+          <svg viewBox="0 0 40 40" fill="none" width="40" height="40">
+            <rect x="4" y="16" width="9" height="8" rx="1" stroke="#A855F7" stroke-width="1"/>
+            <rect x="16" y="10" width="8" height="20" rx="1" stroke="#A855F7" stroke-width="1"/>
+            <rect x="28" y="14" width="8" height="12" rx="1" stroke="#A855F7" stroke-width="1"/>
+            <line x1="13" y1="20" x2="16" y2="20" stroke="#A855F7" stroke-width="1.2"/>
+            <line x1="24" y1="20" x2="28" y2="20" stroke="#A855F7" stroke-width="1.2"/>
+            <circle cx="8.5" cy="9" r="2.5" stroke="#A855F7" stroke-width="1"/>
+            <line x1="8.5" y1="11.5" x2="8.5" y2="16" stroke="#A855F7" stroke-width=".8" stroke-dasharray="2 2"/>
+          </svg>
+        </div>
+        <div class="d-name">BARAX <em>Systems</em></div>
+        <div class="d-sub">C4ISR · Multi-Domain Integration · System-of-Systems</div>
+        <div class="d-desc en">We architect and deploy multi-vendor C4ISR environments — the apex integration layer that connects all capability verticals into a unified operational picture. Where equipment becomes capability, and capability becomes operational dominance.</div>
+        <div class="d-desc es">Arquitectamos y desplegamos entornos C4ISR multi-proveedor — la capa de integración ápex que conecta todas las verticales de capacidad en una imagen operativa unificada. Donde el equipamiento se convierte en capacidad, y la capacidad en dominio operativo.</div>
+        <div class="d-tags">
+          <span class="dt" style="color:var(--v6)">C4ISR</span>
+          <span class="dt" style="color:var(--v6)">Data Fusion</span>
+          <span class="dt" style="color:var(--v6)">Multi-Domain COP</span>
+          <span class="dt" style="color:var(--v6)">Interoperability</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT WE DELIVER ═════════════════════════════════ -->
+<section id="deliver">
+  <div class="container">
+    <div class="del-layout">
+      <div class="reveal">
+        <canvas id="deliverCanvas"></canvas>
+      </div>
+      <div>
+        <div class="s-tag reveal en">04 — What We Deliver</div>
+        <div class="s-tag reveal es">04 — Lo Que Entregamos</div>
+        <h2 class="s-title reveal en">Operational <em>Capability</em><br>at Every Level</h2>
+        <h2 class="s-title reveal es"><em>Capacidad</em> Operativa<br>en Cada Nivel</h2>
+        <div class="del-list">
+          <div class="del-item reveal rd1">
+            <span class="del-num">01</span>
+            <div class="del-body">
+              <div class="del-title en">Mission-Ready Equipment Provisioning</div>
+              <div class="del-title es">Suministro de Equipamiento Listo para Operaciones</div>
+              <div class="del-desc en">We provision tactical ground equipment, naval systems, UAS platforms, counter-drone systems, and night vision — assessed, configured, and delivered deployment-ready. No catalog defaults. No generic distribution.</div>
+              <div class="del-desc es">Suministramos equipo táctico terrestre, sistemas navales, plataformas UAS, sistemas anti-drones y visión nocturna — evaluados, configurados y entregados listos para operar.</div>
+            </div>
+          </div>
+          <div class="del-item reveal rd2">
+            <span class="del-num">02</span>
+            <div class="del-body">
+              <div class="del-title en">Integrated Surveillance Systems</div>
+              <div class="del-title es">Sistemas de Vigilancia Integrados</div>
+              <div class="del-desc en">We deploy layered sensor architectures — radar, EO/IR, UAS, SIGINT — fused through a unified C2 interface. Multi-sensor architectures, not individual equipment.</div>
+              <div class="del-desc es">Desplegamos arquitecturas de sensores en capas — radar, EO/IR, UAS, SIGINT — fusionadas a través de una interfaz C2 unificada. Arquitecturas multi-sensor, no equipos individuales.</div>
+            </div>
+          </div>
+          <div class="del-item reveal rd3">
+            <span class="del-num">03</span>
+            <div class="del-body">
+              <div class="del-title en">Electronic Warfare & Cyber Defense</div>
+              <div class="del-title es">Guerra Electrónica y Ciberdefensa</div>
+              <div class="del-desc en">We deploy EW systems and cyber operations — signal jamming, spectrum management, and cyber-physical protection — for critical infrastructure and tactical units.</div>
+              <div class="del-desc es">Desplegamos sistemas GE y operaciones cibernéticas — inhibición de señal, gestión del espectro y protección ciber-física — para infraestructura crítica y unidades tácticas.</div>
+            </div>
+          </div>
+          <div class="del-item reveal rd4">
+            <span class="del-num">04</span>
+            <div class="del-body">
+              <div class="del-title en">Unmanned Systems Integration</div>
+              <div class="del-title es">Integración de Sistemas No Tripulados</div>
+              <div class="del-desc en">We integrate multi-domain UAS — fixed-wing ISR, tactical VTOL, maritime USV — with payload configuration, GCS training, and counter-UAS defensive layers.</div>
+              <div class="del-desc es">Integramos UAS multi-dominio — ISR de ala fija, VTOL táctico, USV marítimo — con configuración de carga útil, entrenamiento GCS y capas defensivas anti-UAS.</div>
+            </div>
+          </div>
+          <div class="del-item reveal rd5">
+            <span class="del-num">05</span>
+            <div class="del-body">
+              <div class="del-title en">Full C4ISR Architecture</div>
+              <div class="del-title es">Arquitectura C4ISR Completa</div>
+              <div class="del-desc en">We architect multi-vendor C4ISR environments — combining data fusion, interoperable protocols, and common operational pictures across all command echelons. From equipment to unified systems.</div>
+              <div class="del-desc es">Arquitectamos entornos C4ISR multi-proveedor — combinando fusión de datos, protocolos interoperables e imágenes operativas comunes en todos los escalones de mando.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TECHNOLOGY ══════════════════════════════════════ -->
+<section id="technology">
+  <div class="container">
+    <div class="s-tag reveal en">05 — Technology Approach</div>
+    <div class="s-tag reveal es">05 — Enfoque Tecnológico</div>
+    <h2 class="s-title reveal en">How We <em>Integrate</em></h2>
+    <h2 class="s-title reveal es">Cómo <em>Integramos</em></h2>
+    <p class="s-desc reveal en">From first equipment delivery to final systems integration — a systematic framework that ensures operational capability at every stage.</p>
+    <p class="s-desc reveal es">Desde la primera entrega de equipamiento hasta la integración final de sistemas — un marco sistemático que garantiza capacidad operativa en cada etapa.</p>
+
+    <div class="pillars">
+      <div class="pillar reveal rd1">
+        <div class="p-num">APPROACH-01</div>
+        <div class="p-icon">🔗</div>
+        <div class="p-title en">Integration</div>
+        <div class="p-title es">Integración</div>
+        <div class="p-desc en">We bridge multi-vendor ecosystems — from supplied equipment to integrated C4ISR architectures — through open-standard middleware and custom data links that deliver unified operational pictures.</div>
+        <div class="p-desc es">Conectamos ecosistemas multi-proveedor — desde equipamiento suministrado hasta arquitecturas C4ISR integradas — mediante middleware de estándar abierto y enlaces de datos personalizados.</div>
+      </div>
+      <div class="pillar reveal rd2">
+        <div class="p-num">APPROACH-02</div>
+        <div class="p-icon">⬡</div>
+        <div class="p-title en">Scalability</div>
+        <div class="p-title es">Escalabilidad</div>
+        <div class="p-desc en">We design engagements that scale naturally from equipment supply to full integration programs. Every supply contract is a foundation for systems integration. Every layer builds on the last.</div>
+        <div class="p-desc es">Diseñamos compromisos que escalan naturalmente desde el suministro de equipamiento hasta programas de integración completa. Cada capa construye sobre la anterior.</div>
+      </div>
+      <div class="pillar reveal rd3">
+        <div class="p-num">APPROACH-03</div>
+        <div class="p-icon">◎</div>
+        <div class="p-title en">Precision</div>
+        <div class="p-title es">Precisión</div>
+        <div class="p-desc en">Every system — from individual equipment to full C4ISR architecture — is assessed, configured, and validated against the actual operational environment. No catalog defaults. No generic configurations.</div>
+        <div class="p-desc es">Cada sistema — desde equipamiento individual hasta arquitectura C4ISR completa — se evalúa, configura y valida contra el entorno operativo real. Sin configuraciones genéricas.</div>
+      </div>
+      <div class="pillar reveal rd4">
+        <div class="p-num">APPROACH-04</div>
+        <div class="p-icon">▦</div>
+        <div class="p-title en">Data-Driven</div>
+        <div class="p-title es">Basado en Datos</div>
+        <div class="p-desc en">We build intelligence into every layer — from sensor-level detection through fusion analytics to command-level decision support — delivering actionable situational awareness at every echelon.</div>
+        <div class="p-desc es">Integramos inteligencia en cada capa — desde detección a nivel de sensor a través de analítica de fusión hasta soporte de decisiones a nivel de mando — entregando conciencia situacional accionable.</div>
+      </div>
+    </div>
+
+    <div class="metrics reveal">
+      <div class="metric">
+        <div class="m-val">6</div>
+        <div class="m-label en">Technology Verticals</div>
+        <div class="m-label es">Verticales Tecnológicas</div>
+        <div class="m-sub en">Supply through Systems</div>
+        <div class="m-sub es">Supply hasta Systems</div>
+      </div>
+      <div class="metric">
+        <div class="m-val">5</div>
+        <div class="m-label en">Operational Domains</div>
+        <div class="m-label es">Dominios Operativos</div>
+        <div class="m-sub en">Land · Air · Maritime · Cyber · EW</div>
+        <div class="m-sub es">Tierra · Aire · Marítimo · Ciber · GE</div>
+      </div>
+      <div class="metric">
+        <div class="m-val">3</div>
+        <div class="m-label en">Engagement Levels</div>
+        <div class="m-label es">Niveles de Compromiso</div>
+        <div class="m-sub en">Equipment · Capability · Integration</div>
+        <div class="m-sub es">Equipamiento · Capacidad · Integración</div>
+      </div>
+      <div class="metric">
+        <div class="m-val">100<em>%</em></div>
+        <div class="m-label en">Institutional</div>
+        <div class="m-label es">Institucional</div>
+        <div class="m-sub en">Armed Forces & Gov Agencies Only</div>
+        <div class="m-sub es">Solo FF.AA. y Agencias Gubernamentales</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ USE CASES ═══════════════════════════════════════ -->
+<section id="usecases">
+  <div class="container">
+    <div class="s-tag reveal en">06 — Operational Environments</div>
+    <div class="s-tag reveal es">06 — Entornos Operativos</div>
+    <h2 class="s-title reveal en">Where We <em>Operate</em></h2>
+    <h2 class="s-title reveal es">Donde <em>Operamos</em></h2>
+    <p class="s-desc reveal en">We deploy across the environments where defense and security demands are most critical — from borders to littoral waters to urban centers.</p>
+    <p class="s-desc reveal es">Operamos en los entornos donde las exigencias de defensa y seguridad son más críticas — desde fronteras hasta aguas litorales y centros urbanos.</p>
+    <div class="cases">
+      <div class="case reveal rd1">
+        <canvas class="case-cv" data-type="border"></canvas>
+        <div class="case-ov"></div>
+        <div class="case-sys"><span class="cs">Ground Radar</span><span class="cs">UAS Patrol</span><span class="cs">EO/IR</span></div>
+        <div class="case-body">
+          <div class="case-env en">Perimeter & Borders</div>
+          <div class="case-env es">Perímetro y Fronteras</div>
+          <div class="case-title en">Border Surveillance</div>
+          <div class="case-title es">Vigilancia de Fronteras</div>
+          <div class="case-desc en">We deploy persistent sensor layers — radar, EO/IR, UAS, acoustic detection — fused into a common operational picture. BARAX Supply provisions the hardware. BARAX Surveillance integrates the architecture.</div>
+          <div class="case-desc es">Desplegamos capas de sensores persistentes fusionadas en una imagen operativa común. BARAX Supply suministra el hardware. BARAX Surveillance integra la arquitectura.</div>
+        </div>
+      </div>
+      <div class="case reveal rd2">
+        <canvas class="case-cv" data-type="urban"></canvas>
+        <div class="case-ov"></div>
+        <div class="case-sys"><span class="cs">C2 Platform</span><span class="cs">AI Analytics</span><span class="cs">EW</span></div>
+        <div class="case-body">
+          <div class="case-env en">Metropolitan Security</div>
+          <div class="case-env es">Seguridad Metropolitana</div>
+          <div class="case-title en">Urban Security</div>
+          <div class="case-title es">Seguridad Urbana</div>
+          <div class="case-desc en">We integrate AI-assisted analytics, Electronic Warfare awareness, and C2 coordination for major population centers — leveraging BARAX Cyber and BARAX Systems in a unified urban architecture.</div>
+          <div class="case-desc es">Integramos analítica asistida por IA, conciencia de Guerra Electrónica y coordinación C2 para grandes centros urbanos — aprovechando BARAX Cyber y BARAX Systems en una arquitectura urbana unificada.</div>
+        </div>
+      </div>
+      <div class="case reveal rd3">
+        <canvas class="case-cv" data-type="maritime"></canvas>
+        <div class="case-ov"></div>
+        <div class="case-sys"><span class="cs">Coastal Radar</span><span class="cs">AIS Fusion</span><span class="cs">Maritime UAS</span></div>
+        <div class="case-body">
+          <div class="case-env en">Naval Operations</div>
+          <div class="case-env es">Operaciones Navales</div>
+          <div class="case-title en">Maritime Defense</div>
+          <div class="case-title es">Defensa Marítima</div>
+          <div class="case-desc en">We deploy coastal surveillance and maritime domain awareness — surface radar, AIS fusion, maritime UAS, and naval systems provisioned through BARAX Supply and integrated through BARAX Surveillance.</div>
+          <div class="case-desc es">Desplegamos vigilancia costera y conciencia del dominio marítimo — con sistemas navales suministrados a través de BARAX Supply e integrados mediante BARAX Surveillance.</div>
+        </div>
+      </div>
+      <div class="case reveal rd4">
+        <canvas class="case-cv" data-type="aerial"></canvas>
+        <div class="case-ov"></div>
+        <div class="case-sys"><span class="cs">Fixed-Wing ISR</span><span class="cs">SAR Payload</span><span class="cs">C-UAS</span></div>
+        <div class="case-body">
+          <div class="case-env en">Aerial & Counter-UAS</div>
+          <div class="case-env es">Aéreo y Anti-UAS</div>
+          <div class="case-title en">Aerial Operations</div>
+          <div class="case-title es">Operaciones Aéreas</div>
+          <div class="case-desc en">We integrate long-endurance UAS with multi-spectral payloads for wide-area ISR, alongside counter-UAS architectures to protect friendly assets — drawing on BARAX Supply, Platforms, and Systems.</div>
+          <div class="case-desc es">Integramos UAS de larga resistencia con cargas multi-espectrales para ISR de área amplia, junto con arquitecturas anti-UAS para proteger activos propios — aprovechando BARAX Supply, Platforms y Systems.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div>
+        <div class="s-tag reveal en">07 — What is BARAX</div>
+        <div class="s-tag reveal es">07 — Qué es BARAX</div>
+        <h2 class="about-title reveal en">Strategic Defense<br><em>Integrator</em></h2>
+        <h2 class="about-title reveal es">Integrador Estratégico<br>de <em>Defensa</em></h2>
+        <p class="about-p reveal en">We provision mission-ready equipment. We deploy capability architectures. We integrate multi-domain systems. From the first tactical gear delivered through BARAX Supply to the final C4ISR node integrated through BARAX Systems — we deliver operational capability at every level.</p>
+        <p class="about-p reveal es">Suministramos equipamiento listo para operaciones. Desplegamos arquitecturas de capacidad. Integramos sistemas multi-dominio. Desde el primer equipo táctico entregado a través de BARAX Supply hasta el nodo C4ISR final integrado mediante BARAX Systems — entregamos capacidad operativa en cada nivel.</p>
+        <p class="about-p reveal en">We do not manufacture. We do not distribute from a catalog. We engage exclusively with armed forces, government security agencies, and authorized prime contractors — treating every institutional relationship as a program to be built, not a transaction to be closed.</p>
+        <p class="about-p reveal es">No fabricamos. No distribuimos desde un catálogo. Nos relacionamos exclusivamente con fuerzas armadas, agencias gubernamentales de seguridad y contratistas principales autorizados — tratando cada relación institucional como un programa a construir, no una transacción a cerrar.</p>
+        <div class="about-pos reveal">
+          <div class="about-pos-text en">"From mission-ready equipment to full multi-domain integration — BARAX delivers operational capability at every level of institutional complexity."</div>
+          <div class="about-pos-text es">"Desde equipamiento listo para operaciones hasta integración multi-dominio completa — BARAX entrega capacidad operativa en cada nivel de complejidad institucional."</div>
+          <div class="about-pos-attr">— BARAX Master Positioning Statement</div>
+        </div>
+      </div>
+      <div>
+        <div class="about-cards">
+          <div class="a-card reveal rd1">
+            <div class="ac-label en">Entry Point</div>
+            <div class="ac-label es">Punto de Entrada</div>
+            <div class="ac-title" style="color:var(--v1)" >BARAX Supply</div>
+            <div class="ac-body en">Institutions that require immediate operational capability engage through BARAX Supply — mission-ready equipment delivered without the lead time of a full integration program. This entry point builds the relationship that enables larger programs.</div>
+            <div class="ac-body es">Las instituciones que requieren capacidad operativa inmediata se relacionan a través de BARAX Supply — equipamiento listo para operaciones entregado sin el tiempo de espera de un programa de integración completo.</div>
+          </div>
+          <div class="a-card reveal rd2">
+            <div class="ac-label en">Growth Path</div>
+            <div class="ac-label es">Camino de Crecimiento</div>
+            <div class="ac-title">Supply → Capability → Integration</div>
+            <div class="ac-body en">Every engagement is designed to scale. Equipment becomes a surveillance architecture. A surveillance architecture integrates with communications and platforms. Everything feeds into BARAX Systems at the apex — one accountable program, all six verticals.</div>
+            <div class="ac-body es">Cada compromiso está diseñado para escalar. El equipamiento se convierte en arquitectura de vigilancia. Una arquitectura de vigilancia se integra con comunicaciones y plataformas. Todo alimenta BARAX Systems en el ápex.</div>
+          </div>
+          <div class="a-card reveal rd3">
+            <div class="ac-label en">Operating Model</div>
+            <div class="ac-label es">Modelo Operativo</div>
+            <div class="ac-title">Assessment · Delivery · Sustainment</div>
+            <div class="ac-body en">Every engagement begins with operational assessment. We configure before we deliver. We validate before we transfer. We remain accountable through the full lifecycle — at every layer of the stack.</div>
+            <div class="ac-body es">Cada compromiso comienza con evaluación operativa. Configuramos antes de entregar. Validamos antes de transferir. Permanecemos responsables durante todo el ciclo de vida — en cada capa del stack.</div>
+          </div>
+          <div class="a-card reveal rd4">
+            <div class="ac-label en">Market Position</div>
+            <div class="ac-label es">Posición en el Mercado</div>
+            <div class="ac-title">Americas Defense Modernization</div>
+            <div class="ac-body en">We are the only entity in the region that can provision equipment, deploy capability architectures, and integrate full multi-domain systems — within a single institutional relationship, under a single accountable program structure.</div>
+            <div class="ac-body es">Somos la única entidad en la región que puede suministrar equipamiento, desplegar arquitecturas de capacidad e integrar sistemas multi-dominio completos — dentro de una sola relación institucional y bajo una estructura de programa única y responsable.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ═════════════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="container">
+    <div class="contact-content">
+      <div class="s-tag reveal" style="justify-content:center;margin-bottom:20px">
+        <span class="en">08 — Contact</span><span class="es">08 — Contacto</span>
+      </div>
+      <h2 class="contact-title reveal en">Get in <em>Touch</em></h2>
+      <h2 class="contact-title reveal es">Ponerse en <em>Contacto</em></h2>
+      <p class="contact-desc reveal en">We engage exclusively with armed forces, government security agencies, and authorized prime contractors. All institutional inquiries receive a response within 48 to 72 hours.</p>
+      <p class="contact-desc reveal es">Nos relacionamos exclusivamente con fuerzas armadas, agencias gubernamentales de seguridad y contratistas principales autorizados. Todas las consultas institucionales reciben respuesta en 48 a 72 horas.</p>
+      <div class="contact-acts reveal">
+        <a href="mailto:contact@baraxdefense.com" class="btn-p en">Contact BARAX</a>
+        <a href="mailto:contact@baraxdefense.com" class="btn-p es">Contactar BARAX</a>
+        <a href="mailto:contact@baraxdefense.com" class="btn-g en">Get in Touch</a>
+        <a href="mailto:contact@baraxdefense.com" class="btn-g es">Escribir</a>
+      </div>
+      <div class="contact-info reveal">
+        <div class="ci"><div class="ci-l en">Email</div><div class="ci-l es">Correo</div><div class="ci-v">contact@baraxdefense.com</div></div>
+        <div class="ci"><div class="ci-l en">HQ</div><div class="ci-l es">Sede</div><div class="ci-v">Bogotá, Colombia</div></div>
+        <div class="ci"><div class="ci-l en">Engagement</div><div class="ci-l es">Tipo</div><div class="ci-v en">Institutional / B2G</div><div class="ci-v es">Institucional / B2G</div></div>
+        <div class="ci"><div class="ci-l en">Response</div><div class="ci-l es">Respuesta</div><div class="ci-v">48 — 72 hrs</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════ -->
+<footer>
+  <svg width="96" height="22" viewBox="0 0 96 22" fill="none">
+    <polygon points="7,1 14,1 17,5 17,13.5 14,18 7,18 4,13.5 4,5" stroke="#006A82" stroke-width="1" fill="none"/>
+    <circle cx="10.5" cy="9.5" r="1.2" fill="#006A82"/>
+    <text x="21" y="13" font-family="Rajdhani,sans-serif" font-size="11" font-weight="700" fill="#8A9BB5" letter-spacing="2">BARAX</text>
+  </svg>
+  <div class="f-tagline">Strategic Edge. Global Reach.</div>
+  <div class="f-copy">© 2025 BARAX Defense &amp; Technology. Strictly Institutional.</div>
+  <div class="f-status"><div class="f-dot"></div><span class="en">Systems Operational</span><span class="es">Sistemas Operativos</span></div>
+</footer>
+
+<!-- ══ JAVASCRIPT ══════════════════════════════════════ -->
+<script>
+function setLang(l){
+  document.documentElement.setAttribute('data-lang',l);
+  document.getElementById('btnEN').classList.toggle('active',l==='en');
+  document.getElementById('btnES').classList.toggle('active',l==='es');
+  document.documentElement.lang=l;
+}
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+if(window.matchMedia('(pointer:fine)').matches){
+  const g=document.createElement('div');
+  Object.assign(g.style,{position:'fixed',width:'260px',height:'260px',borderRadius:'50%',background:'radial-gradient(circle,rgba(0,212,255,.04) 0%,transparent 70%)',pointerEvents:'none',zIndex:'9999',transform:'translate(-50%,-50%)',transition:'left .18s ease,top .18s ease'});
+  document.body.appendChild(g);
+  document.addEventListener('mousemove',e=>{g.style.left=e.clientX+'px';g.style.top=e.clientY+'px'});
+}
+// Hero Canvas
+(function(){
+  const c=document.getElementById('heroCanvas'),ctx=c.getContext('2d');
+  const pts=[];let W,H;
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;pts.length=0;for(let i=0;i<48;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.2+.2,a:Math.random()*.5+.1})}
+  const blips=[{a:.7,d:.55},{a:2,d:.38},{a:3.8,d:.72},{a:5.2,d:.48},{a:4.1,d:.88}];
+  function draw(t){
+    ctx.clearRect(0,0,W,H);ctx.fillStyle='#060D18';ctx.fillRect(0,0,W,H);
+    for(let y=0;y<H;y+=4){ctx.fillStyle='rgba(0,0,0,.04)';ctx.fillRect(0,y,W,1)}
+    const cx=W/2,cy=H*.44,mr=Math.min(W,H)*.38;
+    [1,2,3,4].forEach(i=>{ctx.beginPath();ctx.arc(cx,cy,mr*i/4,0,Math.PI*2);ctx.strokeStyle=`rgba(0,212,255,${.05+.01*i})`;ctx.lineWidth=1;ctx.stroke()});
+    ctx.strokeStyle='rgba(0,212,255,.07)';ctx.lineWidth=1;ctx.setLineDash([4,10]);
+    ctx.beginPath();ctx.moveTo(cx-mr,cy);ctx.lineTo(cx+mr,cy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx,cy-mr);ctx.lineTo(cx,cy+mr);ctx.stroke();ctx.setLineDash([]);
+    const sa=(t*.0007)%(Math.PI*2);
+    try{const sg=ctx.createConicGradient(sa-1.3,cx,cy);sg.addColorStop(0,'rgba(0,212,255,0)');sg.addColorStop(.75,'rgba(0,212,255,0)');sg.addColorStop(.9,'rgba(0,212,255,.05)');sg.addColorStop(1,'rgba(0,212,255,.18)');ctx.beginPath();ctx.arc(cx,cy,mr,0,Math.PI*2);ctx.fillStyle=sg;ctx.fill()}catch(e){}
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(sa)*mr,cy+Math.sin(sa)*mr);ctx.strokeStyle='rgba(0,212,255,.45)';ctx.lineWidth=1.5;ctx.stroke();
+    blips.forEach(b=>{const diff=((sa-b.a)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);if(diff<1.4){const f=1-diff/1.4,bx=cx+Math.cos(b.a)*mr*b.d,by=cy+Math.sin(b.a)*mr*b.d;ctx.beginPath();ctx.arc(bx,by,3,0,Math.PI*2);ctx.fillStyle=`rgba(0,212,255,${f*.9})`;ctx.fill();ctx.beginPath();ctx.arc(bx,by,7,0,Math.PI*2);ctx.strokeStyle=`rgba(0,212,255,${f*.35})`;ctx.lineWidth=1;ctx.stroke()}});
+    ctx.beginPath();ctx.arc(cx,cy,2,0,Math.PI*2);ctx.fillStyle='#00D4FF';ctx.fill();
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(138,155,181,${p.a})`;ctx.fill()});
+    [[55,55],[W-55,55],[W-55,H-55],[55,H-55]].forEach(([hx,hy])=>{ctx.strokeStyle='rgba(22,45,80,.4)';ctx.lineWidth=1;ctx.beginPath();for(let i=0;i<6;i++){const a=i*Math.PI/3,nx=hx+Math.cos(a)*20,ny=hy+Math.sin(a)*20;i===0?ctx.moveTo(nx,ny):ctx.lineTo(nx,ny)}ctx.closePath();ctx.stroke()});
+    requestAnimationFrame(draw);
+  }
+  resize();window.addEventListener('resize',resize);requestAnimationFrame(draw);
+})();
+// Deliver canvas
+(function(){
+  const c=document.getElementById('deliverCanvas');if(!c)return;
+  const ctx=c.getContext('2d');let W,H,nodes=[],t=0;
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;nodes=[];for(let i=0;i<20;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*2+1});nodes[0]={x:W*.5,y:H*.5,vx:0,vy:0,r:6,c:true}}
+  function draw(){ctx.clearRect(0,0,W,H);ctx.fillStyle='#060D18';ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(22,45,80,.18)';ctx.lineWidth=.5;for(let x=0;x<W;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}for(let y=0;y<H;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    nodes.forEach(n=>{if(n.c)return;n.x+=n.vx;n.y+=n.vy;if(n.x<8||n.x>W-8)n.vx*=-1;if(n.y<8||n.y>H-8)n.vy*=-1});
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<150){ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.strokeStyle=`rgba(0,212,255,${(1-d/150)*.22})`;ctx.lineWidth=.7;ctx.stroke()}}
+    nodes.forEach(n=>{if(n.c){const g=Math.abs(Math.sin(t*.018)),rd=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,30);rd.addColorStop(0,`rgba(0,212,255,${.2+g*.15})`);rd.addColorStop(1,'rgba(0,212,255,0)');ctx.beginPath();ctx.arc(n.x,n.y,30,0,Math.PI*2);ctx.fillStyle=rd;ctx.fill()}ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle=n.c?'#00D4FF':'rgba(0,152,184,.6)';ctx.fill()});
+    t++;requestAnimationFrame(draw);
+  }resize();window.addEventListener('resize',resize);draw();
+})();
+// Use case canvases
+document.querySelectorAll('.case-cv').forEach(c=>{
+  const ctx=c.getContext('2d'),type=c.dataset.type;let W,H,t=0;
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight}
+  function draw(){ctx.clearRect(0,0,W,H);ctx.fillStyle='#0F2140';ctx.fillRect(0,0,W,H);
+    if(type==='border'){for(let i=0;i<6;i++){const y=H*.3+i*16;ctx.beginPath();ctx.moveTo(0,y+Math.sin(t*.01+i)*4);for(let x=0;x<W;x+=7)ctx.lineTo(x,y+Math.sin(x*.025+t*.01+i)*6);ctx.strokeStyle=`rgba(0,212,255,${.07+i*.02})`;ctx.lineWidth=1;ctx.stroke()}const dx=(t*.5)%W;ctx.beginPath();ctx.arc(dx,H*.4,4,0,Math.PI*2);ctx.fillStyle='rgba(0,212,255,.8)';ctx.fill();ctx.beginPath();ctx.arc(dx,H*.4,18+Math.sin(t*.05)*4,0,Math.PI*2);ctx.strokeStyle='rgba(0,212,255,.22)';ctx.lineWidth=1;ctx.stroke()}
+    if(type==='urban'){for(let x=12;x<W;x+=36)for(let y=12;y<H;y+=36){ctx.fillStyle=`rgba(15,33,64,.6)`;ctx.fillRect(x,y,26,26);ctx.strokeStyle='rgba(22,45,80,.4)';ctx.lineWidth=.5;ctx.strokeRect(x,y,26,26)}const ax=W*.6+Math.sin(t*.02)*16,ay=H*.4;ctx.beginPath();ctx.arc(ax,ay,5,0,Math.PI*2);ctx.fillStyle='rgba(255,80,80,.9)';ctx.fill();ctx.beginPath();ctx.arc(ax,ay,12+Math.abs(Math.sin(t*.04))*12,0,Math.PI*2);ctx.strokeStyle='rgba(255,80,80,.3)';ctx.lineWidth=1;ctx.stroke()}
+    if(type==='maritime'){for(let i=0;i<7;i++){const y=20+i*(H/7);ctx.beginPath();ctx.moveTo(0,y);for(let x=0;x<W;x+=5)ctx.lineTo(x,y+Math.sin(x*.03+t*.02+i*.5)*5);ctx.strokeStyle=`rgba(0,152,184,${.07+(i===3?.1:0)})`;ctx.lineWidth=1;ctx.stroke()}const vx=(t*.4)%(W+40)-20,vy=H*.5;ctx.beginPath();ctx.moveTo(vx,vy);ctx.lineTo(vx+14,vy-6);ctx.lineTo(vx+18,vy);ctx.lineTo(vx,vy+5);ctx.closePath();ctx.fillStyle='rgba(0,212,255,.7)';ctx.fill();ctx.beginPath();ctx.moveTo(vx-50,vy);ctx.lineTo(vx,vy);ctx.strokeStyle='rgba(0,212,255,.2)';ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([])}
+    if(type==='aerial'){for(let i=0;i<5;i++){const y=H*.15+i*H*.16;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.strokeStyle='rgba(22,45,80,.2)';ctx.lineWidth=.5;ctx.setLineDash([6,6]);ctx.stroke();ctx.setLineDash([])}const ux=(t*.55)%(W+60)-30,uy=H*.35+Math.sin(t*.012)*10;ctx.beginPath();ctx.moveTo(ux-14,uy);ctx.lineTo(ux+14,uy);ctx.moveTo(ux,uy-6);ctx.lineTo(ux,uy+6);ctx.strokeStyle='rgba(0,212,255,.8)';ctx.lineWidth=2;ctx.stroke();const ch=56+Math.sin(t*.02)*8;ctx.beginPath();ctx.moveTo(ux,uy);ctx.lineTo(ux-ch*.5,uy+ch);ctx.lineTo(ux+ch*.5,uy+ch);ctx.closePath();ctx.fillStyle='rgba(0,212,255,.04)';ctx.fill();ctx.strokeStyle='rgba(0,212,255,.16)';ctx.lineWidth=1;ctx.stroke()}
+    t++;requestAnimationFrame(draw);
+  }resize();window.addEventListener('resize',resize);draw();
+});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(a.getAttribute('href'));if(el)el.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>
