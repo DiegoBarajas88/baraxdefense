@@ -1,0 +1,355 @@
+/* Estilos de /login y /oportunidades. Reutiliza los tokens de :root definidos
+   en styles.css (colores, fuentes); no redefine el sitio público. */
+
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  background: rgba(6, 13, 24, 0.92);
+  backdrop-filter: blur(24px) saturate(1.6);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
+}
+
+.app-user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--st);
+}
+
+.app-user strong {
+  color: var(--w);
+}
+
+.app-admin-link {
+  color: var(--st);
+  text-decoration: none;
+}
+
+.app-admin-link:hover {
+  color: var(--c);
+}
+
+.app-error {
+  color: var(--v4);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.rule-card {
+  border-left-color: var(--c);
+}
+
+.rule-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 14px 0 18px;
+}
+
+.rule-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--sv);
+  cursor: pointer;
+}
+
+.rule-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--st);
+  align-self: center;
+}
+
+.app-logout {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--st);
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.app-logout:hover {
+  color: var(--c);
+  border-color: var(--c);
+}
+
+.app-main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 40px 32px 96px;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--w);
+  margin: 0 0 6px;
+}
+
+.app-subtitle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--st);
+  margin: 0 0 32px;
+}
+
+.opp-card {
+  border: 1px solid rgba(0, 212, 255, 0.14);
+  border-left: 3px solid var(--v1);
+  background: var(--n);
+  padding: 24px;
+  margin-bottom: 18px;
+}
+
+.opp-entity {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--w);
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.opp-reference {
+  font-family: var(--font-mono);
+  color: var(--st);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+.opp-object {
+  color: var(--sv);
+  line-height: 1.55;
+  margin: 14px 0;
+  font-size: 14px;
+}
+
+.opp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.opp-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--v1);
+  background: rgba(120, 190, 138, 0.1);
+  border: 1px solid rgba(120, 190, 138, 0.25);
+  padding: 5px 9px;
+}
+
+.opp-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px 20px;
+  font-size: 13px;
+  color: var(--sv);
+  margin-bottom: 18px;
+}
+
+.opp-meta dt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--st);
+  margin-bottom: 2px;
+}
+
+.opp-meta dd {
+  margin: 0;
+}
+
+.opp-meta a {
+  color: var(--c);
+  text-decoration: none;
+}
+
+.opp-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.opp-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.opp-btn-interesa {
+  color: var(--d);
+  background: var(--v1);
+}
+
+.opp-btn-interesa:hover {
+  box-shadow: 0 0 24px rgba(120, 190, 138, 0.35);
+}
+
+.opp-btn-no {
+  color: var(--st);
+  background: transparent;
+  border: 1px solid rgba(255, 184, 0, 0.35);
+}
+
+.opp-btn-no:hover {
+  color: var(--v4);
+  border-color: var(--v4);
+}
+
+.opp-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.app-empty {
+  color: var(--st);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 48px 0;
+  text-align: center;
+}
+
+/* ── modal de confirmación "No me interesa" ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 9, 16, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal {
+  width: min(420px, 90vw);
+  background: var(--nm);
+  border: 1px solid rgba(0, 212, 255, 0.16);
+  padding: 28px;
+}
+
+.modal h2 {
+  font-family: var(--font-display);
+  color: var(--w);
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+.modal p {
+  color: var(--sv);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.modal textarea {
+  width: 100%;
+  min-height: 72px;
+  background: var(--d);
+  border: 1px solid rgba(0, 212, 255, 0.14);
+  color: var(--w);
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 10px;
+  margin-bottom: 18px;
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ── /login ── */
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-card {
+  width: min(360px, 100%);
+  background: var(--n);
+  border: 1px solid rgba(0, 212, 255, 0.14);
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.login-card .nav-logo {
+  justify-content: center;
+  margin-bottom: 28px;
+  pointer-events: none;
+}
+
+.login-field {
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.login-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--st);
+  margin-bottom: 6px;
+}
+
+.login-field input {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--d);
+  border: 1px solid rgba(0, 212, 255, 0.16);
+  color: var(--w);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px;
+}
+
+.login-error {
+  color: var(--v4);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin: 0 0 14px;
+  min-height: 14px;
+}
+
+.login-card .btn-p {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}

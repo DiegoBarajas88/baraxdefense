@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar SECOP | BARAX Defense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Rajdhani:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/barax-symbol-dark.svg">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/oportunidades.css">
+</head>
+<body>
+<nav class="app-nav">
+  <a href="/" class="nav-logo" aria-label="BARAX Defense and Technology">
+    <img src="../assets/logos/barax-symbol-dark.svg" alt="" class="nav-logo-symbol" width="34" height="34">
+    <span class="nav-logo-lockup">
+      <span class="nav-logo-wordmark">BARAX</span>
+      <span class="nav-logo-descriptor">Radar SECOP</span>
+    </span>
+  </a>
+  <div class="app-user">
+    <a class="app-admin-link" href="/admin" id="adminLink" hidden>Reglas</a>
+    <span>Sesión: <strong id="currentUser">—</strong></span>
+    <button class="app-logout" id="logoutBtn" type="button">Salir</button>
+  </div>
+</nav>
+
+<main class="app-main">
+  <h1 class="app-title">Oportunidades pendientes</h1>
+  <p class="app-subtitle" id="opCount">Cargando…</p>
+  <div id="opList"></div>
+</main>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal">
+    <h2>Confirmar descarte</h2>
+    <p>Esta oportunidad se marcará como "no me interesa" solo para tu usuario. No se volverá a mostrar en tu lista, pero sigue disponible para el resto del equipo.</p>
+    <textarea id="modalReason" placeholder="Motivo (opcional)"></textarea>
+    <div class="modal-actions">
+      <button class="opp-btn opp-btn-no" id="modalCancel" type="button">Cancelar</button>
+      <button class="opp-btn opp-btn-interesa" id="modalConfirm" type="button">Confirmar descarte</button>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/oportunidades.js"></script>
+</body>
+</html>

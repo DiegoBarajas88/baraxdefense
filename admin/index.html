@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administrar reglas — Radar SECOP | BARAX Defense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Rajdhani:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="../assets/logos/barax-symbol-dark.svg">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/oportunidades.css">
+</head>
+<body>
+<nav class="app-nav">
+  <a href="/" class="nav-logo" aria-label="BARAX Defense and Technology">
+    <img src="../assets/logos/barax-symbol-dark.svg" alt="" class="nav-logo-symbol" width="34" height="34">
+    <span class="nav-logo-lockup">
+      <span class="nav-logo-wordmark">BARAX</span>
+      <span class="nav-logo-descriptor">Radar SECOP</span>
+    </span>
+  </a>
+  <div class="app-user">
+    <a class="app-admin-link" href="/oportunidades">Oportunidades</a>
+    <span>Sesión: <strong id="currentUser">—</strong></span>
+    <button class="app-logout" id="logoutBtn" type="button">Salir</button>
+  </div>
+</nav>
+
+<main class="app-main">
+  <h1 class="app-title">Reglas de destinatarios</h1>
+  <p class="app-subtitle">Qué categorías de oportunidades recibe cada usuario, en el dashboard y en el aviso diario de nuevas. Los cambios aplican de inmediato, sin redeploy.</p>
+  <div id="rulesList">Cargando…</div>
+  <p class="app-error" id="rulesError"></p>
+</main>
+
+<script src="../assets/js/admin.js"></script>
+</body>
+</html>
