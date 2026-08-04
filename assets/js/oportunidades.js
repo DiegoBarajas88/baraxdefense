@@ -8,6 +8,15 @@ const modalCancel = document.getElementById("modalCancel");
 const modalConfirm = document.getElementById("modalConfirm");
 const logoutBtn = document.getElementById("logoutBtn");
 
+const PEER_LABEL = { tito: "Tito", diego: "Diego" };
+const FORWARD_TARGET_LABEL = { tito: "Diego Felipe", diego: "Tito" };
+const MONTHS_ES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+
+let currentUser = null;
+let opportunities = [];
 let pendingDiscardId = null;
 
 function formatMoney(value) {
@@ -15,10 +24,36 @@ function formatMoney(value) {
   return "$" + Number(value).toLocaleString("es-CO", { maximumFractionDigits: 0 });
 }
 
+function formatDateEs(isoDate) {
+  if (!isoDate) return "No informada";
+  const [year, month, day] = isoDate.split("-").map(Number);
+  if (!year || !month || !day) return isoDate;
+  return `${day} de ${MONTHS_ES[month - 1]} de ${year}`;
+}
+
+function isToday(isoTimestamp) {
+  if (!isoTimestamp) return false;
+  const created = new Date(isoTimestamp);
+  const now = new Date();
+  return (
+    created.getFullYear() === now.getFullYear() &&
+    created.getMonth() === now.getMonth() &&
+    created.getDate() === now.getDate()
+  );
+}
+
 function escapeHtml(text) {
   const div = document.createElement("div");
   div.textContent = text ?? "";
   return div.innerHTML;
+}
+
+function peerDecisionBadge(peerDecision) {
+  const who = PEER_LABEL[peerDecision.user] || peerDecision.user;
+  if (peerDecision.decision === "no_interesa") {
+    return `<span class="peer-badge peer-badge-no">Descartado por ${escapeHtml(who)}</span>`;
+  }
+  return `<span class="peer-badge peer-badge-yes">A ${escapeHtml(who)} le interesó</span>`;
 }
 
 function renderCard(op) {
@@ -28,6 +63,8 @@ function renderCard(op) {
   const link = op.secop_url
     ? `<a href="${escapeHtml(op.secop_url)}" target="_blank" rel="noopener">Abrir en SECOP II</a>`
     : "No informado";
+  const peerBadges = (op.peer_decisions || []).map(peerDecisionBadge).join("");
+  const forwardLabel = FORWARD_TARGET_LABEL[currentUser];
 
   const card = document.createElement("article");
   card.className = "opp-card";
@@ -35,19 +72,22 @@ function renderCard(op) {
   card.innerHTML = `
     <div class="opp-entity">${escapeHtml(op.entity || "Entidad no informada")}</div>
     <div class="opp-reference">${escapeHtml(op.reference || "")}</div>
+    ${peerBadges ? `<div class="opp-peer-badges">${peerBadges}</div>` : ""}
     <p class="opp-object">${escapeHtml(op.object || "")}</p>
-    <div class="opp-tags">${tags}</div>
     <dl class="opp-meta">
       <div><dt>Valor</dt><dd>${formatMoney(op.value)}</dd></div>
       <div><dt>Ubicación</dt><dd>${escapeHtml(op.location || "No informada")}</dd></div>
       <div><dt>Estado / fase</dt><dd>${escapeHtml(op.procedure_state || "")} · ${escapeHtml(op.phase || "")}</dd></div>
-      <div><dt>Fecha de ofertas</dt><dd>${escapeHtml(op.offer_deadline || "No informada")}</dd></div>
+      <div><dt>Fecha de ofertas</dt><dd>${formatDateEs(op.offer_deadline)}</dd></div>
+      <div><dt>Código UNSPSC</dt><dd>${escapeHtml(op.unspsc_code || "No informado")}</dd></div>
       <div><dt>Portal</dt><dd>${link}</dd></div>
     </dl>
     <div class="opp-actions">
       <button class="opp-btn opp-btn-interesa" data-action="interesa">Me interesa</button>
       <button class="opp-btn opp-btn-no" data-action="no_interesa">No me interesa</button>
+      ${forwardLabel ? `<button class="opp-btn opp-btn-forward" data-action="forward">Enviar a ${escapeHtml(forwardLabel)}</button>` : ""}
     </div>
+    ${tags ? `<div class="opp-tags">${tags}</div>` : ""}
   `;
   return card;
 }
@@ -64,14 +104,31 @@ async function decide(opportunityId, decision, reason) {
   }
 }
 
+async function forward(opportunityId) {
+  const response = await fetch("/api/forward", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ opportunity_id: opportunityId }),
+  });
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.error || "No se pudo enviar el correo.");
+  }
+}
+
+function updateCount() {
+  const newToday = opportunities.filter((op) => isToday(op.created_at)).length;
+  countEl.textContent = `${opportunities.length} oportunidad(es) pendiente(s) · ${newToday} nueva(s) hoy`;
+}
+
 function removeCard(id) {
+  opportunities = opportunities.filter((op) => String(op.id) !== String(id));
   const card = listEl.querySelector(`[data-id="${id}"]`);
   if (card) card.remove();
-  if (!listEl.children.length) {
+  if (!opportunities.length) {
     listEl.innerHTML = '<p class="app-empty">No hay oportunidades pendientes por revisar.</p>';
   }
-  const remaining = listEl.querySelectorAll(".opp-card").length;
-  countEl.textContent = `${remaining} oportunidad(es) pendiente(s)`;
+  updateCount();
 }
 
 function openModal(id) {
@@ -90,9 +147,22 @@ listEl.addEventListener("click", async (event) => {
   if (!button) return;
   const card = button.closest(".opp-card");
   const id = card.dataset.id;
+  const action = button.dataset.action;
 
-  if (button.dataset.action === "no_interesa") {
+  if (action === "no_interesa") {
     openModal(id);
+    return;
+  }
+
+  if (action === "forward") {
+    button.disabled = true;
+    try {
+      await forward(id);
+      button.textContent = "Enviado ✓";
+    } catch (error) {
+      alert(error.message);
+      button.disabled = false;
+    }
     return;
   }
 
@@ -136,16 +206,18 @@ async function load() {
       return;
     }
     if (!response.ok) throw new Error("No se pudieron cargar las oportunidades.");
-    const { user, opportunities } = await response.json();
-    userEl.textContent = user;
-    adminLink.hidden = user !== "diego";
+    const body = await response.json();
+    currentUser = body.user;
+    opportunities = body.opportunities;
+    userEl.textContent = currentUser;
+    adminLink.hidden = currentUser !== "diego";
     listEl.innerHTML = "";
     if (!opportunities.length) {
       listEl.innerHTML = '<p class="app-empty">No hay oportunidades pendientes por revisar.</p>';
     } else {
       opportunities.forEach((op) => listEl.appendChild(renderCard(op)));
     }
-    countEl.textContent = `${opportunities.length} oportunidad(es) pendiente(s)`;
+    updateCount();
   } catch (error) {
     countEl.textContent = error.message;
   }

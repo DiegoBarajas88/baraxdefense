@@ -2,7 +2,8 @@ import nodemailer from "nodemailer";
 import { getSession } from "../lib/session.js";
 import { getSupabase } from "../lib/supabase.js";
 import { getUsers } from "../lib/users.js";
-import { getUserCategories } from "../lib/rules.js";
+import { getUserAccess } from "../lib/rules.js";
+import { greeting, wrapEmail } from "../lib/email.js";
 
 function getTransport() {
   const port = Number(process.env.SECOP_SMTP_PORT || 587);
@@ -22,19 +23,35 @@ function formatMoney(value) {
   return "$" + Number(value).toLocaleString("es-CO", { maximumFractionDigits: 0 });
 }
 
-async function sendInterestEmail(user, opportunity) {
+async function sendInterestEmail(userKey, user, opportunity) {
   const transport = getTransport();
+  const bodyHtml = `
+    <p style="margin:0 0 18px;font-size:15px;">${greeting(userKey)},</p>
+    <p style="margin:0 0 22px;font-size:14px;color:#3B4A63;line-height:1.65;">
+      Confirmamos que registraste tu interés en la siguiente oportunidad. Nuestro equipo
+      dará seguimiento al proceso.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+      style="background:#F7F9FB;border:1px solid #E1E7EF;border-radius:6px;">
+      <tr><td style="padding:18px 20px 4px;font-size:15px;font-weight:700;color:#0A1628;">
+        ${opportunity.entity || "Entidad no informada"}</td></tr>
+      <tr><td style="padding:0 20px 14px;font-size:12px;color:#8A9BB5;letter-spacing:0.03em;">
+        ${opportunity.reference || ""}</td></tr>
+      <tr><td style="padding:0 20px 14px;font-size:13px;color:#3B4A63;line-height:1.5;">
+        ${opportunity.object || ""}</td></tr>
+      <tr><td style="padding:0 20px 18px;font-size:13px;color:#3B4A63;">
+        <strong>Valor:</strong> ${formatMoney(opportunity.value)} &nbsp;·&nbsp;
+        <strong>Fecha de ofertas:</strong> ${opportunity.offer_deadline || "No informada"}</td></tr>
+    </table>`;
   await transport.sendMail({
-    from: "contacto@baraxdefense.com",
+    from: '"Emilio De La Espriella — BARAX Defense & Technology" <contacto@baraxdefense.com>',
     to: user.email,
     subject: `Me interesa: ${opportunity.entity || "Proceso SECOP"} — ${opportunity.reference || ""}`,
-    html: `
-      <p><strong>${opportunity.entity || ""}</strong></p>
-      <p>${opportunity.object || ""}</p>
-      <p>Valor: ${formatMoney(opportunity.value)}</p>
-      <p>Fecha de presentación de ofertas: ${opportunity.offer_deadline || "No informada"}</p>
-      <p><a href="${opportunity.secop_url || "#"}">Abrir proceso en SECOP II</a></p>
-    `,
+    html: wrapEmail({
+      preheader: `Registramos tu interés en ${opportunity.entity || "un proceso SECOP"}.`,
+      bodyHtml,
+      ctaLabel: "Abrir proceso en SECOP II",
+      ctaUrl: opportunity.secop_url || "https://www.baraxdefense.com/oportunidades",
+    }),
   });
 }
 
@@ -64,8 +81,9 @@ export default async function handler(req, res) {
     .select("*")
     .eq("id", opportunityId)
     .single();
-  const categories = await getUserCategories(session.user);
-  if (fetchError || !opportunity || !categories.includes(opportunity.category)) {
+  const access = await getUserAccess(session.user);
+  const canAccess = access.seesAll || access.categories.includes(opportunity?.category);
+  if (fetchError || !opportunity || !canAccess) {
     res.status(404).json({ error: "Oportunidad no encontrada" });
     return;
   }
@@ -88,7 +106,7 @@ export default async function handler(req, res) {
 
   if (decision === "interesa") {
     try {
-      await sendInterestEmail(user, opportunity);
+      await sendInterestEmail(session.user, user, opportunity);
     } catch (emailError) {
       res.status(207).json({ ok: true, emailError: emailError.message });
       return;

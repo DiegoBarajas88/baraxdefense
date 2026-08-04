@@ -8,6 +8,7 @@ export const config = {
     "/admin/:path*",
     "/api/opportunities",
     "/api/decide",
+    "/api/forward",
     "/api/logout",
     "/api/admin/:path*",
   ],

@@ -145,7 +145,36 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 14px;
+  margin-top: 18px;
+}
+
+.opp-peer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.peer-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 9px;
+  border: 1px solid;
+}
+
+.peer-badge-no {
+  color: var(--v4);
+  background: rgba(255, 184, 0, 0.1);
+  border-color: rgba(255, 184, 0, 0.3);
+}
+
+.peer-badge-yes {
+  color: var(--v1);
+  background: rgba(120, 190, 138, 0.1);
+  border-color: rgba(120, 190, 138, 0.3);
 }
 
 .opp-tag {
@@ -210,6 +239,17 @@
 
 .opp-btn-interesa:hover {
   box-shadow: 0 0 24px rgba(120, 190, 138, 0.35);
+}
+
+.opp-btn-forward {
+  color: var(--c);
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.opp-btn-forward:hover {
+  border-color: var(--c);
+  box-shadow: 0 0 24px rgba(0, 212, 255, 0.2);
 }
 
 .opp-btn-no {
