@@ -10,6 +10,12 @@ const logoutBtn = document.getElementById("logoutBtn");
 
 const PEER_LABEL = { tito: "Tito", diego: "Diego" };
 const FORWARD_TARGET_LABEL = { tito: "Diego Felipe", diego: "Tito" };
+const PRIORITY_LABEL = {
+  1: "Prioridad 1 · Repuestos/filtros o entidad conocida",
+  2: "Prioridad 2 · Llantas",
+  3: "Prioridad 3 · Planta eléctrica",
+  4: "Prioridad 4 · General",
+};
 const MONTHS_ES = [
   "enero", "febrero", "marzo", "abril", "mayo", "junio",
   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
@@ -65,11 +71,13 @@ function renderCard(op) {
     : "No informado";
   const peerBadges = (op.peer_decisions || []).map(peerDecisionBadge).join("");
   const forwardLabel = FORWARD_TARGET_LABEL[currentUser];
+  const priorityLabel = PRIORITY_LABEL[op.priority] || null;
 
   const card = document.createElement("article");
-  card.className = "opp-card";
+  card.className = `opp-card priority-${op.priority || 4}`;
   card.dataset.id = op.id;
   card.innerHTML = `
+    ${priorityLabel ? `<span class="priority-badge">${escapeHtml(priorityLabel)}</span>` : ""}
     <div class="opp-entity">${escapeHtml(op.entity || "Entidad no informada")}</div>
     <div class="opp-reference">${escapeHtml(op.reference || "")}</div>
     ${peerBadges ? `<div class="opp-peer-badges">${peerBadges}</div>` : ""}

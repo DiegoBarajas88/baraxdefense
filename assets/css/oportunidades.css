@@ -112,10 +112,47 @@
 
 .opp-card {
   border: 1px solid rgba(0, 212, 255, 0.14);
-  border-left: 3px solid var(--v1);
+  border-left: 3px solid var(--st);
   background: var(--n);
   padding: 24px;
   margin-bottom: 18px;
+}
+
+.opp-card.priority-1 {
+  border-left-color: var(--c);
+}
+
+.opp-card.priority-2 {
+  border-left-color: var(--v1);
+}
+
+.opp-card.priority-3 {
+  border-left-color: var(--v4);
+}
+
+.priority-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--d);
+  background: var(--c);
+  padding: 4px 9px;
+  margin-bottom: 10px;
+}
+
+.priority-2 .priority-badge {
+  background: var(--v1);
+}
+
+.priority-3 .priority-badge {
+  background: var(--v4);
+}
+
+.priority-4 .priority-badge {
+  background: var(--st);
 }
 
 .opp-entity {
