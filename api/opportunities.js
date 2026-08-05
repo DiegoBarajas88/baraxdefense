@@ -34,7 +34,11 @@ export default async function handler(req, res) {
   }
 
   const decidedIds = decided.map((row) => row.opportunity_id);
-  let query = supabase.from("opportunities").select("*").order("score", { ascending: false });
+  let query = supabase
+    .from("opportunities")
+    .select("*")
+    .order("priority", { ascending: true })
+    .order("score", { ascending: false });
   if (!access.seesAll) {
     query = query.in("category", access.categories);
   }
