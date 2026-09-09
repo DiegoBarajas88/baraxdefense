@@ -86,7 +86,7 @@ export default async function handler(req, res) {
   try {
     const transport = getTransport();
     await transport.sendMail({
-      from: '"Emilio De La Espriella — BARAX Defense & Technology" <contacto@baraxdefense.com>',
+      from: '"Emilio Bustamante — BARAX Defense & Technology" <contacto@baraxdefense.com>',
       to: target.email,
       subject: `${senderName} te comparte una oportunidad — ${opportunity.entity || "Proceso SECOP"}`,
       html: wrapEmail({

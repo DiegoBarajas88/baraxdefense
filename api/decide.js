@@ -43,7 +43,7 @@ async function sendInterestEmail(userKey, user, opportunity) {
         <strong>Fecha de ofertas:</strong> ${opportunity.offer_deadline || "No informada"}</td></tr>
     </table>`;
   await transport.sendMail({
-    from: '"Emilio De La Espriella — BARAX Defense & Technology" <contacto@baraxdefense.com>',
+    from: '"Emilio Bustamante — BARAX Defense & Technology" <contacto@baraxdefense.com>',
     to: user.email,
     subject: `Me interesa: ${opportunity.entity || "Proceso SECOP"} — ${opportunity.reference || ""}`,
     html: wrapEmail({
