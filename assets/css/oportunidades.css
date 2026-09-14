@@ -130,6 +130,14 @@
   border-left-color: var(--v4);
 }
 
+.opp-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
 .priority-badge {
   display: inline-block;
   font-family: var(--font-mono);
@@ -140,7 +148,36 @@
   color: var(--d);
   background: var(--c);
   padding: 4px 9px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+}
+
+.deadline-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border: 1px solid;
+}
+
+.deadline-ok {
+  color: var(--v1);
+  background: rgba(120, 190, 138, 0.1);
+  border-color: rgba(120, 190, 138, 0.3);
+}
+
+.deadline-soon {
+  color: var(--v4);
+  background: rgba(255, 184, 0, 0.1);
+  border-color: rgba(255, 184, 0, 0.35);
+}
+
+.deadline-urgent {
+  color: var(--v5);
+  background: rgba(255, 107, 53, 0.12);
+  border-color: rgba(255, 107, 53, 0.4);
 }
 
 .priority-2 .priority-badge {
@@ -153,6 +190,57 @@
 
 .priority-4 .priority-badge {
   background: var(--st);
+}
+
+/* Inteligencia artificial: vigilancia de mercado (solo Diego), color propio
+   para distinguirla de un vistazo del portafolio de suministros. */
+.opp-card.category-ia {
+  border-color: rgba(167, 139, 250, 0.35);
+  border-left: 4px solid #a78bfa;
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0) 55%), var(--n);
+}
+
+.ai-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--d);
+  background: #a78bfa;
+  padding: 4px 9px;
+}
+
+.rup-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 11px;
+}
+
+.rup-no {
+  color: #ffffff;
+  background: #16a34a;
+}
+
+.rup-depende {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.rup-si {
+  color: var(--d);
+  background: var(--st);
+}
+
+.category-ia .opp-tag {
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.3);
 }
 
 .opp-entity {

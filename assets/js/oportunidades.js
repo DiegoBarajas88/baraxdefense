@@ -16,6 +16,10 @@ const PRIORITY_LABEL = {
   3: "Prioridad 3 · Planta eléctrica",
   4: "Prioridad 4 · General",
 };
+const AI_CATEGORY = "inteligencia_artificial";
+// Etiqueta de RUP que push_opportunities.py pone de primera en la evidencia
+// (no confundir con "UNSPSC ... coincide con RUP", que es otra evidencia).
+const RUP_TAG = /^(NO NECESITA RUP|SÍ NECESITA RUP|RUP DEPENDE|SONDEO \(RFI\))/;
 const MONTHS_ES = [
   "enero", "febrero", "marzo", "abril", "mayo", "junio",
   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
@@ -35,6 +39,39 @@ function formatDateEs(isoDate) {
   const [year, month, day] = isoDate.split("-").map(Number);
   if (!year || !month || !day) return isoDate;
   return `${day} de ${MONTHS_ES[month - 1]} de ${year}`;
+}
+
+function daysUntil(isoDate) {
+  if (!isoDate) return null;
+  const deadline = new Date(`${isoDate}T00:00:00`);
+  if (Number.isNaN(deadline.getTime())) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.round((deadline - today) / 86400000);
+}
+
+function closingBadge(offerDeadline) {
+  const days = daysUntil(offerDeadline);
+  if (days === null) return "";
+  let label;
+  let tier;
+  if (days < 0) {
+    label = "Cierre vencido";
+    tier = "urgent";
+  } else if (days === 0) {
+    label = "Cierra hoy";
+    tier = "urgent";
+  } else if (days === 1) {
+    label = "Cierra mañana";
+    tier = "urgent";
+  } else if (days <= 5) {
+    label = `Cierra en ${days} días`;
+    tier = "soon";
+  } else {
+    label = `Cierra en ${days} días`;
+    tier = "ok";
+  }
+  return `<span class="deadline-badge deadline-${tier}">${escapeHtml(label)}</span>`;
 }
 
 function isToday(isoTimestamp) {
@@ -64,6 +101,7 @@ function peerDecisionBadge(peerDecision) {
 
 function renderCard(op) {
   const tags = (op.evidence || [])
+    .filter((reason) => !RUP_TAG.test(reason))
     .map((reason) => `<span class="opp-tag">${escapeHtml(reason)}</span>`)
     .join("");
   const link = op.secop_url
@@ -71,13 +109,30 @@ function renderCard(op) {
     : "No informado";
   const peerBadges = (op.peer_decisions || []).map(peerDecisionBadge).join("");
   const forwardLabel = FORWARD_TARGET_LABEL[currentUser];
-  const priorityLabel = PRIORITY_LABEL[op.priority] || null;
+  // Las de inteligencia artificial son vigilancia de mercado, no prioridad de
+  // negocio: se marcan con su propio color y etiqueta en vez de "Prioridad 4".
+  const isAi = op.category === AI_CATEGORY;
+  const priorityLabel = isAi ? null : PRIORITY_LABEL[op.priority] || null;
+  const deadlineBadge = closingBadge(op.offer_deadline);
+  // push_opportunities.py deja la marca de RUP de primera en la evidencia.
+  const rupTag = (op.evidence || []).find((item) => RUP_TAG.test(item)) || null;
+  const rupTier = !rupTag ? "" : /^(NO NECESITA|SONDEO)/.test(rupTag) ? "no" : /^RUP DEPENDE/.test(rupTag) ? "depende" : "si";
+
+  const badgesRow =
+    isAi || priorityLabel || deadlineBadge
+      ? `<div class="opp-badges-row">
+          ${isAi ? `<span class="ai-badge">Inteligencia artificial</span>` : ""}
+          ${rupTag ? `<span class="rup-badge rup-${rupTier}">${escapeHtml(rupTag)}</span>` : ""}
+          ${priorityLabel ? `<span class="priority-badge">${escapeHtml(priorityLabel)}</span>` : ""}
+          ${deadlineBadge}
+        </div>`
+      : "";
 
   const card = document.createElement("article");
-  card.className = `opp-card priority-${op.priority || 4}`;
+  card.className = `opp-card priority-${op.priority || 4}${isAi ? " category-ia" : ""}`;
   card.dataset.id = op.id;
   card.innerHTML = `
-    ${priorityLabel ? `<span class="priority-badge">${escapeHtml(priorityLabel)}</span>` : ""}
+    ${badgesRow}
     <div class="opp-entity">${escapeHtml(op.entity || "Entidad no informada")}</div>
     <div class="opp-reference">${escapeHtml(op.reference || "")}</div>
     ${peerBadges ? `<div class="opp-peer-badges">${peerBadges}</div>` : ""}
