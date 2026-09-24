@@ -11,7 +11,7 @@
     'hero.sub': 'We equip, connect and integrate capabilities across sea, land, air and cyberspace, with world-class technology partners.',
     'hero.cta1': 'Request a quote', 'hero.cta2': 'See solutions',
     'dom.sea': 'Maritime', 'dom.land': 'Land', 'dom.urban': 'Urban',
-    'proof.1': 'Operating since', 'proof.2': 'Forces and institutions served', 'proof.3': 'Registered · public procurement via SECOP II', 'proof.4': 'Sea · Land · Air · Cyber',
+    'proof.1': 'Years of experience in the defense sector', 'proof.2': 'Forces and institutions served', 'proof.3': 'Registered · public procurement via SECOP II', 'proof.4': 'Sea · Land · Air · Cyber',
     'clients.label': 'We have served', 'clients.1': 'Colombian Navy', 'clients.2': 'Colombian Army', 'clients.3': 'Colombian Aerospace Force', 'clients.4': 'Anti-Narcotics Police',
     'sol.eyebrow': 'Solutions', 'sol.title': 'Three levels, <em>one relationship</em>',
     'sol.lead': 'We start with what your unit needs today and scale up to full integration, with a single accountable partner.',
@@ -39,7 +39,7 @@
     'st3.t': 'Delivery', 'st3.d': 'We meet schedule, guarantees and formal acceptance.',
     'st4.t': 'Support', 'st4.d': 'Training, spare parts and backing across the life cycle.',
     'co.eyebrow': 'Company', 'co.title': 'A Colombian company <em>serving defense</em>',
-    'co.p1': 'BARAX Defense & Technology is the brand of Inversiones Barajas & Asociados S.A.S., a defense-sector supplier since 2018.',
+    'co.p1': 'BARAX Defense & Technology is the brand of Inversiones Barajas & Asociados S.A.S., backed by more than 20 years of experience supplying the defense sector.',
     'co.p2': 'We are not a catalog: every contract is treated as a delivery commitment, from bid to close-out.',
     'co.l1': 'Legal name', 'co.l3': 'Headquarters', 'co.l4': 'Registry', 'co.l4v': 'RUP — Bogotá Chamber of Commerce', 'co.l5': 'Public procurement',
     'ct.eyebrow': 'Contact', 'ct.title': 'Tell us what <em>your unit needs</em>',
@@ -122,7 +122,7 @@
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.sec-head, .level, .cap, .env, .steps li, .legal-card, .form, .proof-item').forEach(function (el) {
+    document.querySelectorAll('.sec-head, .level, .cap, .env, .steps li, .form, .proof-item').forEach(function (el) {
       el.classList.add('reveal'); io.observe(el);
     });
   }
