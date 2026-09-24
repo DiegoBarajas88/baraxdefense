@@ -6,6 +6,9 @@
 <title>BARAX Defense &amp; Technology — Suministro, tecnología e integración para la defensa</title>
 <meta name="description" content="Proveedor de las Fuerzas Militares y de Policía de Colombia: suministro naval, terrestre y aéreo, capacidades tecnológicas e integración de sistemas de defensa.">
 <link rel="canonical" href="https://www.baraxdefense.com/">
+<link rel="alternate" hreflang="es" href="https://www.baraxdefense.com/">
+<link rel="alternate" hreflang="en" href="https://www.baraxdefense.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://www.baraxdefense.com/">
 <meta name="theme-color" content="#060D18">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BARAX Defense &amp; Technology">
@@ -24,7 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="/assets/img/poster-sea.jpg">
+<link rel="preload" as="image" href="/assets/img/poster-sea.webp">
 <link rel="stylesheet" href="/assets/css/styles.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"BARAX Defense & Technology","legalName":"INVERSIONES BARAJAS & ASOCIADOS S.A.S.","taxID":"901240277-0","url":"https://www.baraxdefense.com/","logo":"https://www.baraxdefense.com/assets/logos/barax-logo-primary-dark.png","email":"contacto@baraxdefense.com","address":{"@type":"PostalAddress","addressLocality":"Bogotá","addressCountry":"CO"}}
@@ -35,7 +38,7 @@
 
 <!-- ═══ NAV ═══ -->
 <header class="nav" id="nav">
-  <a href="#top" class="brand" aria-label="BARAX Defense &amp; Technology — inicio">
+  <a href="#top" class="brand">
     <img src="/assets/logos/barax-symbol-dark.svg" alt="" width="34" height="34">
     <span class="brand-lockup"><span class="brand-word">BAR<b>AX</b></span><span class="brand-desc">Defense &amp; Technology</span></span>
   </a>
@@ -48,8 +51,8 @@
   </nav>
   <div class="nav-right">
     <div class="lang" role="group" aria-label="Idioma / Language">
-      <button type="button" data-lang="es" aria-pressed="true">ES</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <a href="/" hreflang="es" lang="es" aria-current="page">ES</a>
+      <a href="/en/" hreflang="en" lang="en">EN</a>
     </div>
     <a href="#contacto" class="btn btn-outline nav-cta" data-i18n="nav.cta">Solicitar cotización</a>
     <button type="button" class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
@@ -60,9 +63,9 @@
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="top">
   <div class="hero-media" aria-hidden="true">
-    <video class="hero-video is-active" muted playsinline loop preload="auto" poster="/assets/img/poster-sea.jpg" data-src="/assets/videos/sea.mp4"></video>
-    <video class="hero-video" muted playsinline loop preload="none" poster="/assets/img/poster-land.jpg" data-src="/assets/videos/land.mp4"></video>
-    <video class="hero-video" muted playsinline loop preload="none" poster="/assets/img/poster-city.jpg" data-src="/assets/videos/city.mp4"></video>
+    <video class="hero-video is-active" muted playsinline loop preload="auto" poster="/assets/img/poster-sea.webp" data-src="/assets/videos/sea.mp4"></video>
+    <video class="hero-video" muted playsinline loop preload="none" poster="/assets/img/poster-land.webp" data-src="/assets/videos/land.mp4"></video>
+    <video class="hero-video" muted playsinline loop preload="none" poster="/assets/img/poster-city.webp" data-src="/assets/videos/city.mp4"></video>
   </div>
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="hero-inner container">
@@ -116,7 +119,7 @@
 
     <!-- Nivel 1 -->
     <article class="level" id="nivel-1">
-      <figure class="level-img"><img src="/assets/img/port-logistics.webp" alt="Operación logística en puerto" loading="lazy" width="1600" height="1200"></figure>
+      <figure class="level-img"><img src="/assets/img/port-logistics.webp" srcset="/assets/img/port-logistics-800.webp 800w, /assets/img/port-logistics.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" alt="Operación logística en puerto" loading="lazy" width="1600" height="1200"></figure>
       <div class="level-body">
         <p class="lv-tag"><span>01</span> <span data-i18n="lv1.name">Suministro</span></p>
         <h3 data-i18n="lv1.title">Equipo y repuestos listos para operar</h3>
@@ -141,7 +144,7 @@
       </div>
       <div class="cap-grid">
         <div class="cap">
-          <img src="/assets/img/frigate-dusk.webp" alt="" loading="lazy" width="1600" height="1067">
+          <img src="/assets/img/frigate-dusk.webp" srcset="/assets/img/frigate-dusk-800.webp 800w, /assets/img/frigate-dusk.webp 1600w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1600" height="1067">
           <div class="cap-body">
             <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg>
             <h4 data-i18n="cap1.t">Vigilancia y reconocimiento</h4>
@@ -149,7 +152,7 @@
           </div>
         </div>
         <div class="cap">
-          <img src="/assets/img/harbor.webp" alt="" loading="lazy" width="1200" height="1600">
+          <img src="/assets/img/harbor.webp" srcset="/assets/img/harbor-800.webp 800w, /assets/img/harbor.webp 1600w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1200" height="1600">
           <div class="cap-body">
             <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a7 7 0 0 1 14 0M8 12a4 4 0 0 1 8 0"/><path d="M12 12v9M8 21h8"/></svg>
             <h4 data-i18n="cap2.t">Comunicaciones tácticas</h4>
@@ -157,7 +160,7 @@
           </div>
         </div>
         <div class="cap">
-          <img src="/assets/img/warehouse.webp" alt="" loading="lazy" width="1600" height="1066">
+          <img src="/assets/img/warehouse.webp" srcset="/assets/img/warehouse-800.webp 800w, /assets/img/warehouse.webp 1600w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1600" height="1066">
           <div class="cap-body">
             <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
             <h4 data-i18n="cap3.t">Guerra electrónica y ciberdefensa</h4>
@@ -166,7 +169,7 @@
           </div>
         </div>
         <div class="cap">
-          <img src="/assets/img/drone.webp" alt="" loading="lazy" width="1600" height="1067">
+          <img src="/assets/img/drone.webp" srcset="/assets/img/drone-800.webp 800w, /assets/img/drone.webp 1600w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1600" height="1067">
           <div class="cap-body">
             <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="2.5"/><circle cx="19" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><rect x="9" y="9" width="6" height="6"/><path d="M7 7l2 2M17 7l-2 2M7 17l2-2M17 17l-2-2"/></svg>
             <h4 data-i18n="cap4.t">No tripulados y antidrones</h4>
@@ -178,7 +181,7 @@
 
     <!-- Nivel 3 -->
     <article class="level level-reverse" id="nivel-3">
-      <figure class="level-img"><img src="/assets/img/naval-fleet.webp" alt="Buques navegando en formación" loading="lazy" width="1600" height="1067"></figure>
+      <figure class="level-img"><img src="/assets/img/naval-fleet.webp" srcset="/assets/img/naval-fleet-800.webp 800w, /assets/img/naval-fleet.webp 1600w" sizes="(max-width:900px) 100vw, 50vw" alt="Buques navegando en formación" loading="lazy" width="1600" height="1067"></figure>
       <div class="level-body">
         <p class="lv-tag"><span>03</span> <span data-i18n="lv3.name">Integración</span></p>
         <h3 data-i18n="lv3.title">Todo conectado en una sola imagen de mando</h3>
@@ -201,10 +204,10 @@
       <h2 data-i18n-html="env.title">Donde se necesita <em>ver, conectar y proteger</em></h2>
     </header>
     <div class="env-grid">
-      <figure class="env"><img src="/assets/img/patrol-boat.webp" alt="" loading="lazy" width="1600" height="1067"><figcaption><h3 data-i18n="env1.t">Marítimo y fluvial</h3><p data-i18n="env1.d">Conciencia del dominio marítimo, patrullaje costero y soporte a unidades a flote.</p></figcaption></figure>
-      <figure class="env"><img src="/assets/img/poster-land.jpg" alt="" loading="lazy" width="1280" height="720"><figcaption><h3 data-i18n="env2.t">Terrestre y fronteras</h3><p data-i18n="env2.d">Sensores persistentes, movilidad táctica y vigilancia de perímetros.</p></figcaption></figure>
-      <figure class="env"><img src="/assets/img/helicopter.webp" alt="" loading="lazy" width="1069" height="1600"><figcaption><h3 data-i18n="env3.t">Aéreo</h3><p data-i18n="env3.d">Reconocimiento aéreo y protección del espacio aéreo contra drones.</p></figcaption></figure>
-      <figure class="env"><img src="/assets/img/poster-city.jpg" alt="" loading="lazy" width="1280" height="720"><figcaption><h3 data-i18n="env4.t">Seguridad ciudadana y grandes eventos</h3><p data-i18n="env4.d">Monitoreo de grandes concentraciones, protección de infraestructura crítica y coordinación de autoridades.</p></figcaption></figure>
+      <figure class="env"><img src="/assets/img/patrol-boat.webp" srcset="/assets/img/patrol-boat-800.webp 800w, /assets/img/patrol-boat.webp 1600w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1600" height="1067"><figcaption><h3 data-i18n="env1.t">Marítimo y fluvial</h3><p data-i18n="env1.d">Conciencia del dominio marítimo, patrullaje costero y soporte a unidades a flote.</p></figcaption></figure>
+      <figure class="env"><img src="/assets/img/poster-land.webp" srcset="/assets/img/poster-land-800.webp 800w, /assets/img/poster-land.webp 1280w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1280" height="720"><figcaption><h3 data-i18n="env2.t">Terrestre y fronteras</h3><p data-i18n="env2.d">Sensores persistentes, movilidad táctica y vigilancia de perímetros.</p></figcaption></figure>
+      <figure class="env"><img src="/assets/img/helicopter.webp" srcset="/assets/img/helicopter-800.webp 800w, /assets/img/helicopter.webp 1600w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1069" height="1600"><figcaption><h3 data-i18n="env3.t">Aéreo</h3><p data-i18n="env3.d">Reconocimiento aéreo y protección del espacio aéreo contra drones.</p></figcaption></figure>
+      <figure class="env"><img src="/assets/img/poster-city.webp" srcset="/assets/img/poster-city-800.webp 800w, /assets/img/poster-city.webp 1280w" sizes="(max-width:600px) 100vw, (max-width:1080px) 50vw, 25vw" alt="" loading="lazy" width="1280" height="720"><figcaption><h3 data-i18n="env4.t">Seguridad ciudadana y grandes eventos</h3><p data-i18n="env4.d">Monitoreo de grandes concentraciones, protección de infraestructura crítica y coordinación de autoridades.</p></figcaption></figure>
     </div>
   </div>
 </section>
@@ -251,7 +254,8 @@
         <button type="button" class="copy" id="copyMail" data-i18n="ct.copy">Copiar</button>
       </div>
     </div>
-    <form class="form" id="contactForm" novalidate>
+    <form class="form" id="contactForm" novalidate data-w3f-key="">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <label><span data-i18n="f.name">Nombre y cargo</span><input name="name" required autocomplete="name"></label>
       <label><span data-i18n="f.org">Entidad o empresa</span><input name="org" required autocomplete="organization"></label>
       <label><span data-i18n="f.email">Correo</span><input name="email" type="email" required autocomplete="email"></label>
@@ -266,7 +270,8 @@
       </label>
       <label class="full"><span data-i18n="f.msg">Mensaje</span><textarea name="msg" rows="4" required></textarea></label>
       <button type="submit" class="btn btn-solid full" data-i18n="f.send">Enviar solicitud</button>
-      <p class="form-note full" data-i18n="f.note">Al enviar se abrirá su correo con la solicitud lista. Sus datos se usan solo para responderle.</p>
+      <p class="form-status full" id="formStatus" role="status" aria-live="polite"></p>
+      <p class="form-note full" data-i18n="f.note">Sus datos se usan únicamente para responder su solicitud.</p>
     </form>
   </div>
 </section>
@@ -274,7 +279,7 @@
 
 <footer class="footer">
   <div class="container footer-grid">
-    <a href="#top" class="brand" aria-label="BARAX — volver arriba">
+    <a href="#top" class="brand">
       <img src="/assets/logos/barax-symbol-dark.svg" alt="" width="28" height="28">
       <span class="brand-lockup"><span class="brand-word">BAR<b>AX</b></span><span class="brand-desc">Defense &amp; Technology</span></span>
     </a>
@@ -284,5 +289,6 @@
 </footer>
 
 <script src="/assets/js/main.js" defer></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
