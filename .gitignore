@@ -1,5 +1,4 @@
 .DS_Store
-<<<<<<< HEAD
 .tmp_audit/
 otros/
 Fotos/
@@ -14,11 +13,9 @@ assets/videos/src/
 Screenshot*
 assets/videos/Option*.mp4
 assets/videos/opcion*.mp4
-=======
 node_modules/
 .vercel
 .env
 .env.local
 .env.*.local
 !.env.example
->>>>>>> origin/main
