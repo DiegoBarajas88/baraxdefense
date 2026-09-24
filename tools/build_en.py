@@ -52,6 +52,10 @@ for el in soup.find_all(True):
         v = el.get(attr)
         if v in ATTRS: el[attr] = ATTRS[v]
 
+HREFS = {"/politicadedatos": "/en/data-policy"}
+for a in soup.find_all("a", href=True):
+    if a["href"] in HREFS: a["href"] = HREFS[a["href"]]
+
 out = ROOT / "en" / "index.html"
 out.parent.mkdir(exist_ok=True)
 out.write_text(str(soup), encoding="utf-8")
