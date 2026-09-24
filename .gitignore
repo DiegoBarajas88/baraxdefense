@@ -11,3 +11,5 @@ assets/videos/src/
 *.docx
 *.HEIC
 Screenshot*
+assets/videos/Option*.mp4
+assets/videos/opcion*.mp4
