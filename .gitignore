@@ -1,4 +1,18 @@
 .DS_Store
+.tmp_audit/
+otros/
+Fotos/
+Logos/
+PAGINA WEB/
+Propuestas nombre y logos - descartada/
+assets/videos/Para luego/
+assets/videos/optimized/
+assets/videos/src/
+*.docx
+*.HEIC
+Screenshot*
+assets/videos/Option*.mp4
+assets/videos/opcion*.mp4
 node_modules/
 .vercel
 .env

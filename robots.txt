@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.baraxdefense.com/sitemap.xml

@@ -1,5 +1,5 @@
 /* Estilos de /login y /oportunidades. Reutiliza los tokens de :root definidos
-   en styles.css (colores, fuentes); no redefine el sitio público. */
+   en app-base.css (colores, fuentes); no redefine el sitio público. */
 
 .app-nav {
   position: sticky;
